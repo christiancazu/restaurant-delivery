@@ -20,6 +20,7 @@ module.exports = configure(function (/* ctx */) {
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
       /* 'axios', */
+      'apollo',
       'composition-api',
       'i18n'
     ],

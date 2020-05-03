@@ -14,7 +14,13 @@
   "dependencies": {
     "@quasar/extras": "^1.7.0",
     "@vue/composition-api": "^0.5.0",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "apollo-link-http": "^1.5.17",
+    "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.3",
     "quasar": "^1.10.0",
+    "vue-apollo": "^3.0.3",
     "vue-i18n": "^8.17.4"
   },
   "devDependencies": {
