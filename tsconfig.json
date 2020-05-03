@@ -1,6 +1,19 @@
 {
   "extends": "@quasar/app/tsconfig-preset",
   "compilerOptions": {
+    "module": "CommonJS",
+    "outDir": "./dist/",
+    "rootDir": "./src/",
+    "strict": true,
     "baseUrl": "."
-  }
+  },
+  "include": ["./src/"],
+  "exclude": [
+    "**/build/**",
+    "**/coverage/**",
+    "**/dist/**",
+    "**/node_modules/**",
+    "./src-pwa/**",
+    "./src-cordova/**"
+  ]
 }

@@ -1,8 +1,8 @@
 {
-  "name": "frontend",
+  "name": "virtualclassroomclient",
   "version": "0.0.1",
-  "description": "virtual classroom client",
-  "productName": "virtual classroom",
+  "description": "Virtual Classroom Client",
+  "productName": "Virtual Classroom",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "devgroup",
@@ -12,21 +12,21 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@quasar/extras": "^1.6.4",
+    "@quasar/extras": "^1.7.0",
     "@vue/composition-api": "^0.5.0",
-    "axios": "^0.19.2",
-    "quasar": "^1.9.15",
-    "vue-i18n": "^8.17.1"
+    "quasar": "^1.10.0",
+    "vue-i18n": "^8.17.4"
   },
   "devDependencies": {
-    "@quasar/app": "^1.7.1",
-    "@types/node": "^13.13.0",
-    "@typescript-eslint/eslint-plugin": "^2.28.0",
-    "@typescript-eslint/parser": "^2.28.0",
+    "@quasar/app": "^1.8.3",
+    "@types/node": "^13.13.4",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
     "babel-eslint": "^10.1.0",
+    "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-loader": "^4.0.0",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",

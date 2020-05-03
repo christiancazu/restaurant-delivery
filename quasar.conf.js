@@ -10,15 +10,18 @@
 
 const { configure } = require('quasar/wrappers');
 
+// path to use environment variables
+const envparser = require('./env.parser');
+
 module.exports = configure(function (/* ctx */) {
   return {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
+      /* 'axios', */
       'composition-api',
-      'i18n',
-      'axios'
+      'i18n'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -43,7 +46,7 @@ module.exports = configure(function (/* ctx */) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: 'material-icons', // Quasar icon set
-      lang: 'en-us', // Quasar language pack
+      lang: 'es', // Quasar language pack
 
       // Possible values for "all":
       // * 'auto' - Auto-import needed Quasar components & directives
@@ -55,19 +58,19 @@ module.exports = configure(function (/* ctx */) {
       all: false,
 
       components: [
-        'QLayout',
-        'QHeader',
-        'QDrawer',
-        'QPageContainer',
-        'QPage',
-        'QToolbar',
-        'QToolbarTitle',
         'QBtn',
+        'QDrawer',
         'QIcon',
-        'QList',
         'QItem',
+        'QItemLabel',
         'QItemSection',
-        'QItemLabel'
+        'QHeader',
+        'QLayout',
+        'QList',
+        'QPage',
+        'QPageContainer',
+        'QToolbar',
+        'QToolbarTitle'
       ],
 
       directives: [
@@ -88,7 +91,7 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
 
       // rtl: false, // https://quasar.dev/options/rtl-support
       // showProgress: false,
@@ -113,13 +116,15 @@ module.exports = configure(function (/* ctx */) {
             }
           });
         }
-      }
+      },
+
+      env: envparser() // build function to load environment variables
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       https: false,
-      port: 8080,
+      port: process.env.APP_PORT,
       open: true // opens browser window automatically
     },
 
