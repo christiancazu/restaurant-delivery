@@ -1,12 +1,12 @@
-import axios, { AxiosInstance } from 'axios';
-import { boot } from 'quasar/wrappers';
+// import axios, { AxiosInstance } from 'axios';
+// import { boot } from 'quasar/wrappers';
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    $axios: AxiosInstance;
-  }
-}
+// declare module 'vue/types/vue' {
+//   interface Vue {
+//     $axios: AxiosInstance;
+//   }
+// }
 
-export default boot(({ Vue }) => {
-  Vue.prototype.$axios = axios;
-});
+// export default boot(({ Vue }) => {
+//   Vue.prototype.$axios = axios;
+// });

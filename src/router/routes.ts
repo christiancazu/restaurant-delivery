@@ -1,11 +1,17 @@
 import { RouteConfig } from 'vue-router';
 
+import home from './home';
+import signin from './signin';
+
 const routes: RouteConfig[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('pages/Index.vue') }]
-  }
+    children: [
+      ...home
+    ]
+  },
+  ...signin
 ];
 
 // Always leave this as last one

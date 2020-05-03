@@ -1,13 +1,14 @@
 {
   "extends": "@quasar/app/tsconfig-preset",
   "compilerOptions": {
-    "module": "CommonJS",
-    "outDir": "./dist/",
-    "rootDir": "./src/",
-    "strict": true,
-    "baseUrl": "."
+    "module": "commonjs",
+    "target": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["src/*"],
+    }
   },
-  "include": ["./src/"],
+  "include": ["./src/**/*"],
   "exclude": [
     "**/build/**",
     "**/coverage/**",

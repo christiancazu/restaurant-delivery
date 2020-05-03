@@ -13,6 +13,8 @@ const { configure } = require('quasar/wrappers');
 // path to use environment variables
 const envparser = require('./env.parser');
 
+const path = require('path');
+
 module.exports = configure(function (/* ctx */) {
   return {
     // app boot file (/src/boot)
@@ -117,6 +119,13 @@ module.exports = configure(function (/* ctx */) {
             }
           });
         }
+
+        cfg.resolve.alias = {
+          ...cfg.resolve.alias, // This adds the existing alias
+
+          // @core alias
+          'src': path.resolve(__dirname, 'src')
+        };
       },
 
       env: envparser() // build function to load environment variables
