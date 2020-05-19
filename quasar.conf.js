@@ -22,8 +22,8 @@ module.exports = configure(function (/* ctx */) {
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
       /* 'axios', */
-      'apollo',
       'composition-api',
+      'apollo',
       'i18n'
     ],
 
@@ -81,7 +81,9 @@ module.exports = configure(function (/* ctx */) {
       ],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -117,14 +119,16 @@ module.exports = configure(function (/* ctx */) {
             options: {
               formatter: require('eslint').CLIEngine.getFormatter('stylish')
             }
-          });
+          }
+          )
         }
 
         cfg.resolve.alias = {
           ...cfg.resolve.alias, // This adds the existing alias
 
-          // @core alias
-          'src': path.resolve(__dirname, 'src')
+          // root alias
+          '@': path.resolve(__dirname, 'src'),
+          '@core': path.resolve(__dirname, '@core'),
         };
       },
 

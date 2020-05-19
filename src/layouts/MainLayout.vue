@@ -15,7 +15,10 @@
         Quasar App
       </q-toolbar-title>
 
-      <div>Quasar v{{ $q.version }}</div>
+      <div>{{ user.name }} {{ user.lastname }}</div>
+      <q-btn @click="signOut">
+        sign Out
+      </q-btn>
     </q-toolbar>
   </q-header>
 
@@ -41,14 +44,31 @@
 </q-layout>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api';
+import { sessionService } from '@core/services';
+
+export default defineComponent({
   name: 'MainLayout',
 
   data () {
     return {
       leftDrawerOpen: false
     };
+  },
+
+  setup (_, { root }) {
+    const { user } = sessionService.get();
+
+    function signOut () {
+      root.$router.push({ name: 'SignIn' });
+      sessionService.close();
+    }
+
+    return {
+      user,
+      signOut
+    };
   }
-};
+});
 </script>

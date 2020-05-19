@@ -3,9 +3,12 @@ import { boot } from 'quasar/wrappers';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import VueApollo from 'vue-apollo';
 
-import sessionService from 'src/services/session.service';
+import { storageService } from '@core/services';
+import { session } from '@core/cache';
+
+import { provide } from '@vue/composition-api';
+import { DefaultApolloClient } from '@vue/apollo-composable';
 
 type Header = {
   authorization?: string;
@@ -13,7 +16,7 @@ type Header = {
 
 const getHeaders = () => {
   const headers: Header = {};
-  const token = sessionService.getToken();
+  const token = storageService.getToken();
   if (token) {
     headers.authorization = `Bearer ${token}`;
   }
@@ -25,18 +28,26 @@ const link = new HttpLink({
   headers: getHeaders()
 });
 
-export const client = new ApolloClient({
+const cache = new InMemoryCache({
+  addTypename: false
+});
+
+export const apolloClient = new ApolloClient({
   link,
-  cache: new InMemoryCache({
-    addTypename: true
-  })
+  cache,
+  resolvers: {}
 });
 
-const apolloProvider = new VueApollo({
-  defaultClient: client
+cache.writeData({
+  data: {
+    session
+  }
 });
 
-export default boot(({ app, Vue }) => {
-  Vue.use(VueApollo);
-  app.apolloProvider = apolloProvider;
+export default boot(({ app }) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  app.setup = () => {
+    provide(DefaultApolloClient, apolloClient);
+  };
 });

@@ -9,7 +9,10 @@ const routes: RouteConfig[] = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       ...home
-    ]
+    ],
+    meta: {
+      requiresAuth: true
+    }
   },
   ...signin
 ];

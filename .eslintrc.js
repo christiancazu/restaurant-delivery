@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+
 module.exports = {
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
   // This option interrupts the configuration hierarchy at this file
@@ -16,7 +17,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     project: resolve(__dirname, './tsconfig.json'),
     tsconfigRootDir: __dirname,
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    ecmaVersion: 2019, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module' // Allows for the use of imports
   },
 
@@ -43,8 +44,8 @@ module.exports = {
     // 'plugin:vue/strongly-recommended' // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/recommended' // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
-    'standard'
-
+    'standard',
+    '@vue/typescript/recommended'
   ],
 
   plugins: [
@@ -53,17 +54,16 @@ module.exports = {
 
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
-    'vue',
-
+    'vue'
   ],
 
   globals: {
-    'ga': true, // Google Analytics
-    'cordova': true,
-    '__statics': true,
-    'process': true,
-    'Capacitor': true,
-    'chrome': true
+    ga: true, // Google Analytics
+    cordova: true,
+    __statics: true,
+    process: true,
+    Capacitor: true,
+    chrome: true
   },
 
   // add your custom rules here
@@ -84,18 +84,18 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
 
-    indent: ["error", 2, { SwitchCase: 1 }],
-    "linebreak-style": ["error", "windows"],
-    quotes: ["error", "single"],
-    semi: ["error", "always"],
-    "linebreak-style": 0,
-    "no-trailing-spaces": "error",
+    indent: ['error', 2, { SwitchCase: 1 }],
+    'linebreak-style': ['error', 'windows'],
+    quotes: ['error', 'single'],
+    semi: ['error', 'always'],
+    'linebreak-style': 0,
+    'no-trailing-spaces': 'error',
     // vue
-    "vue/singleline-html-element-content-newline": "off",
-    "vue/multiline-html-element-content-newline": "off",
-    "vue/component-name-in-template-casing": ["error", "kebab-case"],
-    "vue/max-attributes-per-line": [
-      "warn",
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/multiline-html-element-content-newline': 'off',
+    'vue/component-name-in-template-casing': ['error', 'kebab-case'],
+    'vue/max-attributes-per-line': [
+      'warn',
       {
         singleline: 1,
         multiline: {
@@ -104,17 +104,16 @@ module.exports = {
         }
       }
     ],
-    "vue/script-indent": [
-      "warn",
+    'vue/script-indent': [
+      'warn',
       2,
       {
         baseIndent: 0,
         switchCase: 1
-      },
-      
+      }
     ],
-    "vue/html-indent": [
-      "warn",
+    'vue/html-indent': [
+      'warn',
       2,
       {
         attribute: 1,
@@ -125,8 +124,9 @@ module.exports = {
     ],
     // TypeScript
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-var-requires': 0,
 
     // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
-}
+};
