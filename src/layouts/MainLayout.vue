@@ -45,8 +45,12 @@
 </template>
 
 <script lang="ts">
+import {
+  sessionService,
+  notifyService
+} from '@core/services';
+
 import { defineComponent } from '@vue/composition-api';
-import { sessionService } from '@core/services';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -63,6 +67,7 @@ export default defineComponent({
     function signOut () {
       root.$router.push({ name: 'SignIn' });
       sessionService.close();
+      notifyService.info('session.info.close');
     }
 
     return {

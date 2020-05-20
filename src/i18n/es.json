@@ -1,0 +1,15 @@
+{
+  "auth": {
+    "errors": {
+      "credentials": "El usuario o la contraseña no son válidos"
+    }
+  },
+  "session": {
+    "errors": {
+      "notValid": "La sesión no es válida"
+    },
+    "info": {
+      "close": "La sesión ha finalizado"
+    }
+  }
+}

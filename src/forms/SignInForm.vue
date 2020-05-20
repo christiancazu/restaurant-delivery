@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { Credentials } from '@core/interfaces';
-import { sessionService, authService } from '@core/services';
+import { sessionService, authService, notifyService } from '@core/services';
 
 import { defineComponent } from '@vue/composition-api';
 
@@ -43,6 +43,7 @@ export default defineComponent({
         await authService.signIn(credentials);
         root.$router.push({ name: 'Home' });
       } catch (error) {
+        notifyService.error('auth.errors.credentials');
       }
     };
     return {

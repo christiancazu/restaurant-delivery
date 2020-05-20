@@ -1,6 +1,7 @@
 import {
   sessionService,
-  authService
+  authService,
+  notifyService
 } from '@core/services';
 
 export default async (to, from, next) => {
@@ -14,6 +15,7 @@ export default async (to, from, next) => {
         await authService.me();
         next();
       } catch (error) {
+        notifyService.error('session.errors.notValid');
         next({ name: 'SignIn' });
       }
     }
