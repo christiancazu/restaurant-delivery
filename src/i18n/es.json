@@ -4,6 +4,15 @@
       "credentials": "El usuario o la contraseña no son válidos"
     }
   },
+  "email": "Correo Electrónico",
+  "field": {
+    "errors": {
+      "required": "El campo {name} es requerido",
+      "email": "El Correo Electrónico no es válido"
+    }
+  },
+  "join": "Ingresar",
+  "password": "Contraseña",
   "session": {
     "errors": {
       "notValid": "La sesión no es válida"
@@ -11,5 +20,8 @@
     "info": {
       "close": "La sesión ha finalizado"
     }
-  }
+  },
+  "signIn": "Iniciar sesión",
+  "signOut": "Cerrar sesión",
+  "user": "Usuario"
 }

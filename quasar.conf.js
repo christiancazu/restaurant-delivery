@@ -62,8 +62,12 @@ module.exports = configure(function (/* ctx */) {
 
       components: [
         'QBtn',
+        'QCard',
+        'QCardSection',
         'QDrawer',
+        'QForm',
         'QIcon',
+        'QInput',
         'QItem',
         'QItemLabel',
         'QItemSection',
@@ -72,6 +76,7 @@ module.exports = configure(function (/* ctx */) {
         'QList',
         'QPage',
         'QPageContainer',
+        'QSeparator',
         'QToolbar',
         'QToolbarTitle'
       ],
@@ -144,7 +149,9 @@ module.exports = configure(function (/* ctx */) {
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    animations: [
+      'slideInDown'
+    ],
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

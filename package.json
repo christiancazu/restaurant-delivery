@@ -21,11 +21,11 @@
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "quasar": "^1.11.3",
-    "vue-i18n": "^8.17.6"
+    "vue-i18n": "^8.17.7"
   },
   "devDependencies": {
     "@quasar/app": "^1.8.6",
-    "@types/node": "^14.0.1",
+    "@types/node": "^14.0.4",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "@vue/eslint-config-typescript": "5.0.2",

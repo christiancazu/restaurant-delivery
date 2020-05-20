@@ -1,6 +1,11 @@
 <template>
 <div id="q-app">
-  <router-view />
+  <transition
+    appear
+    enter-active-class="animated slideInDown"
+  >
+    <router-view />
+  </transition>
 </div>
 </template>
 

@@ -12,12 +12,15 @@
       />
 
       <q-toolbar-title>
-        Quasar App
+        Virtual Classroom
       </q-toolbar-title>
 
-      <div>{{ user.name }} {{ user.lastname }}</div>
-      <q-btn @click="signOut">
-        sign Out
+      <div class="q-mx-sm">{{ user.name }} {{ user.lastname }}</div>
+      <q-btn
+        color="secondary"
+        @click="signOut"
+      >
+        {{ $t('signOut') }}
       </q-btn>
     </q-toolbar>
   </q-header>
@@ -49,6 +52,7 @@ import {
   sessionService,
   notifyService
 } from '@core/services';
+import { Session } from '@core/interfaces';
 
 import { defineComponent } from '@vue/composition-api';
 
@@ -62,12 +66,12 @@ export default defineComponent({
   },
 
   setup (_, { root }) {
-    const { user } = sessionService.get();
+    const { user }: Session = sessionService.get();
 
     function signOut () {
-      root.$router.push({ name: 'SignIn' });
       sessionService.close();
       notifyService.info('session.info.close');
+      root.$router.push({ name: 'SignIn' });
     }
 
     return {

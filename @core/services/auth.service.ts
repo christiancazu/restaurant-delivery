@@ -12,10 +12,13 @@ export default {
     sessionService.set({ user: me });
   },
 
-  async signIn (variables: Credentials) {
+  async signIn ({ email, password }: Credentials) {
     const { data: { signIn } } = await apolloClient.mutate({
       mutation: SIGN_IN_MUTATION,
-      variables
+      variables: {
+        email,
+        password
+      }
     });
     sessionService.set(signIn);
   }

@@ -1,54 +1,98 @@
 <template>
-<div>
-  <h1 class="text-h1 text-white">SIGN IN</h1>
-  <q-btn
-    color="secondary"
-    @click="login"
-  >
-    login
-  </q-btn>
-  <div
-    class="text-white flex-column"
-    style="max-width: 600px"
-  >
-    <div
-      v-for="(value, key, index) in user" :key="index"
-      style="white-space: initial; word-wrap:break-word;"
+<q-card>
+  <q-card-section>
+    <q-form
+      class="q-gutter-y-md"
+      @submit="onSubmitSignIn"
     >
-      {{ key }}: {{ value }}
-    </div>
-  </div>
-</div>
+      <div class="text-h6 text-center q-py-none">
+        {{ $t('signIn') }}
+      </div>
+
+      <q-separator />
+
+      <q-input
+        v-model="credentials.email"
+        :rules="[
+          val => !!val || $t('field.errors.required', { name: $t('email') }),
+          val => /\S+@\S+\.\S+/.test(val) || $t('field.errors.email')
+        ]"
+        :label="$t('email')"
+        :disable="loading"
+        autocomplete="off"
+        outlined lazy-rules
+      >
+        <template v-slot:append>
+          <q-icon name="person" />
+        </template>
+      </q-input>
+      <q-input
+        v-model="credentials.password"
+        :rules="[val => !!val || $t('field.errors.required', { name: $t('password') })]"
+        :label="$t('password')"
+        :disable="loading"
+        type="password"
+        autocomplete="off"
+        outlined
+      >
+        <template v-slot:append>
+          <q-icon name="lock" />
+        </template>
+      </q-input>
+      <div>
+        <q-btn
+          :loading="loading"
+          type="submit"
+          class="full-width"
+          color="primary"
+        >
+          {{ $t('join') }}
+        </q-btn>
+      </div>
+    </q-form>
+  </q-card-section>
+</q-card>
 </template>
 
 <script lang="ts">
 import { Credentials } from '@core/interfaces';
-import { sessionService, authService, notifyService } from '@core/services';
-
-import { defineComponent } from '@vue/composition-api';
+import {
+  authService,
+  notifyService
+} from '@core/services';
+import {
+  defineComponent,
+  ref
+} from '@vue/composition-api';
 
 export default defineComponent({
   name: 'SignInForm',
 
   setup (_, { root }) {
-    const credentials: Credentials = {
-      email: 'christiancazu@gmail.com',
-      password: '12345678'
-    };
+    const credentials = ref<Credentials>({
+      email: '',
+      password: ''
+    });
 
-    const { user } = sessionService.get();
+    const loading = ref<boolean>(false);
 
-    const login = async () => {
+    async function onSubmitSignIn () {
       try {
-        await authService.signIn(credentials);
+        loading.value = true;
+
+        await authService.signIn(credentials.value);
+
         root.$router.push({ name: 'Home' });
       } catch (error) {
         notifyService.error('auth.errors.credentials');
+      } finally {
+        loading.value = false;
       }
     };
     return {
-      user,
-      login
+      credentials,
+      onSubmitSignIn,
+      loading
     };
   }
 });

@@ -4,6 +4,15 @@
       "credentials": "The username o password are not valid"
     }
   },
+  "email": "Email",
+  "field": {
+    "errors": {
+      "required": "The field {name} is required",
+      "email": "The Email is not valid"
+    }
+  },
+  "join": "Join",
+  "password": "Password",
   "session": {
     "errors": {
       "notValid": "The session is not valid"
@@ -11,5 +20,8 @@
     "info": {
       "close": "The session has ended"
     }
-  }
+  },
+  "signIn": "Sign in",
+  "signOut": "Sign out",
+  "user": "User"
 }
