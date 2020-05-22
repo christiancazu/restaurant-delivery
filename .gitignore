@@ -37,3 +37,4 @@ yarn.lock
 package-lock.json
 
 .env
+/src/migrations/*

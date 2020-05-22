@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: [ "src/migrations/*"],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
@@ -24,6 +25,9 @@ module.exports = {
     semi: ["error", "always"],
     "linebreak-style": 0,
     "no-empty": ["error", { "allowEmptyCatch": true }],
+    "array-element-newline": ["error", "consistent"],
+    "array-bracket-spacing": ["error", "never"],
+    "array-bracket-newline": ["error", { "multiline": true }],
     // ts
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
