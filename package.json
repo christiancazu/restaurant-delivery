@@ -27,13 +27,18 @@
     "@nestjs/common": "^7.0.13",
     "@nestjs/config": "^0.4.2",
     "@nestjs/core": "^7.0.13",
+    "@nestjs/graphql": "^7.3.9",
     "@nestjs/platform-express": "^7.0.13",
     "@nestjs/typeorm": "^7.0.0",
+    "apollo-server-express": "^2.13.1",
     "global": "^4.4.0",
+    "graphql": "^15.0.0",
+    "graphql-tools": "^6.0.0",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.5",
+    "type-graphql": "^1.0.0-rc.2",
     "typeorm": "^0.2.25"
   },
   "devDependencies": {

@@ -5,14 +5,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();
-  app.setGlobalPrefix('api');
+  // app.setGlobalPrefix('api');
 
   const port = parseInt(process.env.PORT, 10) || 3000;
 
   await app.listen(port);
 
   if (process.env.NODE_ENV !== 'production') {
-    console.log(`running on: http://localhost:${port}`);
+    console.log(`running gql api: http://localhost:${port}/graphql`);
   }
 }
 bootstrap();
