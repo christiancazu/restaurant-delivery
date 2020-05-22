@@ -28,6 +28,9 @@ module.exports = {
     "array-element-newline": ["error", "consistent"],
     "array-bracket-spacing": ["error", "never"],
     "array-bracket-newline": ["error", { "multiline": true }],
+    "object-curly-spacing": ["error", "always"],
+    "object-property-newline": "error",
+    "object-curly-newline": ["error", {"multiline": true, "minProperties": 3}],
     // ts
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',

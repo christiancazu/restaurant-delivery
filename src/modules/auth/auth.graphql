@@ -1,0 +1,13 @@
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type Session {
+  user: User
+  token: String
+} 
+
+type Mutation {
+  signIn(signInInput: SignInInput): Session
+}

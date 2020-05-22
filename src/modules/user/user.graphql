@@ -1,6 +1,6 @@
 type User {
-  id: ID!
-  username: String
+  id: Int!
+  email: String!
 }
 
 type Query {
