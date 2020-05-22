@@ -8,6 +8,10 @@ type Session {
   token: String
 } 
 
+type Query {
+  me: Session
+}
+
 type Mutation {
   signIn(signInInput: SignInInput): Session
 }

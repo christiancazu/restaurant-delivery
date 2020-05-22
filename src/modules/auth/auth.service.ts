@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   async validateUserAuth({ id }: Partial<User>): Promise<User> {
-    const user = await this._userService.getById(id);
+    const user = await this._userService.findById(id);
     if (!user) {
       throw Error('auth.errors.authentication');
     }
