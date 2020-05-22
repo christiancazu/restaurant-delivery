@@ -2,7 +2,7 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
-import { UserModule } from './modules/user/user.module';
+import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { APP_PIPE } from '@nestjs/core';
 import { join } from 'path';
@@ -23,7 +23,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
         outputAs: 'class',
       },
     }),
-    UserModule,
+    UsersModule,
     AuthModule,
     ConfigModule
   ],

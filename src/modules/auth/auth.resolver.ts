@@ -6,9 +6,9 @@ import { UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Session } from 'src/graphql.schema.generated';
 import { SignInInputDto } from './dtos/sign-in.input.dto';
-import { CurrentUser } from '../user/decorators/current-user.decorator';
+import { CurrentUser } from '../users/decorators/current-user.decorator';
 import { GqlAuthGuard } from './gql.guard';
-import { UserService } from '../user/user.service';
+import { UserService } from '../users/users.service';
 
 @Resolver('Auth')
 export class AuthResolver {

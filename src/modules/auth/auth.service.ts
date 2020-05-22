@@ -2,8 +2,8 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { UserService } from '../user/user.service';
-import { User } from '../user/user.entity';
+import { UserService } from '../users/users.service';
+import { User } from '../users/user.entity';
 import { SignInInputDto } from './dtos/sign-in.input.dto';
 import { Session } from 'src/graphql.schema.generated';
 import { Repository } from 'typeorm';

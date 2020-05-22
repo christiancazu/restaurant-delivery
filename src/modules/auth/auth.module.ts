@@ -4,8 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
-import { UserService } from '../user/user.service';
-import { UserRepository } from '../user/user.repository';
+import { UserService } from '../users/users.service';
+import { UserRepository } from '../users/user.repository';
 import { JwtStrategy } from './jwt.strategy';
 
 @Module({
