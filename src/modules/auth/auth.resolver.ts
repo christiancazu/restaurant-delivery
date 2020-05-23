@@ -7,8 +7,9 @@ import { AuthService } from './auth.service';
 import { Session } from 'src/graphql.schema.generated';
 import { SignInInputDto } from './dtos/sign-in.input.dto';
 import { CurrentUser } from '../users/decorators/current-user.decorator';
-import { GqlAuthGuard } from './gql.guard';
+import { GqlAuthGuard } from './guards/gql.guard';
 import { UserService } from '../users/users.service';
+import { SignUpInputDto } from './dtos/sign-up.input.dto';
 
 @Resolver('Auth')
 export class AuthResolver {
@@ -27,15 +28,21 @@ export class AuthResolver {
     });
   }
 
+  @Mutation(() => Session)
+  signUp(
+    @Args('signUpInput') { email, password }: SignUpInputDto
+  ): Promise<Session> {
+    return this._authService.signUp({
+      email,
+      password
+    });
+  }
+
   @UseGuards(GqlAuthGuard)
   @Query(() => Session)
-  async me(
+  me(
     @CurrentUser('id') currentUserId: number
   ): Promise<Session> {
-    const user = await this._userService.findById(currentUserId);
-    return {
-      user,
-      token: await this._authService.signJWTPayload(user)
-    };
+    return this._authService.getSession(currentUserId);
   }
 }

@@ -31,9 +31,12 @@ module.exports = {
     "object-curly-spacing": ["error", "always"],
     "object-property-newline": "error",
     "object-curly-newline": ["error", {"multiline": true, "minProperties": 3}],
+    "key-spacing": ["error", { "afterColon": true }],
     // ts
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-function': 'off'
+    // "@typescript-eslint/explicit-module-boundary-types": 'off',
   },
 };

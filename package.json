@@ -36,7 +36,6 @@
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
-    "cookie-parser": "^1.4.5",
     "global": "^4.4.0",
     "graphql": "^15.0.0",
     "graphql-tools": "^6.0.0",

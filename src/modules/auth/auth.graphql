@@ -3,6 +3,11 @@ input SignInInput {
   password: String!
 }
 
+input SignUpInput {
+  email: String!
+  password: String!
+}
+
 type Session {
   user: User
   token: String
@@ -14,4 +19,9 @@ type Query {
 
 type Mutation {
   signIn(signInInput: SignInInput): Session
+}
+
+
+type Mutation {
+  signUp(signUpInput: SignUpInput): Session
 }
