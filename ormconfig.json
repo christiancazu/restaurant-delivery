@@ -6,10 +6,10 @@
   "password": "root",
   "database": "test",
   "synchronize": true,
-  "logging": true,
   "entities": ["dist/**/*.entity.js"],
-  "migrations": ["src/migrations/**/*.js"],
+  "migrations": ["dist/migrations/**/*.js"],
   "cli": {
+    "entitiesDir": "src/modules",
     "migrationsDir": "src/migrations"
   }
 }

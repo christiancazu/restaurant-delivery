@@ -39,3 +39,4 @@ package-lock.json
 .env
 /src/migrations/*
 /src/graphql.schema.generated.ts
+yarn.lock

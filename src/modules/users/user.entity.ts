@@ -17,15 +17,11 @@ export class User extends BaseEntity {
   @Column({
     type: 'varchar',
     unique: true,
-    length: 25,
-    nullable: false
+    length: 25
   })
   email: string;
 
-  @Column({
-    type: 'varchar',
-    nullable: false
-  })
+  @Column({ type: 'varchar' })
   password: string;
 
   @BeforeInsert()
