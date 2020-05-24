@@ -21,8 +21,10 @@ $ yarn migration:generate {name}
 
 # rum migration
 $ yarn migration:run
-```
 
+# rum seeders
+$ yarn seed:run
+```
 ## Running the app
 
 ```bash
