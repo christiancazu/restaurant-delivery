@@ -1,4 +1,6 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import {
+  Injectable, UnprocessableEntityException, UnauthorizedException
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -9,11 +11,10 @@ import { SignUpInputDto } from './dtos/sign-up.input.dto';
 import { Session } from 'src/graphql.schema.generated';
 import { Repository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
-import { Roles } from '../roles/enums/roles.enum';
+import { ROLES } from '../roles/enums/roles.enum';
 import { Role } from '../roles/role.entity';
 
 import { getConnection } from 'typeorm';
-
 
 @Injectable()
 export class AuthService {
@@ -25,19 +26,25 @@ export class AuthService {
   ) {}
 
   private signJWTPayload(user: Partial<User>): string {
+    const userJWTPayload = {
+      ...user,
+      roles: user.roles.map(r => r.name)
+    };
+
+
     return sign(
-      { user },
+      userJWTPayload,
       this._configService.get('JWT_SECRET'),
       { expiresIn: '7d' }
     );
   }
 
-  async validateUserAuth({ user: { id } }: any): Promise<User> {
-    const user = await this._userService.findById(id);
+  async validateUserAuth(payload: Partial<User>): Promise<any> {
+    const user = await this._userService.findById(payload.id);
     if (!user) {
-      throw Error('auth.errors.authentication');
+      throw new UnauthorizedException('auth.errors.authentication');
     }
-    return user;
+    return payload;
   }
 
   async signIn({ email, password }: SignInInputDto): Promise<Session> {
@@ -60,7 +67,10 @@ export class AuthService {
   }
 
   async signUp(data: SignUpInputDto): Promise<Session> {
-    let user = await this._userRepository.findOne({ email: data.email });
+    let user = await this._userRepository.findOne({
+      where: { email: data.email },
+      relations: ['roles']
+    });
 
     if (user) {
       throw new UnprocessableEntityException('auth.errors.exists');
@@ -69,7 +79,7 @@ export class AuthService {
     user = this._userRepository.create(data);
 
     const roleRepository = getConnection().getRepository(Role);
-    const defaultRole = await roleRepository.findOne({ where: { name: Roles.USER } });
+    const defaultRole = await roleRepository.findOne({ where: { name: ROLES.USER } });
     user.roles = [defaultRole];
 
     const userSaved = await this._userRepository.save(user);
@@ -78,7 +88,10 @@ export class AuthService {
   }
 
   async getSession(userId: number): Promise<Session> {
-    const user = await this._userRepository.findOne(userId);
+    const user = await this._userRepository.findOne({
+      where: { id: userId },
+      relations: ['roles']
+    });
 
     if (!user) {
       throw new UnprocessableEntityException('auth.errors.exists');
@@ -87,7 +100,7 @@ export class AuthService {
     return this.provideSession(user);
   }
 
-  private async provideSession(user: User) {
+  private provideSession(user: User): Session {
     delete user['password'];
     return {
       user,

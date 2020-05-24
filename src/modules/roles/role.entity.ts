@@ -5,7 +5,7 @@ import {
   Column
 } from 'typeorm';
 
-import { Roles } from './enums/roles.enum';
+import { ROLES } from './enums/roles.enum';
 
 @Entity('roles')
 export class Role extends BaseEntity {
@@ -14,15 +14,16 @@ export class Role extends BaseEntity {
   id: number;
 
   @Column('enum', {
-    enum: Roles,
-    default: Roles.USER
+    enum: ROLES,
+    default: ROLES.USER
   })
-  name: Roles
+  name: ROLES
 
   @Column({
     type: 'varchar',
     length: 50,
-    nullable: true
+    nullable: true,
+    select: false
   })
   description: string;
 }

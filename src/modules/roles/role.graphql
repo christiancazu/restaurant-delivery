@@ -1,5 +1,5 @@
 type Role {
-  id: Int!
-  name: String!
-  description: String!
+  id: Int
+  name: String
+  description: String
 }

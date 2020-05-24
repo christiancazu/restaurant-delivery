@@ -1,1 +1,3 @@
 src/migrations/**
+/dist/*
+/node_modules/*

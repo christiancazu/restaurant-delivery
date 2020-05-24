@@ -1,6 +1,6 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
-import { Roles } from '../../modules/roles/enums/roles.enum';
+import { ROLES } from '../../modules/roles/enums/roles.enum';
 
 export default class RolesSeeder implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<any> {
@@ -10,19 +10,19 @@ export default class RolesSeeder implements Seeder {
       .into('roles')
       .values([
         {
-          name: Roles.ADMIN,
+          name: ROLES.ADMIN,
           description: 'admin...'
         },
         {
-          name: Roles.USER,
+          name: ROLES.USER,
           description: 'user...'
         },
         {
-          name: Roles.CHEF,
+          name: ROLES.CHEF,
           description: 'chef...'
         },
         {
-          name: Roles.DEALER,
+          name: ROLES.DEALER,
           description: 'dealer...'
         },
       ])
