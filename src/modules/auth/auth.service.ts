@@ -9,6 +9,11 @@ import { SignUpInputDto } from './dtos/sign-up.input.dto';
 import { Session } from 'src/graphql.schema.generated';
 import { Repository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
+import { Roles } from '../roles/enums/roles.enum';
+import { Role } from '../roles/role.entity';
+
+import { getConnection } from 'typeorm';
+
 
 @Injectable()
 export class AuthService {
@@ -36,7 +41,10 @@ export class AuthService {
   }
 
   async signIn({ email, password }: SignInInputDto): Promise<Session> {
-    const user = await this._userRepository.findOne({ email });
+    const user = await this._userRepository.findOne({
+      where: { email },
+      relations: ['roles']
+    });
 
     if (!user) {
       throw new UnprocessableEntityException('auth.errors.credentials');
@@ -59,17 +67,14 @@ export class AuthService {
     }
 
     user = this._userRepository.create(data);
-    await this._userRepository.save(user);
 
-    return this.provideSession(user);
-  }
+    const roleRepository = getConnection().getRepository(Role);
+    const defaultRole = await roleRepository.findOne({ where: { name: Roles.USER } });
+    user.roles = [defaultRole];
 
-  private async provideSession(user: User) {
-    delete user['password'];
-    return {
-      user,
-      token: this.signJWTPayload(user)
-    };
+    const userSaved = await this._userRepository.save(user);
+
+    return this.provideSession(userSaved);
   }
 
   async getSession(userId: number): Promise<Session> {
@@ -80,5 +85,13 @@ export class AuthService {
     }
 
     return this.provideSession(user);
+  }
+
+  private async provideSession(user: User) {
+    delete user['password'];
+    return {
+      user,
+      token: this.signJWTPayload(user)
+    };
   }
 }

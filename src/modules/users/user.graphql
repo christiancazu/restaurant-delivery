@@ -1,6 +1,7 @@
 type User {
   id: Int!
   email: String!
+  roles: [Role]
 }
 
 type Query {
