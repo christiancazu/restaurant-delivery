@@ -1,0 +1,16 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "root",
+  "database": "test",
+  "synchronize": true,
+  "entities": ["dist/**/*.entity.js"],
+  "migrations": ["dist/migrations/**/*.js"],
+  "seeds": ["src/**/*.seeder{.ts,.js}"],
+  "cli": {
+    "entitiesDir": "src/modules",
+    "migrationsDir": "src/migrations"
+  }
+}
