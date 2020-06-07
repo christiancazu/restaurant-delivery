@@ -124,8 +124,7 @@ module.exports = configure(function (/* ctx */) {
             options: {
               formatter: require('eslint').CLIEngine.getFormatter('stylish')
             }
-          }
-          )
+          });
         }
 
         cfg.resolve.alias = {
@@ -133,7 +132,7 @@ module.exports = configure(function (/* ctx */) {
 
           // root alias
           '@': path.resolve(__dirname, 'src'),
-          '@core': path.resolve(__dirname, '@core'),
+          '@core': path.resolve(__dirname, 'core')
         };
       },
 

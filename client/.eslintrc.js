@@ -18,7 +18,8 @@ module.exports = {
     project: resolve(__dirname, './tsconfig.json'),
     tsconfigRootDir: __dirname,
     ecmaVersion: 2019, // Allows for the parsing of modern ECMAScript features
-    sourceType: 'module' // Allows for the use of imports
+    sourceType: 'module', // Allows for the use of imports
+    createDefaultProgram: true
   },
 
   env: {
@@ -85,7 +86,6 @@ module.exports = {
     'prefer-promise-reject-errors': 'off',
 
     indent: ['error', 2, { SwitchCase: 1 }],
-    'linebreak-style': ['error', 'windows'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     'linebreak-style': 0,
