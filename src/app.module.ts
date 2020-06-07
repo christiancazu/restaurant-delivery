@@ -20,7 +20,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
       context: ({ req }) => ({ req }),
       typePaths: ['./**/*.graphql'],
       definitions: {
-        path: join(process.cwd(), 'src/graphql.schema.generated.ts'),
+        path: join(process.cwd(), 'common/gql/graphql.schema.generated.ts'),
         outputAs: 'class'
       },
     }),
@@ -28,11 +28,10 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     UsersModule,
     RolesModule
   ],
-  controllers: [],
   providers: [
     {
       provide: APP_PIPE,
-      useClass: ValidationPipe,
+      useClass: ValidationPipe
     },
   ],
 })

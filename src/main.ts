@@ -17,4 +17,5 @@ async function bootstrap() {
     console.log(`running gql api: http://localhost:${port}/graphql`);
   }
 }
+
 bootstrap();

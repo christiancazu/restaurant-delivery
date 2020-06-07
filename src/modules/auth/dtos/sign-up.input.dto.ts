@@ -1,7 +1,7 @@
 import {
   IsEmail, MinLength, IsNotEmpty, ValidationArguments
 } from 'class-validator';
-import { SignUpInput } from 'src/graphql.schema.generated';
+import { SignUpInput } from '@common/gql/graphql.schema.generated';
 
 export class SignUpInputDto extends SignUpInput {
 

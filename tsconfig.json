@@ -13,8 +13,10 @@
     "baseUrl": "./",
     "incremental": true,
     "paths": {
-      "src": ["src/*"],
+      "src/*": ["src/*"],
+      "@common/*": ["common/*"],
     }
   },
-  "exclude": ["node_modules", "dist"]
+  "include": ["./src"],
+  "exclude": ["node_modules", "dist", "client"]
 }

@@ -8,7 +8,7 @@ import { UserService } from '../users/users.service';
 import { User } from '../users/user.entity';
 import { SignInInputDto } from './dtos/sign-in.input.dto';
 import { SignUpInputDto } from './dtos/sign-up.input.dto';
-import { Session } from 'src/graphql.schema.generated';
+import { Session } from '@common/gql/graphql.schema.generated';
 import { Repository } from 'typeorm';
 import { sign } from 'jsonwebtoken';
 import { ROLES } from '../roles/enums/roles.enum';

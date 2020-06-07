@@ -4,7 +4,7 @@ import {
 import { UseGuards } from '@nestjs/common';
 
 import { AuthService } from './auth.service';
-import { Session } from 'src/graphql.schema.generated';
+import { Session } from '@common/gql/graphql.schema.generated';
 import { SignInInputDto } from './dtos/sign-in.input.dto';
 import { CurrentUser } from '../users/decorators/current-user.decorator';
 import { GqlAuthGuard } from './guards/gql.guard';

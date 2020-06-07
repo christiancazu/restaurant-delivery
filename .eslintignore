@@ -1,3 +1,4 @@
 src/migrations/**
 /dist/*
 /node_modules/*
+generate-typings.ts
