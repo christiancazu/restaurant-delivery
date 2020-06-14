@@ -21,7 +21,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
       typePaths: ['./**/*.graphql'],
       definitions: {
         path: join(process.cwd(), 'common/gql/graphql.schema.generated.ts'),
-        outputAs: 'class'
+        // outputAs: 'class'
       },
     }),
     AuthModule,

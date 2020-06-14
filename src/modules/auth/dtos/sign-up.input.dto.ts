@@ -3,7 +3,7 @@ import {
 } from 'class-validator';
 import { SignUpInput } from '@common/gql/graphql.schema.generated';
 
-export class SignUpInputDto extends SignUpInput {
+export class SignUpInputDto implements SignUpInput {
 
   @IsNotEmpty()
   @IsEmail()

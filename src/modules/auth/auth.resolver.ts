@@ -18,7 +18,7 @@ export class AuthResolver {
     private readonly _userService: UserService,
   ){}
 
-  @Mutation(() => Session)
+  @Mutation()
   signIn(
     @Args('signInInput') { email, password }: SignInInputDto
   ): Promise<Session> {
@@ -28,7 +28,7 @@ export class AuthResolver {
     });
   }
 
-  @Mutation(() => Session)
+  @Mutation()
   signUp(
     @Args('signUpInput') { email, password }: SignUpInputDto
   ): Promise<Session> {
@@ -39,7 +39,7 @@ export class AuthResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Query(() => Session)
+  @Query()
   me(
     @CurrentUser('id') currentUserId: number
   ): Promise<Session> {
