@@ -1,5 +1,7 @@
 <template>
-<q-card>
+<q-card
+  bordered
+>
   <q-card-section>
     <q-form
       class="q-gutter-y-md"
@@ -12,7 +14,7 @@
       <q-separator />
 
       <q-input
-        v-model="credentials.email"
+        v-model="signInInput.email"
         :rules="[
           val => !!val || $t('field.errors.required', { name: $t('email') }),
           val => /\S+@\S+\.\S+/.test(val) || $t('field.errors.email')
@@ -22,12 +24,12 @@
         autocomplete="off"
         outlined lazy-rules
       >
-        <template v-slot:append>
+        <template v-slot:prepend>
           <q-icon name="person" />
         </template>
       </q-input>
       <q-input
-        v-model="credentials.password"
+        v-model="signInInput.password"
         :rules="[val => !!val || $t('field.errors.required', { name: $t('password') })]"
         :label="$t('password')"
         :disable="loading"
@@ -35,7 +37,7 @@
         autocomplete="off"
         outlined
       >
-        <template v-slot:append>
+        <template v-slot:prepend>
           <q-icon name="lock" />
         </template>
       </q-input>
@@ -55,21 +57,22 @@
 </template>
 
 <script lang="ts">
-import { Credentials } from '@core/interfaces';
+import { SignInInput } from '@common/gql/graphql.schema.generated';
 import {
   authService,
   notifyService
 } from '@core/services';
 import {
   defineComponent,
-  ref
+  ref,
+  reactive
 } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'SignInForm',
 
   setup (_, { root }) {
-    const credentials = ref<Credentials>({
+    const signInInput = reactive<SignInInput>({
       email: '',
       password: ''
     });
@@ -80,17 +83,17 @@ export default defineComponent({
       try {
         loading.value = true;
 
-        await authService.signIn(credentials.value);
+        await authService.signIn(signInInput);
 
         root.$router.push({ name: 'Home' });
       } catch (error) {
-        notifyService.error('auth.errors.credentials');
+        notifyService.error('auth.errors.signInInput');
       } finally {
         loading.value = false;
       }
-    };
+    }
     return {
-      credentials,
+      signInInput,
       onSubmitSignIn,
       loading
     };

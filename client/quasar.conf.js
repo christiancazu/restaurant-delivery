@@ -132,7 +132,8 @@ module.exports = configure(function (/* ctx */) {
 
           // root alias
           '@': path.resolve(__dirname, 'src'),
-          '@core': path.resolve(__dirname, 'core')
+          '@core': path.resolve(__dirname, 'core'),
+          '@common': path.resolve(__dirname, '../common')
         };
       },
 

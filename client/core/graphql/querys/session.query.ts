@@ -6,9 +6,10 @@ export const SESSION_QUERY = gql`
       isLogged
       user {
         id
-        name
-        lastname
         email
+        roles {
+          name
+        }
       }
     }
   }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Notify } from 'quasar';
 import { i18n } from 'src/boot/i18n';
 
@@ -21,6 +22,7 @@ export default {
   send (type: string, message: string) {
     Notify.create({
       type,
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       message: `${i18n.t(message)}`,
       position: 'top-right'
     });

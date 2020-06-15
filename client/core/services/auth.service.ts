@@ -9,7 +9,8 @@ export default {
     const { data: { me } } = await apolloClient.query({
       query: ME_QUERY
     });
-    sessionService.set({ user: me });
+
+    sessionService.set(me);
   },
 
   async signIn ({ email, password }: Credentials) {
@@ -20,6 +21,7 @@ export default {
         password
       }
     });
+
     sessionService.set(signIn);
   }
 };

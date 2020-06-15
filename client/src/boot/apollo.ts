@@ -45,9 +45,8 @@ cache.writeData({
 });
 
 export default boot(({ app }) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
   app.setup = () => {
     provide(DefaultApolloClient, apolloClient);
+    return {};
   };
 });

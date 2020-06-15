@@ -1,7 +1,5 @@
-import { User } from '@core/interfaces/user.interface';
+import { Session as SessionGQL } from '@common/gql/graphql.schema.generated';
 
-export interface Session {
-  user?: User;
+export interface Session extends SessionGQL {
   isLogged?: boolean;
-  token?: string;
 }

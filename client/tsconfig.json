@@ -9,9 +9,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@core/*": ["core/*"],
+      "@common/*": ["../common/*"],
     }
   },
-  "include": ["./src"],
+  "include": ["./src", "./core"],
   "exclude": [
     "**/build/**",
     "**/dist/**",

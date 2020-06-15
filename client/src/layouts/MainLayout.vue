@@ -3,19 +3,20 @@
   <q-header elevated>
     <q-toolbar>
       <q-btn
-        flat
-        dense
-        round
         icon="menu"
         aria-label="Menu"
+        flat dense round
         @click="leftDrawerOpen = !leftDrawerOpen"
       />
 
       <q-toolbar-title>
-        Virtual Classroom
+        UTP Restaurant Delivery
       </q-toolbar-title>
 
-      <div class="q-mx-sm">{{ user.name }} {{ user.lastname }}</div>
+      <div
+        v-if="session.user"
+        class="q-mx-sm"
+      >{{ session.user.email }}</div>
       <q-btn
         color="secondary"
         @click="signOut"
@@ -27,8 +28,7 @@
 
   <q-drawer
     v-model="leftDrawerOpen"
-    show-if-above
-    bordered
+    show-if-above bordered
     content-class="bg-grey-1"
   >
     <q-list>
@@ -36,7 +36,7 @@
         header
         class="text-grey-8"
       >
-        Essential Links
+        Menu
       </q-item-label>
     </q-list>
   </q-drawer>
@@ -52,7 +52,6 @@ import {
   sessionService,
   notifyService
 } from '@core/services';
-import { Session } from '@core/interfaces';
 
 import { defineComponent } from '@vue/composition-api';
 
@@ -66,7 +65,7 @@ export default defineComponent({
   },
 
   setup (_, { root }) {
-    const { user }: Session = sessionService.get();
+    const { session } = sessionService.get();
 
     function signOut () {
       sessionService.close();
@@ -75,7 +74,7 @@ export default defineComponent({
     }
 
     return {
-      user,
+      session,
       signOut
     };
   }

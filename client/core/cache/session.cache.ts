@@ -1,15 +1,12 @@
-import {
-  User,
-  Session
-} from '@core/interfaces';
+import { Session } from '@core/interfaces';
 
-export default {
+const session: Session = {
   user: {
     id: null,
-    name: '',
-    lastname: '',
-    email: ''
-  } as User,
-
+    email: '',
+    roles: []
+  },
   isLogged: false
-} as Session;
+};
+
+export default session;

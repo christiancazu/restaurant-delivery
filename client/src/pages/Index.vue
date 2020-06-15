@@ -1,13 +1,14 @@
 <template>
 <q-page class="row flex justify-center items-center">
   <pre style="max-width: 600px">
-    {{ user }}
+    {{ session }}
   </pre>
 </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+
 import { sessionService } from '@core/services';
 
 export default defineComponent({
@@ -20,9 +21,10 @@ export default defineComponent({
   },
 
   setup () {
-    const { user } = sessionService.get();
+    const { session } = sessionService.get();
+
     return {
-      user
+      session
     };
   }
 });
