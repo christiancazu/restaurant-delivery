@@ -1,4 +1,5 @@
 import { Module, ValidationPipe } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -12,6 +13,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({ rootPath: join(__dirname, '../../client', 'dist/pwa') }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
