@@ -14,6 +14,7 @@ import { storageService } from '@core/services';
 import { session } from '@core/cache';
 import typeDefs from '@core/graphql/typeDefs';
 import resolvers from '@core/graphql/resolvers';
+import { notifyUtil } from '@core/utils';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 const authLink = setContext((_, { headers }) => {
@@ -32,7 +33,7 @@ const errorLink = onError(({ response }) => {
   try {
     const messageError = response.errors[0].extensions.exception.response.message;
     if (messageError) {
-
+      notifyUtil.error(messageError);
     }
   } catch (error) {
 

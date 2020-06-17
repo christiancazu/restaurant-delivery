@@ -5,8 +5,6 @@ import {
   authService
 } from '@core/services';
 
-import { notifyUtil } from '@core/utils';
-
 export default async (to: Route, from: Route, next: NavigationGuardNext<Vue>): Promise<any> => {
   if (to.matched.some((record: RouteRecord) => record.meta.requiresAuth)) {
     const { session: { isLogged } } = sessionService.get();
@@ -18,7 +16,6 @@ export default async (to: Route, from: Route, next: NavigationGuardNext<Vue>): P
         await authService.me();
         next();
       } catch (error) {
-        notifyUtil.error('session.errors.notValid');
         next({ name: 'SignIn' });
       }
     }

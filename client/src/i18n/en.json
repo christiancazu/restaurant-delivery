@@ -7,10 +7,12 @@
   "email": "Email",
   "field": {
     "errors": {
-      "required": "The field {name} is required",
-      "email": "The Email is not valid"
+      "email": "The Email is not valid",
+      "minLength": "The field {field} must contain at least {amount} characters",
+      "required": "The field {field} is required"
     }
   },
+  "error": "An error has been occurred",
   "join": "Join",
   "password": "Password",
   "session": {
@@ -23,5 +25,6 @@
   },
   "signIn": "Sign in",
   "signOut": "Sign out",
+  "Unauthorized": "The session is not valid",
   "user": "User"
 }

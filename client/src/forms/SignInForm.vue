@@ -16,7 +16,7 @@
       <q-input
         v-model="signInInput.email"
         :rules="[
-          val => !!val || $t('field.errors.required', { name: $t('email') }),
+          val => !!val || $t('field.errors.required', { field: $t('email') }),
           val => /\S+@\S+\.\S+/.test(val) || $t('field.errors.email')
         ]"
         :label="$t('email')"
@@ -30,7 +30,7 @@
       </q-input>
       <q-input
         v-model="signInInput.password"
-        :rules="[val => !!val || $t('field.errors.required', { name: $t('password') })]"
+        :rules="[val => !!val || $t('field.errors.required', { field: $t('password') })]"
         :label="$t('password')"
         :disable="loading"
         type="password"

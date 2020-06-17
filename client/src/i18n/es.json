@@ -7,10 +7,12 @@
   "email": "Correo Electrónico",
   "field": {
     "errors": {
-      "required": "El campo {name} es requerido",
-      "email": "El Correo Electrónico no es válido"
+      "email": "El Correo Electrónico no es válido",
+      "minLength": "El campo {field} debe contener almenos {amount} caracteres",
+      "required": "El campo {field} es requerido"
     }
   },
+  "error": "Ha ocurrido un error",
   "join": "Ingresar",
   "password": "Contraseña",
   "session": {
@@ -23,5 +25,6 @@
   },
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
+  "Unauthorized": "La sesión no es válida",
   "user": "Usuario"
 }
