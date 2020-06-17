@@ -2,9 +2,10 @@ import { Route, NavigationGuardNext, RouteRecord } from 'vue-router';
 
 import {
   sessionService,
-  authService,
-  notifyService
+  authService
 } from '@core/services';
+
+import { notifyUtil } from '@core/utils';
 
 export default async (to: Route, from: Route, next: NavigationGuardNext<Vue>): Promise<any> => {
   if (to.matched.some((record: RouteRecord) => record.meta.requiresAuth)) {
@@ -17,7 +18,7 @@ export default async (to: Route, from: Route, next: NavigationGuardNext<Vue>): P
         await authService.me();
         next();
       } catch (error) {
-        notifyService.error('session.errors.notValid');
+        notifyUtil.error('session.errors.notValid');
         next({ name: 'SignIn' });
       }
     }

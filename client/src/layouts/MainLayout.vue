@@ -48,10 +48,9 @@
 </template>
 
 <script lang="ts">
-import {
-  sessionService,
-  notifyService
-} from '@core/services';
+import { sessionService } from '@core/services';
+
+import { notifyUtil } from '@core/utils';
 
 import { defineComponent } from '@vue/composition-api';
 
@@ -69,7 +68,7 @@ export default defineComponent({
 
     function signOut () {
       sessionService.close();
-      notifyService.info('session.info.close');
+      notifyUtil.info('session.info.close');
       root.$router.push({ name: 'SignIn' });
     }
 
