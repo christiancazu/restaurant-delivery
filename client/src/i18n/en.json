@@ -1,12 +1,22 @@
 {
-  "auth": {
-    "errors": {
-      "credentials": "The username o password are not valid"
+  "account": {
+    "notHave": "You do not have an account?",
+    "success": {
+      "created": "The account has been created successfully"
     }
   },
+  "auth": {
+    "errors": {
+      "credentials": "The username o password are not valid",
+      "exists": "Email has already been registered"
+    }
+  },
+  "cancel": "Cancel",
+  "confirmPassword": "Confirm password",
   "email": "Email",
   "field": {
     "errors": {
+      "repeatPassword": "Passwords do not match",
       "email": "The Email is not valid",
       "minLength": "The field {field} must contain at least {amount} characters",
       "required": "The field {field} is required"
@@ -23,8 +33,11 @@
       "close": "The session has ended"
     }
   },
+  "register": "Register",
+  "registerHere": "Register here",
   "signIn": "Sign in",
   "signOut": "Sign out",
+  "signUp": "Sign up",
   "Unauthorized": "The session is not valid",
   "user": "User"
 }

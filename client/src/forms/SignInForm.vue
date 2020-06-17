@@ -53,12 +53,35 @@
       </div>
     </q-form>
   </q-card-section>
+  <q-card-section class="text-center">
+    {{ $t('account.notHave') }}
+    <span
+      class="text-link text-lowercase"
+      @click="openSignUp"
+    >
+      {{ $t('registerHere') }}
+    </span>
+  </q-card-section>
+
+  <q-dialog
+    v-model="signUpDialogOpen"
+    persistent
+    content-class="dialog-sign-up"
+  >
+    <sign-up-form
+      :style="`width: ${!$q.screen.lt.md ? '400px' : '100%'}`"
+      @cancel="signUpDialogOpen = false"
+    />
+  </q-dialog>
 </q-card>
 </template>
 
 <script lang="ts">
 import { SignInInput } from '@common/gql/graphql.schema.generated';
 import { authService } from '@core/services';
+
+import SignUpForm from './SignUpForm.vue';
+
 import {
   defineComponent,
   ref,
@@ -68,13 +91,19 @@ import {
 export default defineComponent({
   name: 'SignInForm',
 
+  components: {
+    SignUpForm
+  },
+
   setup () {
     const signInInput = reactive<SignInInput>({
       email: '',
       password: ''
     });
 
-    const loading = ref<boolean>(false);
+    const
+      loading = ref<boolean>(false),
+      signUpDialogOpen = ref<boolean>(false);
 
     function onSubmitSignIn () {
       try {
@@ -86,11 +115,25 @@ export default defineComponent({
         loading.value = false;
       }
     }
+
+    function openSignUp () {
+      signUpDialogOpen.value = true;
+    }
     return {
       signInInput,
       onSubmitSignIn,
-      loading
+      openSignUp,
+      loading,
+      signUpDialogOpen
     };
   }
 });
 </script>
+
+<style lang="scss">
+.dialog-sign-up {
+  & .q-dialog__inner {
+    padding: 8px;
+  }
+}
+</style>

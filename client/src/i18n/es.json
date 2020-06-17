@@ -1,12 +1,22 @@
 {
-  "auth": {
-    "errors": {
-      "credentials": "El usuario o la contraseña no son válidos"
+  "account": {
+    "notHave": "¿No tienes una cuenta?",
+    "success": {
+      "created": "La cuenta ha sido creada con éxito"
     }
   },
+  "auth": {
+    "errors": {
+      "credentials": "El usuario o la contraseña no son válidos",
+      "exists": "El correo electrónico ya ha sido registrado"
+    }
+  },
+  "cancel": "Cancelar",
+  "confirmPassword": "Confirmar contraseña",
   "email": "Correo Electrónico",
   "field": {
     "errors": {
+      "repeatPassword": "Las contraseñas no coinciden",
       "email": "El Correo Electrónico no es válido",
       "minLength": "El campo {field} debe contener almenos {amount} caracteres",
       "required": "El campo {field} es requerido"
@@ -23,8 +33,11 @@
       "close": "La sesión ha finalizado"
     }
   },
+  "register": "Registrar",
+  "registerHere": "Registrar aquí",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
+  "signUp": "Registrarse",
   "Unauthorized": "La sesión no es válida",
   "user": "Usuario"
 }

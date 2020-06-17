@@ -64,6 +64,7 @@ module.exports = configure(function (/* ctx */) {
         'QBtn',
         'QCard',
         'QCardSection',
+        'QDialog',
         'QDrawer',
         'QForm',
         'QIcon',

@@ -10,6 +10,6 @@ export class SignUpInputDto implements SignUpInput {
   readonly email: string;
 
   @IsNotEmpty()
-  @MinLength(6, { message: (args: ValidationArguments) => `{"message":"data.errors.invalid.minLength","attrs":{"field":"password","amount":${args.constraints[0]}}}` })
+  @MinLength(6, { message: (args: ValidationArguments) => `{"message":"field.errors.minLength","asserts":{"field":"password","amount":${args.constraints[0]}}}` })
   readonly password: string;
 }
