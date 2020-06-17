@@ -21,7 +21,6 @@ type Mutation {
   signIn(signInInput: SignInInput): Session
 }
 
-
 type Mutation {
   signUp(signUpInput: SignUpInput): Session
 }

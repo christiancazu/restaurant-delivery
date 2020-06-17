@@ -1,7 +1,7 @@
 <template>
 <q-page class="row flex justify-center items-center">
   <pre style="max-width: 600px">
-    {{ session }}
+    {{ session.user }}
   </pre>
 </q-page>
 </template>
@@ -9,7 +9,9 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 
-import { sessionService } from '@core/services';
+import { useQuery, useResult } from '@vue/apollo-composable';
+import { SESSION_QUERY } from '@core/graphql/querys';
+import { Session } from '@common/gql/graphql.schema.generated';
 
 export default defineComponent({
   name: 'PageIndex',
@@ -21,10 +23,12 @@ export default defineComponent({
   },
 
   setup () {
-    const { session } = sessionService.get();
+    const { result, loading } = useQuery(SESSION_QUERY);
+    const session = useResult<Session>(result);
 
     return {
-      session
+      session,
+      loading
     };
   }
 });

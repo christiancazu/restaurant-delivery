@@ -58,10 +58,7 @@
 
 <script lang="ts">
 import { SignInInput } from '@common/gql/graphql.schema.generated';
-import {
-  authService,
-  notifyService
-} from '@core/services';
+import { authService } from '@core/services';
 import {
   defineComponent,
   ref,
@@ -71,7 +68,7 @@ import {
 export default defineComponent({
   name: 'SignInForm',
 
-  setup (_, { root }) {
+  setup () {
     const signInInput = reactive<SignInInput>({
       email: '',
       password: ''
@@ -79,15 +76,12 @@ export default defineComponent({
 
     const loading = ref<boolean>(false);
 
-    async function onSubmitSignIn () {
+    function onSubmitSignIn () {
       try {
         loading.value = true;
 
-        await authService.signIn(signInInput);
-
-        root.$router.push({ name: 'Home' });
-      } catch (error) {
-        notifyService.error('auth.errors.signInInput');
+        authService.signIn(signInInput);
+      } catch (e) {
       } finally {
         loading.value = false;
       }
