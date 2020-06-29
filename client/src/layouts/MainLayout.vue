@@ -10,29 +10,134 @@
         @click="leftDrawerOpen = !leftDrawerOpen"
       />
 
-      <q-avatar size="48px">
+      <q-avatar
+        size="48px"
+        @click="$router.push({ name: 'Home' })"
+      >
         <img src="app-logo-128x128.png">
       </q-avatar>
 
-      <q-toolbar-title>
+      <q-toolbar-title v-if="!$q.screen.lt.md">
         Restaurant Delivery
         <q-btn
-          icon="fad fa-home"
+          icon="fad fa-home fa-swap-opacity"
           flat round
-          :to="{ name: 'Home' }"
+          :to="{ name: 'Home', params: { module: '' } }"
         />
       </q-toolbar-title>
 
-      <div
-        v-if="session.user"
-        class="q-mx-sm"
-      >{{ session.user.email }}</div>
-      <q-btn
-        color="grey"
-        @click="signOut"
-      >
-        {{ $t('signOut') }}
-      </q-btn>
+      <template v-if="session.user">
+        <q-btn-dropdown
+          stretch flat
+        >
+          <template #label>
+            <q-avatar
+              square
+              size="2em"
+              icon="fad fa-bell fa-swap-opacity"
+            >
+              <q-badge
+                color="warning"
+                label="2"
+                floating
+                style="transform: translate(16px, -4px)"
+              />
+            </q-avatar>
+          </template>
+
+          <q-list>
+            <q-item
+              v-close-popup clickable tabindex="0"
+            >
+              <q-item-section avatar>
+                <q-avatar
+                  icon="fad fa-bells"
+                />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ $t('myNotification') }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+
+        <q-btn-dropdown
+          stretch flat
+        >
+          <template #label>
+            <q-avatar
+              square
+              size="2em"
+              icon="fad fa-shopping-cart"
+            >
+              <q-badge
+                color="warning"
+                label="2"
+                floating
+                style="transform: translate(16px, -4px)"
+              />
+            </q-avatar>
+          </template>
+
+          <q-list>
+            <q-item
+              v-close-popup clickable tabindex="0"
+            >
+              <q-item-section avatar>
+                <q-avatar
+                  icon="fad fa-cart-plus"
+                />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ $tc('myOrder', 2) }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+
+        <q-btn-dropdown
+          stretch
+          flat
+        >
+          <template #label>
+            <q-avatar
+              square
+              size="2em"
+              icon="fad fa-user-circle"
+            />
+            <span v-if="!$q.screen.lt.md">{{ session.user.email }}</span>
+          </template>
+
+          <q-list>
+            <q-item
+              v-close-popup clickable tabindex="0"
+            >
+              <q-item-section avatar>
+                <q-avatar
+                  icon="fad fa-address-card"
+                />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ $t('myProfile') }}</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item
+              v-close-popup clickable tabindex="1"
+              @click="signOut"
+            >
+              <q-item-section avatar>
+                <q-avatar
+                  icon="fad fa-sign-out"
+                />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ $t('signOut') }}</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
+      </template>
+
     </q-toolbar>
   </q-header>
 
@@ -106,7 +211,7 @@ export default defineComponent({
       adminOptions: [
         {
           title: this.$tc('plate', 1),
-          icon: 'school',
+          icon: 'fad fa-clipboard-list',
           routeName: 'Admin',
           routeModule: 'plate'
         },
@@ -133,17 +238,23 @@ export default defineComponent({
           icon: 'fad fa-motorcycle',
           routeName: 'Admin',
           routeModule: 'vehicle'
+        },
+        {
+          title: this.$tc('report', 2),
+          icon: 'fad fa-file-chart-line',
+          routeName: 'Admin',
+          routeModule: 'report'
         }
       ],
       clientOptions: [
         {
-          title: this.$t('my_orders'),
+          title: this.$tc('myOrder', 2),
           icon: 'fad fa-address-book',
           routeName: 'User',
           routeModule: 'order'
         },
         {
-          title: this.$t('menu_daily'),
+          title: this.$t('menuDaily'),
           icon: 'fad fa-hat-chef',
           routeName: 'User',
           routeModule: 'menu'
