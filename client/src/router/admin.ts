@@ -2,9 +2,9 @@ import { RouteConfig } from 'vue-router';
 
 const routes: RouteConfig[] = [
   {
-    path: ':module',
-    name: 'Home',
-    component: () => import('pages/Index.vue')
+    path: 'admin/:module',
+    name: 'Admin',
+    component: () => import('pages/admin/Index.vue')
   }
 ];
 

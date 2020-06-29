@@ -1,6 +1,8 @@
 import { RouteConfig } from 'vue-router';
 
 import home from './home';
+import admin from './admin';
+import user from './user';
 import signin from './signin';
 
 const routes: RouteConfig[] = [
@@ -8,7 +10,9 @@ const routes: RouteConfig[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      ...home
+      ...home,
+      ...admin,
+      ...user
     ],
     meta: {
       requiresAuth: true

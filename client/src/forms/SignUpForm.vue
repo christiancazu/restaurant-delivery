@@ -74,7 +74,7 @@
       <div>
         <q-btn
           class="full-width"
-          color="negative"
+          text-color="primary"
           @click="$emit('cancel')"
         >
           {{ $t('cancel') }}

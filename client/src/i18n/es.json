@@ -5,6 +5,7 @@
       "created": "La cuenta ha sido creada con éxito"
     }
   },
+  "admin": "Administrador",
   "auth": {
     "errors": {
       "credentials": "El usuario o la contraseña no son válidos",
@@ -12,7 +13,9 @@
     }
   },
   "cancel": "Cancelar",
+  "client": "cliente | clientes",
   "confirmPassword": "Confirmar contraseña",
+  "dealer": "repartidor | repartidores",
   "email": "Correo Electrónico",
   "field": {
     "errors": {
@@ -22,9 +25,13 @@
       "required": "El campo {field} es requerido"
     }
   },
+  "employee": "empleado | empleados",
   "error": "Ha ocurrido un error",
   "join": "Ingresar",
+  "my_orders": "Mis ordenes",
+  "menu_daily": "Menú del día",
   "password": "Contraseña",
+  "plate": "plato | platos | platos extras",
   "session": {
     "errors": {
       "notValid": "La sesión no es válida"
@@ -39,5 +46,6 @@
   "signOut": "Cerrar sesión",
   "signUp": "Registrarse",
   "Unauthorized": "La sesión no es válida",
-  "user": "Usuario"
+  "user": "Usuario",
+  "vehicle": "vehiculo | vehiculos"
 }
