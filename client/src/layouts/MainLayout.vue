@@ -4,9 +4,9 @@
     <q-toolbar class="bg-primary">
 
       <q-btn
-        icon="menu"
+        icon="fad fa-bars"
         aria-label="Menu"
-        flat dense round
+        flat round
         @click="leftDrawerOpen = !leftDrawerOpen"
       />
 
@@ -17,8 +17,8 @@
       <q-toolbar-title>
         Restaurant Delivery
         <q-btn
-          icon="home"
-          flat dense round
+          icon="fad fa-home"
+          flat round
           :to="{ name: 'Home' }"
         />
       </q-toolbar-title>
@@ -71,7 +71,12 @@
   </q-drawer>
 
   <q-page-container>
-    <router-view />
+    <transition
+      appear
+      enter-active-class="animated slideInDown"
+    >
+      <router-view />
+    </transition>
   </q-page-container>
 </q-layout>
 </template>
@@ -100,32 +105,32 @@ export default defineComponent({
       leftDrawerOpen: false,
       adminOptions: [
         {
-          title: this.$tc('plate', 2),
+          title: this.$tc('plate', 1),
           icon: 'school',
           routeName: 'Admin',
           routeModule: 'plate'
         },
         {
           title: this.$tc('dealer', 2),
-          icon: 'code',
+          icon: 'fad fa-biking-mountain',
           routeName: 'Admin',
           routeModule: 'dealer'
         },
         {
           title: this.$tc('employee', 2),
-          icon: 'code',
+          icon: 'fad fa-users',
           routeName: 'Admin',
           routeModule: 'employee'
         },
         {
           title: this.$tc('client', 2),
-          icon: 'code',
+          icon: 'fad fa-user-friends',
           routeName: 'Admin',
           routeModule: 'client'
         },
         {
           title: this.$tc('vehicle', 2),
-          icon: 'code',
+          icon: 'fad fa-motorcycle',
           routeName: 'Admin',
           routeModule: 'vehicle'
         }
@@ -133,19 +138,19 @@ export default defineComponent({
       clientOptions: [
         {
           title: this.$t('my_orders'),
-          icon: 'code',
+          icon: 'fad fa-address-book',
           routeName: 'User',
           routeModule: 'order'
         },
         {
           title: this.$t('menu_daily'),
-          icon: 'code',
+          icon: 'fad fa-hat-chef',
           routeName: 'User',
           routeModule: 'menu'
         },
         {
-          title: this.$tc('plate', 3),
-          icon: 'code',
+          title: this.$tc('plate', 2),
+          icon: 'fad fa-burger-soda',
           routeName: 'User',
           routeModule: 'extras'
         }

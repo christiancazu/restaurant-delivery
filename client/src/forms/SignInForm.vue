@@ -25,7 +25,7 @@
         outlined lazy-rules
       >
         <template v-slot:prepend>
-          <q-icon name="person" />
+          <q-icon name="fad fa-user" />
         </template>
       </q-input>
       <q-input
@@ -38,7 +38,7 @@
         outlined
       >
         <template v-slot:prepend>
-          <q-icon name="lock" />
+          <q-icon name="fad fa-lock" />
         </template>
       </q-input>
       <div>
