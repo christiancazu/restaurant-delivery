@@ -15,8 +15,15 @@ const envparser = require('./env.parser');
 
 const path = require('path');
 
-module.exports = configure(function (/* ctx */) {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+module.exports = configure(function (ctx) {
   return {
+    // https://quasar.dev/quasar-cli/supporting-ts
+    supportTS: {
+      tsCheckerConfig: {
+        eslint: true
+      }
+    },
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
@@ -50,55 +57,28 @@ module.exports = configure(function (/* ctx */) {
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'es', // Quasar language pack
+      config: {},
 
-      // Possible values for "all":
+      // Possible values for "importStrategy":
       // * 'auto' - Auto-import needed Quasar components & directives
       //            (slightly higher compile time; next to minimum bundle size; most convenient)
       // * false  - Manually specify what to import
       //            (fastest compile time; minimum bundle size; most tedious)
       // * true   - Import everything from Quasar
       //            (not treeshaking Quasar; biggest bundle size; convenient)
-      all: false,
-
-      components: [
-        'QBtn',
-        'QCard',
-        'QCardSection',
-        'QDialog',
-        'QDrawer',
-        'QForm',
-        'QIcon',
-        'QInput',
-        'QItem',
-        'QItemLabel',
-        'QItemSection',
-        'QHeader',
-        'QLayout',
-        'QList',
-        'QPage',
-        'QPageContainer',
-        'QSeparator',
-        'QToolbar',
-        'QToolbarTitle'
-      ],
+      importStrategy: 'auto',
 
       directives: [
         'Ripple'
       ],
 
-      // Quasar plugins
       plugins: [
         'Notify'
       ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
-    supportIE: true,
-
-    // https://quasar.dev/quasar-cli/cli-documentation/supporting-ts
-    supportTS: {
-      tsCheckerConfig: { eslint: true }
-    },
+    // supportIE: true,
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
@@ -115,15 +95,15 @@ module.exports = configure(function (/* ctx */) {
 
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
       extendWebpack (cfg) {
-        if (process.env.NODE_ENV === 'production') {
-          // linting is slow in TS projects, we execute it only for production builds
+        if (ctx.prod) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           cfg.module.rules.push({
             enforce: 'pre',
             test: /\.(js|vue)$/,
             loader: 'eslint-loader',
             exclude: /node_modules/,
             options: {
-              formatter: require('eslint').CLIEngine.getFormatter('stylish')
+              // formatter: require('eslint').CLIEngine.getFormatter('stylish')
             }
           });
         }
@@ -164,39 +144,36 @@ module.exports = configure(function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'virtual classroom',
-        // eslint-disable-next-line @typescript-eslint/camelcase
-        short_name: 'virtual classroom',
-        description: 'virtual classroom client',
+        name: 'Restaurant Delivery UTP',
+        short_name: 'Restaurant Delivery UTP',
+        description: 'Restaurant Delivery UTP client',
         display: 'standalone',
         orientation: 'portrait',
-        // eslint-disable-next-line @typescript-eslint/camelcase
         background_color: '#ffffff',
-        // eslint-disable-next-line @typescript-eslint/camelcase
         theme_color: '#027be3',
         icons: [
           {
-            src: 'statics/icons/icon-128x128.png',
+            src: 'icons/icon-128x128.png',
             sizes: '128x128',
             type: 'image/png'
           },
           {
-            src: 'statics/icons/icon-192x192.png',
+            src: 'icons/icon-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'statics/icons/icon-256x256.png',
+            src: 'icons/icon-256x256.png',
             sizes: '256x256',
             type: 'image/png'
           },
           {
-            src: 'statics/icons/icon-384x384.png',
+            src: 'icons/icon-384x384.png',
             sizes: '384x384',
             type: 'image/png'
           },
           {
-            src: 'statics/icons/icon-512x512.png',
+            src: 'icons/icon-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
@@ -207,7 +184,7 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
     cordova: {
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
-      id: 'org.cordova.quasar.app'
+      // id: 'org.cordova.quasar.app'
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor

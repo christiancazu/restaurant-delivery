@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/unbound-method
 const { resolve } = require('path');
 
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     project: resolve(__dirname, './tsconfig.json'),
     tsconfigRootDir: __dirname,
-    ecmaVersion: 2019, // Allows for the parsing of modern ECMAScript features
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: 'module', // Allows for the use of imports
     createDefaultProgram: true
   },

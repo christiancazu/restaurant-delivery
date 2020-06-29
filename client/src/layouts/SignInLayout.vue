@@ -6,7 +6,7 @@
         { 'justify-center': $q.screen.lt.md },
         'row justify-end items-center'
       ]"
-      :style="`background: url(statics/utp_restaurant.jpg) no-repeat center center fixed;`"
+      :style="`background: url(utp_restaurant.jpg) no-repeat center center fixed;`"
     >
       <section
         :style="!$q.screen.lt.md && 'margin-right: 92px'"
