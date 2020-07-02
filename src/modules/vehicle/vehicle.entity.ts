@@ -3,6 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
+  BeforeInsert,
 } from 'typeorm';
 
 @Entity('vehicle')
@@ -36,5 +37,10 @@ export class User extends BaseEntity {
       nullable: false,
     })
     capability: boolean;
+
+    @BeforeInsert()
+    beforeInsertActions() {
+      this.enabled = true;
+    }
 }
 
