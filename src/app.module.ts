@@ -15,6 +15,7 @@ import { PaymentModule } from './modules/payment/payment.module';
 import { RatingModule } from './modules/rating/rating.module';
 import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { PlateModule } from './modules/plate/plate.module';
+import { CardModule } from './modules/card/card.module';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -43,6 +44,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     RatingModule,
     VehicleModule,
     PlateModule,
+    CardModule,
   ],
   providers: [
     {
