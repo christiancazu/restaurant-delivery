@@ -10,6 +10,7 @@ import { APP_PIPE } from '@nestjs/core';
 import { join } from 'path';
 import { TypeModule } from './modules/type/type.module';
 import { CategoryModule } from './modules/category/category.module';
+import { StatusModule } from './modules/status/status.module';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -33,6 +34,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     RolesModule,
     TypeModule,
     CategoryModule,
+    StatusModule,
   ],
   providers: [
     {
