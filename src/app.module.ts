@@ -12,6 +12,7 @@ import { TypeModule } from './modules/type/type.module';
 import { CategoryModule } from './modules/category/category.module';
 import { StatusModule } from './modules/status/status.module';
 import { PaymentModule } from './modules/payment/payment.module';
+import { RatingModule } from './modules/rating/rating.module';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -37,6 +38,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     CategoryModule,
     StatusModule,
     PaymentModule,
+    RatingModule,
   ],
   providers: [
     {
