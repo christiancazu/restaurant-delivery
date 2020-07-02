@@ -33,12 +33,12 @@ export class Plate extends BaseEntity {
     })
     description: string;
 
-    @JoinColumn({ name: 'category_id' })
-    @ManyToOne(type => Category)
-    category: Category;
+    @JoinColumn({ name: 'category_id', })
+    @ManyToOne(() => Category, { nullable: false })
+    category!: Category;
 
     @JoinColumn({ name: 'type_id' })
-    @ManyToOne(type => Type)
+    @ManyToOne(() => Type, { nullable: false })
     type: Type;
 
     @CreateDateColumn()
@@ -56,7 +56,7 @@ export class Plate extends BaseEntity {
     updated_at: Date;
 
     @JoinColumn({ name: 'updated_by_user_id' })
-    @ManyToOne(type => User)
+    @ManyToOne(() => User, { nullable: false })
     updated_id: User;
 
     @Column({
