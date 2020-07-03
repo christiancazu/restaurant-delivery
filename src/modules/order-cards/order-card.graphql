@@ -1,0 +1,32 @@
+input CreateCardOrderInput {
+  order: Order!
+  card: Card!
+  amount: Int!
+  subtotal: Float!
+}
+
+input UpdateCardOrderInput {
+  order: Order
+  card: Card
+  amount: Int
+  subtotal: Float
+}
+
+type CardOrder {
+  id: Int!
+  order: Order!
+  card: Card!
+  amount: Int!
+  subtotal: Float!
+}
+
+type Query {
+  cardOder: CardOrder!
+  cardOrders: [CardOrder!]
+}
+
+type Mutation {
+  createCardOrder(card: CreateCardOrderInput!): CardOrder!
+  updateCardOrder(card: UpdateCardOrderInput!): CardOrder!
+  deleteCardOrder(id: Int!): CardOrder!
+}

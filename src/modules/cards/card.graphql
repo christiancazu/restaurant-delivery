@@ -17,6 +17,7 @@ input UpdateCardInput {
 }
 
 type Card {
+  id: Int!
   stock: Int!
   price: Float!
   updated_by_id: User!
