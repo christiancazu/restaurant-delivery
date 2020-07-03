@@ -9,9 +9,9 @@ import {
   UpdateDateColumn
 } from 'typeorm';
 import { User } from '../users/user.entity';
-import { Plate } from '../plate/plate.entity';
+import { Plate } from '../plates/plate.entity';
 
-@Entity('card')
+@Entity('cards')
 export class Card extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;

@@ -6,8 +6,8 @@ import {
   JoinColumn,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { Order } from '../order/order.entity';
-import { Card } from '../card/card.entity';
+import { Order } from '../orders/order.entity';
+import { Card } from '../cards/card.entity';
 
 @Entity('order_cards')
 export class OrderCards extends BaseEntity {

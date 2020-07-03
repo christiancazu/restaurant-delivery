@@ -5,8 +5,8 @@ import {
   Column
 } from 'typeorm';
 
-@Entity('rating')
-export class Rating extends BaseEntity {
+@Entity('payments')
+export class Payment extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
@@ -19,8 +19,7 @@ export class Rating extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 128,
-      nullable: true
+      length: 128
     })
     description: string;
 }

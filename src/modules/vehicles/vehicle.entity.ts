@@ -6,7 +6,7 @@ import {
   BeforeInsert
 } from 'typeorm';
 
-@Entity('vehicle')
+@Entity('vehicles')
 export class Vehicle extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
