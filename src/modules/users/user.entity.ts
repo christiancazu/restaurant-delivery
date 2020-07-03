@@ -10,6 +10,7 @@ import {
 
 import * as bcrypt from 'bcryptjs';
 import { Role } from '../roles/role.entity';
+import { asserts } from '@common/config/asserts';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -19,7 +20,7 @@ export class User extends BaseEntity {
   @Column({
     type: 'varchar',
     unique: true,
-    length: 16,
+    length: asserts.user.DOCUMENT_MAX_LENGTH,
     nullable: false,
   })
   document: string;
