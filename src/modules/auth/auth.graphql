@@ -11,7 +11,7 @@ input SignUpInput {
 type Session {
   user: User
   token: String
-} 
+}
 
 type Query {
   me: Session

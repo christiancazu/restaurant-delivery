@@ -15,7 +15,7 @@ import { SignUpInputDto } from './dtos/sign-up.input.dto';
 export class AuthResolver {
   constructor(
     private readonly _authService: AuthService,
-    private readonly _userService: UserService,
+    private readonly _userService: UserService
   ){}
 
   @Mutation()

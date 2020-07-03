@@ -1,0 +1,37 @@
+input CreateCardInput {
+  stock: Int!
+  price: Float!
+  updated_by_id: User!
+  plate: Plate!
+  created_at: Date!
+  updated_at: Date!
+}
+
+input UpdateCardInput {
+  stock: Int
+  price: Float
+  updated_by_id: User
+  plate: Plate
+  created_at: Date
+  updated_at: Date
+}
+
+type Card {
+  stock: Int!
+  price: Float!
+  updated_by_id: User!
+  plate: Plate!
+  created_at: Date!
+  updated_at: Date!
+}
+
+type Query {
+  card: Card!
+  cards: [Card!]
+}
+
+type Mutation {
+  createCard(card: CreateCardInput!): Card!
+  updateCard(card: UpdateCardInput!): Card!
+  deleteCard(id: Int!): Card!
+}
