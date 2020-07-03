@@ -6,7 +6,7 @@ import {
   JoinColumn,
   ManyToOne,
   CreateDateColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Plate } from '../plate/plate.entity';
@@ -16,37 +16,23 @@ export class Card extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Column({
-      type: 'int',
-      nullable: false,
-    })
+    @Column({ type: 'int' })
     stock: number;
 
-    @Column({
-      type: 'decimal',
-      nullable: true,
-    })
+    @Column({ type: 'decimal' })
     price: number;
 
-    @ManyToOne(() => User,{ nullable: true, })
-    @JoinColumn({ name: 'updated_by_user_id', })
+    @ManyToOne(() => User, { nullable: true })
+    @JoinColumn({ name: 'updated_by_user_id' })
     updated_by_id: User;
 
-    @ManyToOne(() => Plate,{ nullable: true, })
-    @JoinColumn({ name: 'plate_id', })
+    @ManyToOne(() => Plate, { nullable: true })
+    @JoinColumn({ name: 'plate_id' })
     plate: Plate;
 
-    @CreateDateColumn()
-    @Column({
-      type: 'timestamp',
-      nullable: false,
-    })
+    @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
 
-    @UpdateDateColumn()
-    @Column({
-      type: 'timestamp',
-      nullable: false,
-    })
+    @UpdateDateColumn({ type: 'timestamp' })
     updated_at: Date;
 }

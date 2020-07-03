@@ -11,12 +11,12 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
+    'prettier/@typescript-eslint'
   ],
   root: true,
   env: {
     node: true,
-    jest: true,
+    jest: true
   },
   rules: {
     'no-trailing-spaces': 'error',
@@ -38,11 +38,26 @@ module.exports = {
       }
     ],
     'key-spacing': ['error', { 'afterColon': true }],
+    'comma-spacing': [
+      'error', {
+        'before': false,
+        'after': true
+      }
+    ],
+    'comma-dangle': [
+      'error', {
+        'arrays': 'never',
+        'objects': 'never',
+        'imports': 'never',
+        'exports': 'never',
+        'functions': 'never'
+      }
+    ],
     // ts
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-empty-function': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-  },
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
+  }
 };

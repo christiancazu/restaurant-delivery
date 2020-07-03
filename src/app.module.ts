@@ -17,7 +17,7 @@ import { VehicleModule } from './modules/vehicle/vehicle.module';
 import { PlateModule } from './modules/plate/plate.module';
 import { CardModule } from './modules/card/card.module';
 import { OrderModule } from './modules/order/order.module';
-import { CardOrderModule } from './modules/card-order/card-order.module';
+import { OrderCardsModule } from './modules/order-cards/order-cards.module';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -32,9 +32,9 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
       context: ({ req }) => ({ req }),
       typePaths: ['./**/*.graphql'],
       definitions: {
-        path: join(process.cwd(), 'common/gql/graphql.schema.generated.ts'),
+        path: join(process.cwd(), 'common/gql/graphql.schema.generated.ts')
         // outputAs: 'class'
-      },
+      }
     }),
     AuthModule,
     UsersModule,
@@ -48,13 +48,13 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     PlateModule,
     CardModule,
     OrderModule,
-    CardOrderModule,
+    OrderCardsModule
   ],
   providers: [
     {
       provide: APP_PIPE,
       useClass: ValidationPipe
-    },
-  ],
+    }
+  ]
 })
 export class AppModule {}

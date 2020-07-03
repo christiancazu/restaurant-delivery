@@ -2,7 +2,7 @@ import {
   BaseEntity,
   Entity,
   PrimaryGeneratedColumn,
-  Column,
+  Column
 } from 'typeorm';
 
 @Entity('rating')
@@ -13,15 +13,14 @@ export class Rating extends BaseEntity {
     @Column({
       type: 'varchar',
       unique: true,
-      length: 32,
-      nullable: false,
+      length: 32
     })
     name: string;
 
     @Column({
       type: 'varchar',
       length: 128,
-      nullable: true,
+      nullable: true
     })
     description: string;
 }

@@ -7,7 +7,7 @@ import {
   ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-  BeforeInsert,
+  BeforeInsert
 } from 'typeorm';
 import { Category } from '../category/category.entity';
 import { Type } from '../type/type.entity';
@@ -21,55 +21,42 @@ export class Plate extends BaseEntity {
     @Column({
       type: 'varchar',
       unique: true,
-      length: 64,
-      nullable: false,
+      length: 64
     })
     name: string;
 
     @Column({
       type: 'varchar',
       length: 128,
-      nullable: true,
+      nullable: true
     })
     description: string;
 
-    @JoinColumn({ name: 'category_id', })
-    @ManyToOne(() => Category, { nullable: false })
+    @JoinColumn({ name: 'category_id' })
+    @ManyToOne(() => Category)
     category!: Category;
 
     @JoinColumn({ name: 'type_id' })
-    @ManyToOne(() => Type, { nullable: false })
+    @ManyToOne(() => Type)
     type: Type;
 
-    @CreateDateColumn()
-    @Column({
-      type: 'timestamp',
-      nullable: false,
-    })
+    @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
 
-    @UpdateDateColumn()
-    @Column({
-      type: 'timestamp',
-      nullable: false,
-    })
+    @UpdateDateColumn({ type: 'timestamp' })
     updated_at: Date;
 
     @JoinColumn({ name: 'updated_by_user_id' })
-    @ManyToOne(() => User, { nullable: false })
+    @ManyToOne(() => User)
     updated_id: User;
 
     @Column({
       type: 'varchar',
-      length: 32,
-      nullable: false,
+      length: 32
     })
     avatar: string;
 
-    @Column({
-      type: 'boolean',
-      nullable: false,
-    })
+    @Column({ type: 'boolean' })
     enabled: boolean;
 
     @BeforeInsert()

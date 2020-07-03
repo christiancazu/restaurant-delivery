@@ -3,7 +3,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  BeforeInsert,
+  BeforeInsert
 } from 'typeorm';
 
 @Entity('vehicle')
@@ -14,33 +14,25 @@ export class Vehicle extends BaseEntity {
     @Column({
       type: 'varchar',
       unique: true,
-      length: 8,
-      nullable: false,
+      length: 8
     })
     licence_plate: string;
 
     @Column({
       type: 'varchar',
-      length: 16,
-      nullable: false,
+      length: 16
     })
     type: string;
 
-    @Column({
-      type: 'boolean',
-      nullable: false,
-    })
-    enabled: boolean;
-
-    @Column({
-      type: 'int',
-      nullable: false,
-    })
+    @Column({ type: 'int' })
     capability: boolean;
+
+    @Column({ type: 'boolean' })
+    available: boolean;
 
     @BeforeInsert()
     beforeInsertActions() {
-      this.enabled = true;
+      this.available = true;
     }
 }
 

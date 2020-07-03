@@ -5,7 +5,7 @@ import {
   Column,
   BeforeInsert,
   ManyToMany,
-  JoinTable,
+  JoinTable
 } from 'typeorm';
 
 import * as bcrypt from 'bcryptjs';
@@ -20,90 +20,88 @@ export class User extends BaseEntity {
   @Column({
     type: 'varchar',
     unique: true,
-    length: asserts.user.DOCUMENT_MAX_LENGTH,
-    nullable: false,
+    length: asserts.user.DOCUMENT_MAX_LENGTH
   })
   document: string;
 
   @Column({
     type: 'varchar',
-    length: 32,
-    nullable: false,
+    length: 32
   })
   firstname: string;
 
   @Column({
     type: 'varchar',
-    length: 32,
-    nullable: false,
+    length: 32
   })
   lastname: string;
 
   @Column({
     type: 'varchar',
     length: 32,
-    unique: true,
-    nullable: false,
+    unique: true
   })
   username: string;
 
   @Column({
     type: 'varchar',
-    length: 32,
-    nullable: false,
+    length: 32
   })
   password: string;
 
   @Column({
     type: 'varchar',
     length: 64,
-    nullable: true,
+    nullable: true
   })
   adress: string;
 
   @Column({
     type: 'varchar',
     length: 16,
-    unique: true,
-    nullable: false,
+    unique: true
   })
   phone: string;
 
   @Column({
     type: 'varchar',
     unique: true,
-    length: 64,
-    nullable: false,
+    length: 64
   })
   email: string;
 
   @Column({
     type: 'varchar',
     length: 128,
-    nullable: true,
+    nullable: true
   })
   locationLatLng: string;
 
   @Column({
     type: 'varchar',
     length: 32,
-    nullable: true,
+    nullable: true
   })
   avatar: string;
 
-  @Column({
-    type: 'boolean',
-    nullable: false,
-  })
+  @Column({ type: 'boolean' })
   enabled: boolean;
 
+  @Column({ type: 'boolean' })
+  available: boolean;
+
   @ManyToMany(() => Role, { cascade: true })
-  @JoinTable({ name: 'users_roles' })
+  @JoinTable({
+    name: 'user_roles',
+    joinColumns: [{ name: 'user_id' }],
+    inverseJoinColumns: [{ name: 'role_id' }]
+  })
   roles: Role[];
 
   @BeforeInsert()
   beforeInsertActions() {
     this.enabled = true;
+    this.available = true;
   }
 
   @BeforeInsert()

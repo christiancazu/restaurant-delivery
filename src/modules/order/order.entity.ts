@@ -8,7 +8,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
-  BeforeInsert,
+  BeforeInsert
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Status } from '../status/status.entity';
@@ -22,74 +22,58 @@ export class Order extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 128,
-      nullable: false,
+      length: 128
     })
     destineLatLng: string;
 
-    @ManyToOne(() => Status,{ nullable: false, })
-    @JoinColumn({ name: 'status_id', })
+    @ManyToOne(() => Status)
+    @JoinColumn({ name: 'status_id' })
     status: Status;
 
-    @ManyToOne(() => Rating,{ nullable: false, })
-    @JoinColumn({ name: 'rating_id', })
+    @ManyToOne(() => Rating)
+    @JoinColumn({ name: 'rating_id' })
     rating: Rating;
 
     @Column({
       type: 'varchar',
       length: 128,
-      nullable: true,
+      nullable: true
     })
     rating_description: string
 
-    @OneToOne(() => User,{ nullable: false, })
-    @JoinColumn({ name: 'requested_by_user_id', })
+    @OneToOne(() => User)
+    @JoinColumn({ name: 'requested_by_user_id' })
     requested_user: User;
 
-    @OneToOne(() => User,{ nullable: false, })
-    @JoinColumn({ name: 'delivered_by_user_id', })
+    @OneToOne(() => User)
+    @JoinColumn({ name: 'delivered_by_user_id' })
     delivered_user: User;
 
-    @ManyToOne(() => Vehicle,{ nullable: false, })
-    @JoinColumn({ name: 'delivered_by_vehicle_id', })
+    @ManyToOne(() => Vehicle)
+    @JoinColumn({ name: 'delivered_by_vehicle_id' })
     vehicle: Vehicle;
 
     @Column({
       type: 'varchar',
       length: 16,
-      nullable: true,
+      nullable: true
     })
     payment_card: string
 
-    @Column({
-      type: 'decimal',
-      nullable: false,
-    })
+    @Column({ type: 'decimal' })
     total: number
 
-    @CreateDateColumn()
-    @Column({
-      type: 'timestamp',
-      nullable: false,
-    })
+    @CreateDateColumn({ type: 'timestamp' })
     created_at: Date;
 
-    @UpdateDateColumn()
-    @Column({
-      type: 'timestamp',
-      nullable: false,
-    })
+    @UpdateDateColumn({ type: 'timestamp' })
     updated_at: Date;
 
-    @UpdateDateColumn()
-    @Column({
-      type: 'boolean',
-      nullable: false,
-    })
-    played: boolean;
+    @Column({ type: 'boolean' })
+    payed: boolean;
 
     @BeforeInsert()
     beforeInsertActions() {
-      this.played = false;
+      this.payed = false;
     }
 }
