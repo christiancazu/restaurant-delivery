@@ -10,6 +10,10 @@ export default class RolesSeeder implements Seeder {
       .into('roles')
       .values([
         {
+          name: ROLES.SUPER_ADMIN,
+          description: 'super admin...'
+        },
+        {
           name: ROLES.ADMIN,
           description: 'admin...'
         },
@@ -24,7 +28,7 @@ export default class RolesSeeder implements Seeder {
         {
           name: ROLES.DEALER,
           description: 'dealer...'
-        },
+        }
       ])
       .execute();
   }

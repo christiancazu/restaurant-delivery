@@ -10,7 +10,7 @@ import {
 
 import * as bcrypt from 'bcryptjs';
 import { Role } from '../roles/role.entity';
-import { asserts } from '@common/config/asserts';
+import { ASSERTS } from '@common/config/asserts';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -19,67 +19,67 @@ export class User extends BaseEntity {
 
   @Column({
     type: 'varchar',
-    unique: true,
-    length: asserts.user.DOCUMENT_MAX_LENGTH
+    length: ASSERTS.USER.DOCUMENT_MAX_LENGTH,
+    unique: true
   })
   document: string;
 
   @Column({
     type: 'varchar',
-    length: 32
+    length: ASSERTS.USER.FIRSTNAME_MAX_LENGTH
   })
   firstname: string;
 
   @Column({
     type: 'varchar',
-    length: 32
+    length: ASSERTS.USER.LASTNAME_MAX_LENGTH
   })
   lastname: string;
 
   @Column({
     type: 'varchar',
-    length: 32,
+    length: ASSERTS.USER.EMAIL_MAX_LENGTH,
+    unique: true
+  })
+  email: string;
+
+  @Column({
+    type: 'varchar',
+    length: ASSERTS.USER.USERNAME_MAX_LENGTH,
     unique: true
   })
   username: string;
 
   @Column({
     type: 'varchar',
-    length: 32
+    length: 255
   })
   password: string;
 
   @Column({
     type: 'varchar',
-    length: 64,
-    nullable: true
-  })
-  adress: string;
-
-  @Column({
-    type: 'varchar',
-    length: 16,
+    length: ASSERTS.USER.PHONE_MAX_LENGTH,
     unique: true
   })
   phone: string;
 
   @Column({
     type: 'varchar',
-    unique: true,
-    length: 64
+    length: ASSERTS.USER.ADDRESS_MAX_LENGTH,
+    nullable: true
   })
-  email: string;
+  address: string;
 
   @Column({
     type: 'varchar',
-    length: 128,
+    length: ASSERTS.USER.LOCATION_LAT_LNG_MAX_LENGTH,
     nullable: true
   })
   locationLatLng: string;
 
   @Column({
     type: 'varchar',
-    length: 32,
+    length: ASSERTS.USER.AVATAR_MAX_LENGTH,
     nullable: true
   })
   avatar: string;
@@ -112,6 +112,11 @@ export class User extends BaseEntity {
   @BeforeInsert()
   async emailLowerCase(): Promise<void> {
     this.email = this.email.toLowerCase();
+  }
+
+  @BeforeInsert()
+  usernameEqualsToEmail() {
+    this.username = this.email.toLowerCase();
   }
 
   async comparePassword(attempt: string): Promise<boolean> {
