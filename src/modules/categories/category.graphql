@@ -1,0 +1,23 @@
+input CreateCategoryInput {
+  name: String!
+  description: String
+  avatar: String
+}
+
+input UpdateCategoryInput {
+  name: String
+  description: String
+  avatar: String
+}
+
+type Category {
+  id: Int!
+  name: String!
+  description: String
+  avatar: String
+}
+
+type Query {
+  Category: Category!
+  Categorys: [Category!]
+}
