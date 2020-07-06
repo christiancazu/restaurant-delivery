@@ -65,11 +65,10 @@
 
   <q-dialog
     v-model="signUpDialogOpen"
-    persistent
-    content-class="dialog-sign-up"
+    persistent medium
   >
     <sign-up-form
-      :style="`width: ${!$q.screen.lt.md ? '400px' : '100%'}`"
+      :style="`width: ${!$q.screen.lt.md ? '92%' : '100%'}`"
       @cancel="signUpDialogOpen = false"
     />
   </q-dialog>

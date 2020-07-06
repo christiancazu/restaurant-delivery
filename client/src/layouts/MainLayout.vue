@@ -187,14 +187,14 @@
 </template>
 
 <script lang="ts">
-import { sessionService } from '@core/services';
+import { Session } from '@common/gql/graphql.schema.generated';
 
+import { sessionService } from '@core/services';
 import { notifyUtil } from '@core/utils';
 
 import { defineComponent } from '@vue/composition-api';
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { SESSION_QUERY } from '@core/graphql/querys';
-import { Session } from '@common/gql/graphql.schema.generated';
 
 import SidebarMenu from 'src/components/SidebarMenu.vue';
 
