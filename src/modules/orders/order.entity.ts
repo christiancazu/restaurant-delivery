@@ -12,8 +12,8 @@ import {
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Status } from '../status/status.entity';
-import { Rating } from '../rating/rating.entity';
-import { Vehicle } from '../vehicle/vehicle.entity';
+import { Rating } from '../ratings/rating.entity';
+import { Vehicle } from '../vehicles/vehicle.entity';
 
 @Entity('order')
 export class Order extends BaseEntity {

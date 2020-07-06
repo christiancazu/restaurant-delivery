@@ -9,8 +9,8 @@ import {
   UpdateDateColumn,
   BeforeInsert
 } from 'typeorm';
-import { Category } from '../category/category.entity';
-import { Type } from '../type/type.entity';
+import { Category } from '../categories/category.entity';
+import { Type } from '../types/type.entity';
 import { User } from '../users/user.entity';
 
 @Entity('plate')

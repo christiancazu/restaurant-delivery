@@ -9,7 +9,7 @@ import {
   UpdateDateColumn
 } from 'typeorm';
 import { User } from '../users/user.entity';
-import { Plate } from '../plate/plate.entity';
+import { Plate } from '../plates/plate.entity';
 
 @Entity('card')
 export class Card extends BaseEntity {

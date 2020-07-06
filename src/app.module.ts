@@ -3,21 +3,23 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
+import { APP_PIPE } from '@nestjs/core';
+
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { RolesModule } from './modules/roles/roles.module';
-import { APP_PIPE } from '@nestjs/core';
-import { join } from 'path';
-import { TypeModule } from './modules/type/type.module';
-import { CategoryModule } from './modules/category/category.module';
+import { TypesModule } from './modules/types/type.module';
+import { CategoriesModule } from './modules/categories/category.module';
 import { StatusModule } from './modules/status/status.module';
-import { PaymentModule } from './modules/payment/payment.module';
-import { RatingModule } from './modules/rating/rating.module';
-import { VehicleModule } from './modules/vehicle/vehicle.module';
-import { PlateModule } from './modules/plate/plate.module';
-import { CardModule } from './modules/card/card.module';
-import { OrderModule } from './modules/order/order.module';
+import { PaymentsModule } from './modules/payments/payment.module';
+import { RatingsModule } from './modules/ratings/rating.module';
+import { VehiclesModule } from './modules/vehicles/vehicle.module';
+import { PlatesModule } from './modules/plates/plate.module';
+import { CardsModule } from './modules/cards/card.module';
+import { OrdersModule } from './modules/orders/order.module';
 import { OrderCardsModule } from './modules/order-cards/order-cards.module';
+
+import { join } from 'path';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -39,15 +41,15 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     AuthModule,
     UsersModule,
     RolesModule,
-    TypeModule,
-    CategoryModule,
+    TypesModule,
+    CategoriesModule,
     StatusModule,
-    PaymentModule,
-    RatingModule,
-    VehicleModule,
-    PlateModule,
-    CardModule,
-    OrderModule,
+    PaymentsModule,
+    RatingsModule,
+    VehiclesModule,
+    PlatesModule,
+    CardsModule,
+    OrdersModule,
     OrderCardsModule
   ],
   providers: [
