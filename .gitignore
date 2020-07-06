@@ -40,3 +40,6 @@ package-lock.json
 /src/migrations/*
 /common/gql/graphql.schema.generated.ts
 yarn.lock
+
+/media/*
+!/media/.gitkeep

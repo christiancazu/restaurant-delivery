@@ -20,15 +20,17 @@ import { OrdersModule } from './modules/orders/orders.module';
 import { OrderCardsModule } from './modules/order-cards/order-cards.module';
 
 import { join } from 'path';
+import { UploadModule } from './modules/upload/upload.module';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({ rootPath: join(__dirname, '../../client', 'dist/pwa') }),
+    ServeStaticModule.forRoot({ rootPath: join(__dirname, '../../client', 'dist/pwa') }, {}),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
+      path: 'api/graphql',
       debug: !IS_PRODUCTION_ENV,
       playground: !IS_PRODUCTION_ENV,
       context: ({ req }) => ({ req }),
@@ -50,7 +52,8 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     PlatesModule,
     CardsModule,
     OrdersModule,
-    OrderCardsModule
+    OrderCardsModule,
+    UploadModule
   ],
   providers: [
     {

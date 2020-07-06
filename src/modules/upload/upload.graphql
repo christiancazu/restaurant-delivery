@@ -1,0 +1,5 @@
+scalar Upload
+
+type Mutation {
+  uploadAvatar(file: Upload!, avatarType: String): String
+}
