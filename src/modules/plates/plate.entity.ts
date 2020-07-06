@@ -13,7 +13,7 @@ import { Category } from '../categories/category.entity';
 import { Type } from '../types/type.entity';
 import { User } from '../users/user.entity';
 
-@Entity('plate')
+@Entity('plates')
 export class Plate extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;

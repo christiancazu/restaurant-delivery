@@ -15,7 +15,7 @@ import { Status } from '../status/status.entity';
 import { Rating } from '../ratings/rating.entity';
 import { Vehicle } from '../vehicles/vehicle.entity';
 
-@Entity('order')
+@Entity('orders')
 export class Order extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;

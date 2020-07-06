@@ -11,7 +11,7 @@ import {
 import { User } from '../users/user.entity';
 import { Plate } from '../plates/plate.entity';
 
-@Entity('card')
+@Entity('cards')
 export class Card extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;

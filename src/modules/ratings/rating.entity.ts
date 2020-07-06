@@ -5,7 +5,7 @@ import {
   Column
 } from 'typeorm';
 
-@Entity('rating')
+@Entity('ratings')
 export class Rating extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
     id: number;
