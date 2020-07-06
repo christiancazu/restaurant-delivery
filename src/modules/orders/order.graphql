@@ -48,12 +48,12 @@ type Order {
 }
 
 type Query {
-  oder: Order!
+  order: Order!
   orders: [Order!]
 }
 
 type Mutation {
-  createOrder(card: CreateOrderInput!): Order!
-  updateOrder(card: UpdateOrderInput!): Order!
+  createOrder(order: CreateOrderInput!): Order!
+  updateOrder(order: UpdateOrderInput!): Order!
   deleteOrder(id: Int!): Order!
 }
