@@ -259,10 +259,9 @@ export default defineComponent({
           routeModule: 'menu'
         },
         {
-          title: this.$tc('plate', 2),
+          title: 'Platillos',
           icon: 'fad fa-burger-soda',
-          routeName: 'User',
-          routeModule: 'extras'
+          routeName: 'UserPlates'
         }
 
       ]
