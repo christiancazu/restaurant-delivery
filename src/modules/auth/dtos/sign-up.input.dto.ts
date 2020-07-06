@@ -8,7 +8,7 @@ import {
   IsOptional
 } from 'class-validator';
 import { SignUpInput } from '@common/gql/graphql.schema.generated';
-import { ASSERTS } from '@common/config/asserts';
+import { ASSERTS } from '@common/config/asserts.config';
 
 export class SignUpInputDto implements SignUpInput {
   @IsNotEmpty()

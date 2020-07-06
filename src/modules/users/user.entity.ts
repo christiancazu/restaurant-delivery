@@ -10,7 +10,7 @@ import {
 
 import * as bcrypt from 'bcryptjs';
 import { Role } from '../roles/role.entity';
-import { ASSERTS } from '@common/config/asserts';
+import { ASSERTS } from '@common/config/asserts.config';
 
 @Entity('users')
 export class User extends BaseEntity {

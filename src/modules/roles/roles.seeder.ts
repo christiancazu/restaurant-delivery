@@ -18,7 +18,7 @@ export default class RolesSeeder implements Seeder {
           description: 'admin...'
         },
         {
-          name: ROLES.USER,
+          name: ROLES.CLIENT,
           description: 'user...'
         },
         {

@@ -15,7 +15,7 @@ export class Role extends BaseEntity {
 
   @Column('enum', {
     enum: ROLES,
-    default: ROLES.USER
+    default: ROLES.CLIENT
   })
   name: ROLES
 

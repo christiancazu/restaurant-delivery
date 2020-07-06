@@ -89,7 +89,7 @@ export class AuthService {
 
     const roleRepository = getConnection().getRepository(Role);
 
-    const defaultRole = await roleRepository.findOne({ where: { name: ROLES.USER } });
+    const defaultRole = await roleRepository.findOne({ where: { name: ROLES.CLIENT } });
 
     user.roles = [defaultRole];
 
