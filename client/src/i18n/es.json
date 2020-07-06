@@ -42,8 +42,10 @@
   "myOrder": "Mi orden | Mis ordenes",
   "myProfile": "Mi Perfil",
   "menuDaily": "Menú del día",
+  "name": "nombre",
   "password": "Contraseña",
   "plate": "plato | platos | platos extras",
+  "plateRegister": "El Platillo ha sido registrado",
   "phone": "Nº Celular",
   "session": {
     "errors": {

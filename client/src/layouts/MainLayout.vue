@@ -175,7 +175,7 @@
     </q-list>
   </q-drawer>
 
-  <q-page-container>
+  <q-page-container class="bg-grey-11">
     <transition
       appear
       enter-active-class="animated slideInDown"
@@ -212,8 +212,7 @@ export default defineComponent({
         {
           title: this.$tc('plate', 1),
           icon: 'fad fa-clipboard-list',
-          routeName: 'Admin',
-          routeModule: 'plate'
+          routeName: 'AdminPlate'
         },
         {
           title: this.$tc('dealer', 2),
