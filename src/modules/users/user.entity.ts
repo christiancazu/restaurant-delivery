@@ -122,4 +122,9 @@ export class User extends BaseEntity {
   async comparePassword(attempt: string): Promise<boolean> {
     return await bcrypt.compare(attempt, this.password);
   }
+
+  constructor(id: number) {
+    super();
+    this.id = id;
+  }
 }

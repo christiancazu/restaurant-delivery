@@ -30,4 +30,9 @@ export class Type extends BaseEntity {
       nullable: true
     })
     avatar: string;
+
+    constructor(id: number) {
+      super();
+      this.id = id;
+    }
 }

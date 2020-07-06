@@ -51,7 +51,8 @@ export class Plate extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 32
+      length: 32,
+      nullable: true
     })
     avatar: string;
 

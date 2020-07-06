@@ -10,3 +10,19 @@ type Plate {
   createdAt: String
   updatedAt: String
 }
+
+type Query {
+  plates: [Plate]
+}
+
+input PlateCreateInput {
+  name: String!
+  description: String
+  avatar: String
+  categoryId: Int
+  typeId: Int!
+}
+
+type Mutation {
+  plateCreate(plateCreateInput: PlateCreateInput): Plate
+}
