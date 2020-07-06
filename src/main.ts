@@ -9,7 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   app.enableCors();
-  // app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api');
   const configService = app.get<ConfigService>(ConfigService);
 
   const port = parseInt(configService.get('PORT'), 10) || 3000;

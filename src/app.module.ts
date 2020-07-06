@@ -21,6 +21,8 @@ import { OrderCardsModule } from './modules/order-cards/order-cards.module';
 
 import { join } from 'path';
 import { UploadModule } from './modules/upload/upload.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { AppController } from './app.controller';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -28,6 +30,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
   imports: [
     ServeStaticModule.forRoot({ rootPath: join(__dirname, '../../client', 'dist/pwa') }, {}),
     ConfigModule.forRoot({ isGlobal: true }),
+    MulterModule.register(),
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
       path: 'api/graphql',
@@ -60,6 +63,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
       provide: APP_PIPE,
       useClass: ValidationPipe
     }
-  ]
+  ],
+  controllers: [AppController]
 })
 export class AppModule {}
