@@ -1,0 +1,10 @@
+type Type {
+  id: Int!
+  name: String
+  description: String
+  avatar: String
+}
+
+type Query {
+  types: [Type]
+}

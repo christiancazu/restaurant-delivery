@@ -1,0 +1,12 @@
+type Plate {
+  id: Int!
+  name: String
+  description: String
+  avatar: String
+  category: Category
+  type: Type
+  enabled: Boolean
+  updater: User
+  createdAt: String
+  updatedAt: String
+}
