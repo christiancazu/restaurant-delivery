@@ -1,0 +1,20 @@
+input CreatePaymentInput {
+  name: String!
+  description: String
+}
+
+input UpdatePaymentInput {
+  name: String
+  description: String
+}
+
+type Payment {
+  id: Int!
+  name: String!
+  description: String
+}
+
+type Query {
+  payment: Payment!
+  payments: [Payment!]
+}

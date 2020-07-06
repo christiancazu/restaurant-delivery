@@ -18,6 +18,6 @@ type Category {
 }
 
 type Query {
-  Category: Category!
-  Categorys: [Category!]
+  category: Category!
+  categorys: [Category!]
 }
