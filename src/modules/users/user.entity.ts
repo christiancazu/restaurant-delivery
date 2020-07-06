@@ -93,8 +93,8 @@ export class User extends BaseEntity {
   @ManyToMany(() => Role, { cascade: true })
   @JoinTable({
     name: 'user_roles',
-    joinColumns: [{ name: 'user_id' }],
-    inverseJoinColumns: [{ name: 'role_id' }]
+    joinColumns: [{ name: 'userId' }],
+    inverseJoinColumns: [{ name: 'roleId' }]
   })
   roles: Role[];
 

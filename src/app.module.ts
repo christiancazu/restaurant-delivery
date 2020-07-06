@@ -11,12 +11,12 @@ import { RolesModule } from './modules/roles/roles.module';
 import { TypesModule } from './modules/types/types.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { StatusModule } from './modules/status/status.module';
-import { PaymentsModule } from './modules/payments/payment.module';
-import { RatingsModule } from './modules/ratings/rating.module';
-import { VehiclesModule } from './modules/vehicles/vehicle.module';
+import { PaymentsModule } from './modules/payments/payments.module';
+import { RatingsModule } from './modules/ratings/ratings.module';
+import { VehiclesModule } from './modules/vehicles/vehicles.module';
 import { PlatesModule } from './modules/plates/plate.module';
-import { CardsModule } from './modules/cards/card.module';
-import { OrdersModule } from './modules/orders/order.module';
+import { CardsModule } from './modules/cards/cards.module';
+import { OrdersModule } from './modules/orders/orders.module';
 import { OrderCardsModule } from './modules/order-cards/order-cards.module';
 
 import { join } from 'path';

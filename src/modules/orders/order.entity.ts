@@ -27,11 +27,11 @@ export class Order extends BaseEntity {
     destineLatLng: string;
 
     @ManyToOne(() => Status)
-    @JoinColumn({ name: 'status_id' })
+    @JoinColumn({ name: 'statusId' })
     status: Status;
 
     @ManyToOne(() => Rating)
-    @JoinColumn({ name: 'rating_id' })
+    @JoinColumn({ name: 'ratingId' })
     rating: Rating;
 
     @Column({
@@ -39,35 +39,35 @@ export class Order extends BaseEntity {
       length: 128,
       nullable: true
     })
-    rating_description: string
+    ratingDescription: string
 
     @OneToOne(() => User)
-    @JoinColumn({ name: 'requested_by_user_id' })
-    requested_user: User;
+    @JoinColumn({ name: 'requestedByUserId' })
+    client: User;
 
     @OneToOne(() => User)
-    @JoinColumn({ name: 'delivered_by_user_id' })
-    delivered_user: User;
+    @JoinColumn({ name: 'deliveredByUserId' })
+    dealer: User;
 
-    @ManyToOne(() => Vehicle)
-    @JoinColumn({ name: 'delivered_by_vehicle_id' })
+    @OneToOne(() => Vehicle)
+    @JoinColumn({ name: 'deliveredByVehicleId' })
     vehicle: Vehicle;
 
     @Column({
       type: 'varchar',
-      length: 16,
+      length: 32,
       nullable: true
     })
-    payment_card: string
+    paymentCode: string
 
     @Column({ type: 'decimal' })
     total: number
 
     @CreateDateColumn({ type: 'timestamp' })
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn({ type: 'timestamp' })
-    updated_at: Date;
+    updatedAt: Date;
 
     @Column({ type: 'boolean' })
     payed: boolean;

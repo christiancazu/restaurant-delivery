@@ -22,8 +22,7 @@ export class Role extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 50,
-    nullable: true,
-    select: false
+    nullable: true
   })
   description: string;
 }

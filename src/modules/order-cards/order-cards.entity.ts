@@ -15,11 +15,11 @@ export class OrderCards extends BaseEntity {
   id: number;
 
   @ManyToOne(() => Order)
-  @JoinColumn({ name: 'order_id' })
+  @JoinColumn({ name: 'orderId' })
   order: Order;
 
   @ManyToOne(() => Card)
-  @JoinColumn({ name: 'card_id' })
+  @JoinColumn({ name: 'cardId' })
   card: Card;
 
   @Column({ type: 'int' })
