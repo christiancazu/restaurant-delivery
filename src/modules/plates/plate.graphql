@@ -1,18 +1,38 @@
+input CreatePlateInput {
+  name: String!
+  description: String
+  category: Category!
+  type: Type!
+  created: Date!
+  updated: Date!
+  updated_user: User!
+  avatar: String
+  enabled: Boolean!
+}
+
+input UpdatePlateInput {
+  name: String
+  description: String
+  category: Category
+  type: Type
+  created: Date
+  updated: Date
+  updated_user: User
+  avatar: String
+  enabled: Boolean
+}
+
 type Plate {
   id: Int!
   name: String
   description: String
-  avatar: String
   category: Category
   type: Type
+  created: Date
+  updated: Date
+  updated_user: User
+  avatar: String
   enabled: Boolean
-  updater: User
-  createdAt: String
-  updatedAt: String
-}
-
-type Query {
-  plates: [Plate]
 }
 
 input PlateCreateInput {
@@ -23,6 +43,14 @@ input PlateCreateInput {
   typeId: Int
 }
 
+type Query {
+  plate: Plate!
+  plates: [Plate!]
+}
+
 type Mutation {
+  createPlate(plate: CreatePlateInput!): Plate!
+  updatePlate(plate: UpdatePlateInput!): Plate!
   plateCreate(plateCreateInput: PlateCreateInput): Plate
+  deletePlate(id: Int!): Plate!
 }

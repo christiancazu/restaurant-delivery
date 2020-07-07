@@ -1,0 +1,20 @@
+input CreateRatingInput {
+  name: String!
+  description: String
+}
+
+input UpdateRatingInput {
+  name: String
+  description: String
+}
+
+type Rating {
+  id: Int!
+  name: String!
+  description: String
+}
+
+type Query {
+  rating: Rating!
+  ratings: [Rating!]
+}
