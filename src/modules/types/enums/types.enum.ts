@@ -1,0 +1,7 @@
+export enum TYPES {
+  ENTRADA = 'ENTRADA',
+  FONDO = 'FONDO',
+  POSTRE = 'POSTRE',
+  BEBIDA = 'BEBIDA',
+  EXTRAS = 'EXTRAS'
+};

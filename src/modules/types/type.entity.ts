@@ -12,8 +12,8 @@ export class Type extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      unique: true,
-      length: 32
+      length: 32,
+      unique: true
     })
     name: string;
 
@@ -30,4 +30,9 @@ export class Type extends BaseEntity {
       nullable: true
     })
     avatar: string;
+
+    constructor(id: number) {
+      super();
+      this.id = id;
+    }
 }

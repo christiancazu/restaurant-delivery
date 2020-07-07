@@ -15,15 +15,14 @@ export class Role extends BaseEntity {
 
   @Column('enum', {
     enum: ROLES,
-    default: ROLES.USER
+    default: ROLES.CLIENT
   })
   name: ROLES
 
   @Column({
     type: 'varchar',
     length: 50,
-    nullable: true,
-    select: false
+    nullable: true
   })
   description: string;
 }

@@ -66,20 +66,31 @@ export class AuthService {
     return this.provideSession(user);
   }
 
-  async signUp(data: SignUpInputDto): Promise<Session> {
-    let user = await this._userRepository.findOne({
-      where: { email: data.email },
-      relations: ['roles']
-    });
+  async signUp(signUpInput: SignUpInputDto): Promise<Session> {
+    let user: User = await this._userRepository.findOne({ where: { email: signUpInput.email } });
 
     if (user) {
-      throw new UnprocessableEntityException('auth.errors.exists');
+      throw new UnprocessableEntityException('auth.errors.exists.email');
     }
 
-    user = this._userRepository.create(data);
+    user = await this._userRepository.findOne({ where: { document: signUpInput.document } });
+
+    if (user) {
+      throw new UnprocessableEntityException('auth.errors.exists.document');
+    }
+
+    user = await this._userRepository.findOne({ where: { phone: signUpInput.phone } });
+
+    if (user) {
+      throw new UnprocessableEntityException('auth.errors.exists.phone');
+    }
+
+    user = this._userRepository.create(signUpInput);
 
     const roleRepository = getConnection().getRepository(Role);
-    const defaultRole = await roleRepository.findOne({ where: { name: ROLES.USER } });
+
+    const defaultRole = await roleRepository.findOne({ where: { name: ROLES.CLIENT } });
+
     user.roles = [defaultRole];
 
     const userSaved = await this._userRepository.save(user);

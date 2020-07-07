@@ -30,12 +30,9 @@ export class AuthResolver {
 
   @Mutation()
   signUp(
-    @Args('signUpInput') { email, password }: SignUpInputDto
+    @Args('signUpInput') signUpInput: SignUpInputDto
   ): Promise<Session> {
-    return this._authService.signUp({
-      email,
-      password
-    });
+    return this._authService.signUp(signUpInput);
   }
 
   @UseGuards(GqlAuthGuard)

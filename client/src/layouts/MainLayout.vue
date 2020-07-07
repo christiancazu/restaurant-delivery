@@ -175,7 +175,7 @@
     </q-list>
   </q-drawer>
 
-  <q-page-container>
+  <q-page-container class="bg-grey-11">
     <transition
       appear
       enter-active-class="animated slideInDown"
@@ -187,14 +187,14 @@
 </template>
 
 <script lang="ts">
-import { sessionService } from '@core/services';
+import { Session } from '@common/gql/graphql.schema.generated';
 
+import { sessionService } from '@core/services';
 import { notifyUtil } from '@core/utils';
 
 import { defineComponent } from '@vue/composition-api';
 import { useQuery, useResult } from '@vue/apollo-composable';
 import { SESSION_QUERY } from '@core/graphql/querys';
-import { Session } from '@common/gql/graphql.schema.generated';
 
 import SidebarMenu from 'src/components/SidebarMenu.vue';
 
@@ -212,8 +212,7 @@ export default defineComponent({
         {
           title: this.$tc('plate', 1),
           icon: 'fad fa-clipboard-list',
-          routeName: 'Admin',
-          routeModule: 'plate'
+          routeName: 'AdminPlate'
         },
         {
           title: this.$tc('dealer', 2),
@@ -260,10 +259,9 @@ export default defineComponent({
           routeModule: 'menu'
         },
         {
-          title: this.$tc('plate', 2),
+          title: 'Platillos',
           icon: 'fad fa-burger-soda',
-          routeName: 'User',
-          routeModule: 'extras'
+          routeName: 'UserPlates'
         }
 
       ]

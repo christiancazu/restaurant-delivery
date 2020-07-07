@@ -13,10 +13,10 @@ export class Vehicle extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      unique: true,
-      length: 8
+      length: 8,
+      unique: true
     })
-    licence_plate: string;
+    licencePlate: string;
 
     @Column({
       type: 'varchar',

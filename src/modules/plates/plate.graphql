@@ -1,0 +1,28 @@
+type Plate {
+  id: Int!
+  name: String
+  description: String
+  avatar: String
+  category: Category
+  type: Type
+  enabled: Boolean
+  updater: User
+  createdAt: String
+  updatedAt: String
+}
+
+type Query {
+  plates: [Plate]
+}
+
+input PlateCreateInput {
+  name: String!
+  description: String
+  avatar: String
+  categoryId: Int
+  typeId: Int
+}
+
+type Mutation {
+  plateCreate(plateCreateInput: PlateCreateInput): Plate
+}

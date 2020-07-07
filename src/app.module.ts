@@ -3,30 +3,37 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
+import { APP_PIPE } from '@nestjs/core';
+
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { RolesModule } from './modules/roles/roles.module';
-import { APP_PIPE } from '@nestjs/core';
-import { join } from 'path';
-import { TypeModule } from './modules/types/type.module';
-import { CategoryModule } from './modules/categories/category.module';
+import { TypesModule } from './modules/types/types.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 import { StatusModule } from './modules/status/status.module';
-import { PaymentModule } from './modules/payments/payment.module';
-import { RatingModule } from './modules/ratings/rating.module';
-import { VehicleModule } from './modules/vehicles/vehicle.module';
-import { PlateModule } from './modules/plates/plate.module';
-import { CardModule } from './modules/cards/card.module';
-import { OrderModule } from './modules/orders/order.module';
+import { PaymentsModule } from './modules/payments/payments.module';
+import { RatingsModule } from './modules/ratings/ratings.module';
+import { VehiclesModule } from './modules/vehicles/vehicles.module';
+import { PlatesModule } from './modules/plates/plates.module';
+import { CardsModule } from './modules/cards/cards.module';
+import { OrdersModule } from './modules/orders/orders.module';
 import { OrderCardsModule } from './modules/order-cards/order-cards.module';
+
+import { join } from 'path';
+import { UploadModule } from './modules/upload/upload.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { AppController } from './app.controller';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
 @Module({
   imports: [
-    ServeStaticModule.forRoot({ rootPath: join(__dirname, '../../client', 'dist/pwa') }),
+    ServeStaticModule.forRoot({ rootPath: join(__dirname, '../../client', 'dist/pwa') }, {}),
     ConfigModule.forRoot({ isGlobal: true }),
+    MulterModule.register(),
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
+      path: 'api/graphql',
       debug: !IS_PRODUCTION_ENV,
       playground: !IS_PRODUCTION_ENV,
       context: ({ req }) => ({ req }),
@@ -39,22 +46,24 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     AuthModule,
     UsersModule,
     RolesModule,
-    TypeModule,
-    CategoryModule,
+    TypesModule,
+    CategoriesModule,
     StatusModule,
-    PaymentModule,
-    RatingModule,
-    VehicleModule,
-    PlateModule,
-    CardModule,
-    OrderModule,
-    OrderCardsModule
+    PaymentsModule,
+    RatingsModule,
+    VehiclesModule,
+    PlatesModule,
+    CardsModule,
+    OrdersModule,
+    OrderCardsModule,
+    UploadModule
   ],
   providers: [
     {
       provide: APP_PIPE,
       useClass: ValidationPipe
     }
-  ]
+  ],
+  controllers: [AppController]
 })
 export class AppModule {}

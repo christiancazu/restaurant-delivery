@@ -20,39 +20,39 @@ export class Plate extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      unique: true,
-      length: 64
+      length: 64,
+      unique: true
     })
     name: string;
 
     @Column({
-      type: 'varchar',
-      length: 128,
+      type: 'text',
       nullable: true
     })
     description: string;
 
-    @JoinColumn({ name: 'category_id' })
+    @JoinColumn({ name: 'categoryId' })
     @ManyToOne(() => Category)
-    category!: Category;
+    category: Category;
 
-    @JoinColumn({ name: 'type_id' })
+    @JoinColumn({ name: 'typeId' })
     @ManyToOne(() => Type)
     type: Type;
 
     @CreateDateColumn({ type: 'timestamp' })
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn({ type: 'timestamp' })
-    updated_at: Date;
+    updatedAt: Date;
 
-    @JoinColumn({ name: 'updated_by_user_id' })
+    @JoinColumn({ name: 'updatedByUserId' })
     @ManyToOne(() => User)
-    updated_id: User;
+    updater: User;
 
     @Column({
       type: 'varchar',
-      length: 32
+      length: 32,
+      nullable: true
     })
     avatar: string;
 

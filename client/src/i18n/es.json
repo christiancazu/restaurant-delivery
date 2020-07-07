@@ -5,35 +5,48 @@
       "created": "La cuenta ha sido creada con éxito"
     }
   },
+  "address": "Dirección",
   "admin": "Administrador",
   "auth": {
     "errors": {
       "credentials": "El usuario o la contraseña no son válidos",
-      "exists": "El correo electrónico ya ha sido registrado"
+      "exists": {
+        "email": "El Correo Electrónico ya ha sido registrado",
+        "document": "El Documento ya ha sido registrado",
+        "phone": "El Teléfono ya ha sido registrado"
+      }
     }
   },
   "cancel": "Cancelar",
   "client": "cliente | clientes",
   "confirmPassword": "Confirmar contraseña",
   "dealer": "repartidor | repartidores",
+  "document": "Documento",
   "email": "Correo Electrónico",
   "field": {
     "errors": {
       "repeatPassword": "Las contraseñas no coinciden",
       "email": "El Correo Electrónico no es válido",
       "minLength": "El campo {field} debe contener almenos {amount} caracteres",
+      "maxLength": "El campo {field} no debe contener más de {amount} caracteres",
+      "notValid": "El campo {field} no es válido",
       "required": "El campo {field} es requerido"
     }
   },
+  "firstname": "Nombres",
   "employee": "empleado | empleados",
   "error": "Ha ocurrido un error",
   "join": "Ingresar",
+  "lastname": "Apellidos",
   "myNotification": "Mis notificaciones",
   "myOrder": "Mi orden | Mis ordenes",
   "myProfile": "Mi Perfil",
   "menuDaily": "Menú del día",
+  "name": "nombre",
   "password": "Contraseña",
   "plate": "plato | platos | platos extras",
+  "plateRegister": "El Platillo ha sido registrado",
+  "phone": "Nº Celular",
   "session": {
     "errors": {
       "notValid": "La sesión no es válida"

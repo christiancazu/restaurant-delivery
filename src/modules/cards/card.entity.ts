@@ -23,16 +23,16 @@ export class Card extends BaseEntity {
     price: number;
 
     @ManyToOne(() => User, { nullable: true })
-    @JoinColumn({ name: 'updated_by_user_id' })
-    updated_by_id: User;
+    @JoinColumn({ name: 'updatedByUserId' })
+    user: User;
 
     @ManyToOne(() => Plate, { nullable: true })
-    @JoinColumn({ name: 'plate_id' })
+    @JoinColumn({ name: 'plateId' })
     plate: Plate;
 
     @CreateDateColumn({ type: 'timestamp' })
-    created_at: Date;
+    createdAt: Date;
 
     @UpdateDateColumn({ type: 'timestamp' })
-    updated_at: Date;
+    updatedAt: Date;
 }

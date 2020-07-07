@@ -6,6 +6,13 @@ input SignInInput {
 input SignUpInput {
   email: String!
   password: String!
+  document: String!
+  firstname: String!
+  lastname: String!
+  phone: String!
+  address: String
+  locationLatLng: String
+  avatar: String
 }
 
 type Session {

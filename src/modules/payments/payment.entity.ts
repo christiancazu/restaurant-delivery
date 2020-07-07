@@ -12,8 +12,8 @@ export class Payment extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      unique: true,
-      length: 32
+      length: 32,
+      unique: true
     })
     name: string;
 
