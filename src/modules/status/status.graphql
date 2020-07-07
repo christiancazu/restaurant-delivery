@@ -1,0 +1,20 @@
+input CreateStatusInput {
+  name: String!
+  description: String
+}
+
+input UpdateStatusInput {
+  name: String
+  description: String
+}
+
+type Status {
+  id: Int!
+  name: String!
+  description: String
+}
+
+type Query {
+  status: Status!
+  statuss: [Status!]
+}
