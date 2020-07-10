@@ -209,7 +209,7 @@ import { useMutation } from '@vue/apollo-composable';
 import { CreatePlateInput } from '@common/gql/graphql.schema.generated';
 
 import { ASSERTS } from '@common/config/asserts.config';
-import { notifyUtil } from '../../../core/utils';
+import { notifyUtil } from '@core/utils';
 
 export const CATEGORIES = {
   CALDOS: 'CALDOS',
@@ -309,12 +309,12 @@ export default defineComponent({
 
     async function onSubmitCreatePlate () {
       try {
-        if (createPlateInput.categoryId) {
-          createPlateInput.categoryId = createPlateInput.categoryId.value;
-        }
-        if (createPlateInput.typeId) {
-          createPlateInput.typeId = createPlateInput.typeId.value;
-        }
+        // if (createPlateInput.categoryId) {
+        //   createPlateInput.categoryId = createPlateInput.categoryId.value;
+        // }
+        // if (createPlateInput.typeId) {
+        //   createPlateInput.typeId = createPlateInput.typeId.value;
+        // }
 
         await createPlateMutation(createPlateInput);
 
