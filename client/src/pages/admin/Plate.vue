@@ -1,39 +1,42 @@
 <template>
-<q-page
-  padding
->
+<q-page>
   <q-card
     style="min-height: 100vh"
-    class="bg-grey-1"
-    bordered
+    class="bg-grey-2"
   >
+    <section class="row q-py-sm q-px-md">
+      <div class="col-sm-6 text-h6">
+        <q-icon name="fad fa-utensils-alt" /> Registrar Platillo
+      </div>
+    </section>
+
+    <q-separator inset />
+
     <q-card-section>
       <q-form
-        class="q-gutter-y-md"
+        ref="refForm"
         @submit="onSubmitCreatePlate"
       >
-        <div class="text-h6 text-center q-py-none">
-          <q-icon name="fad fa-utensils-alt" /> Registrar Platillo
-        </div>
-
-        <q-separator />
-
-        <section class="row q-my-sm q-col-gutter-md">
+        <section
+          class="row q-my-sm q-col-gutter-x-md"
+          style="padding-top: 8px"
+        >
 
           <div class="col-12 col-md-6">
             <q-uploader
+              ref="refUploader"
               class="full-width"
               label="Imagen del platillo"
               accept=".jpg, image/*"
               hide-upload-btn
-              @added="added"
+              @added="avatarFile = $event[0]"
+              @removed="avatarFile = null"
             />
           </div>
 
           <div class="col-12 col-md-6">
             <q-input
               v-model="createPlateInput.name"
-              class="bg-white q-mb-md"
               :rules="[
                 val => !!val || $t('field.errors.required', { field: $t('name') }),
                 val =>
@@ -50,9 +53,11 @@
                   })
               ]"
               :label="$t('name')"
-              :disable="loading"
-              autocomplete="off"
+              :disable="loadingPlate"
               outlined lazy-rules
+              autocomplete="off"
+              bg-color="white"
+              class="q-mb-sm"
             >
               <template #prepend>
                 <q-icon name="fad fa-utensils" />
@@ -61,13 +66,16 @@
 
             <q-select
               v-model="createPlateInput.typeId"
-              outlined
               :options="types"
               :rules="[
                 val => !!val || $t('field.errors.required', { field: 'Tipo' }),
               ]"
-              style="margin-bottom: 36px"
+              option-label="name"
+              option-value="id"
+              outlined emit-value map-options
               label="Tipo de plato"
+              class="q-mb-sm"
+              bg-color="white"
             >
               <template v-slot:prepend>
                 <q-icon name="fad fa-burger-soda" />
@@ -77,10 +85,14 @@
 
             <q-select
               v-model="createPlateInput.categoryId"
-              outlined
               :options="categories"
-              class="q-mb-md"
+              :loading="loadingCategories"
+              option-label="name"
+              option-value="id"
+              outlined emit-value map-options
               label="Categoría"
+              class="q-mb-xs"
+              bg-color="white"
             >
               <template v-slot:prepend>
                 <q-icon name="fad fa-salad" />
@@ -90,7 +102,8 @@
         </section>
 
         <section class="row q-my-sm q-col-gutter-md">
-          <div class="col-12">
+          <div class="q-field__label">{{ $t('description') }}</div>
+          <div class="col-12 q-py-xs">
             <q-editor
               v-model="createPlateInput.description"
               :dense="$q.screen.lt.md"
@@ -126,7 +139,7 @@
                       'h4',
                       'h5',
                       'h6',
-                      'code'
+                    /*'code'*/
                     ]
                   },
                   {
@@ -185,10 +198,11 @@
 
         <section class="flex justify-center q-my-lg">
           <q-btn
+            :loading="loadingPlate"
             style="width: 200px"
             color="primary"
-            icon="check"
-            :loading="loading"
+            icon="fad fa-save"
+            glossy push
             label="Enviar"
             type="submit"
           />
@@ -201,82 +215,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from '@vue/composition-api';
 import { PLATE_CREATE_MUTATION } from '@core/graphql/mutations';
-
-import axios from 'axios';
-import { useMutation } from '@vue/apollo-composable';
-import { CreatePlateInput } from '@common/gql/graphql.schema.generated';
-
-import { ASSERTS } from '@common/config/asserts.config';
 import { notifyUtil } from '@core/utils';
+import {
+  CATEGORIES_QUERY,
+  TYPES_QUERY
+} from '@core/graphql/querys';
 
-export const CATEGORIES = {
-  CALDOS: 'CALDOS',
-  CHICHARRONES: 'CHICHARRONES',
-  MIXTOS: 'MIXTOS',
-  POLLOS: 'POLLOS',
-  ENSALADAS: 'ENSALADAS',
-  ARROCES: 'ARROCES',
-  PESCADOS: 'PESCADOS'
-};
+import { CreatePlateInput } from '@common/gql/graphql.schema.generated';
+import { ASSERTS } from '@common/config/asserts.config';
+
+import { defineComponent, reactive, ref } from '@vue/composition-api';
+import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
+import axios from 'axios';
+import { QUploader, QForm } from 'quasar';
 
 export default defineComponent({
-  setup (_, { root }) {
-    const types = [
-      {
-        label: 'Entrada',
-        value: 1
-      },
-      {
-        label: 'Fondo',
-        value: 2
-      },
-      {
-        label: 'Postre',
-        value: 3
-      },
-      {
-        label: 'Bebida',
-        value: 4
-      },
-      {
-        label: 'Extra',
-        value: 5
-      }
-    ];
-
-    const categories = [
-      {
-        label: 'Caldos',
-        value: 1
-      },
-      {
-        label: 'Chicharrones',
-        value: 2
-      },
-      {
-        label: 'Mixtos',
-        value: 3
-      },
-      {
-        label: 'Pollos',
-        value: 4
-      },
-      {
-        label: 'Ensaladas',
-        value: 5
-      },
-      {
-        label: 'Arroces',
-        value: 6
-      },
-      {
-        label: 'Pescados',
-        value: 7
-      }
-    ];
-
+  setup () {
     const createPlateInput = reactive<CreatePlateInput>({
       name: '',
       description: '',
@@ -285,53 +240,92 @@ export default defineComponent({
       typeId: null
     });
 
-    const { mutate: createPlateMutation, loading } = useMutation(PLATE_CREATE_MUTATION);
+    const {
+      mutate: createPlateMutation,
+      loading: loadingPlate
+    } = useMutation(PLATE_CREATE_MUTATION);
 
-    async function added (e) {
-      try {
-        const fd = new FormData();
-        fd.append('image', e[0]);
+    const {
+      result: resultCategories,
+      loading: loadingCategories
+    } = useQuery(CATEGORIES_QUERY);
 
-        const { data } = await axios
-          .post(
-            `${process.env.API_MEDIA_URL.replace(/"/g, '')}`,
-            fd,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
+    const {
+      result: resultTypes,
+      loading: loadingTypes
+    } = useQuery(TYPES_QUERY);
+
+    const categories = useResult(resultCategories);
+    const types = useResult(resultTypes);
+
+    const
+      avatarFile = ref<string|null>(null),
+      refUploader = ref<InstanceType<typeof QUploader>>(null),
+      refForm = ref<InstanceType<typeof QForm>>(null);
+
+    async function uploadFile () {
+      const fd = new FormData();
+      fd.append('image', avatarFile.value);
+
+      const { data } = await axios
+        .post(
+          `${process.env.API_MEDIA_URL.replace(/"/g, '')}`,
+          fd,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
             }
-          );
+          }
+        );
 
-        createPlateInput.avatar = data.avatar;
-      } catch (e) {}
+      return data.avatar;
     }
 
     async function onSubmitCreatePlate () {
       try {
-        // if (createPlateInput.categoryId) {
-        //   createPlateInput.categoryId = createPlateInput.categoryId.value;
-        // }
-        // if (createPlateInput.typeId) {
-        //   createPlateInput.typeId = createPlateInput.typeId.value;
-        // }
+        if (!avatarFile.value) {
+          notifyUtil.warn('avatar.errors.required');
+          return;
+        }
+
+        const avatarFileName = await uploadFile();
+
+        createPlateInput.avatar = avatarFileName;
 
         await createPlateMutation(createPlateInput);
 
-        notifyUtil.success('plateRegister');
+        resetForm();
 
-        root.$router.push({ name: 'Home' });
+        notifyUtil.success('plateRegister');
       } catch (e) {
       }
     }
 
+    function resetForm () {
+      createPlateInput.name = '';
+      createPlateInput.description = '';
+      createPlateInput.avatar = '';
+      createPlateInput.categoryId = null;
+      createPlateInput.typeId = null;
+
+      refUploader.value.reset();
+      refForm.value.reset();
+      refForm.value.resetValidation();
+    }
+
     return {
-      types,
-      categories,
-      added,
+      avatarFile,
       createPlateInput,
-      loading,
+      loadingPlate,
       onSubmitCreatePlate,
+      refUploader,
+      refForm,
+      /* categories */
+      categories,
+      loadingCategories,
+      /* categories */
+      types,
+      loadingTypes,
       /* const */
       ASSERTS
     };

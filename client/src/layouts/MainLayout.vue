@@ -143,17 +143,15 @@
 
   <q-drawer
     v-model="leftDrawerOpen"
-    show-if-above bordered
-    content-class="bg-grey-1"
+    show-if-above bordered dark
+    :width="240"
+    content-class="drawer"
   >
     <q-list v-if="session.isLogged">
 
       <!-- ADMIN PANEL -->
       <template v-if="session.user.roles.find(role => role.name === 'ADMIN')">
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header>
           {{ $t('admin' ) }}
         </q-item-label>
 
@@ -162,7 +160,7 @@
           v-bind="adminOption"
         />
 
-        <q-separator />
+        <q-separator dark />
 
       </template>
 
@@ -178,7 +176,7 @@
   <q-page-container class="bg-grey-11">
     <transition
       appear
-      enter-active-class="animated slideInDown"
+      enter-active-class="animated slideInUp"
     >
       <router-view />
     </transition>
@@ -211,36 +209,36 @@ export default defineComponent({
       adminOptions: [
         {
           title: this.$tc('plate', 1),
-          icon: 'fad fa-clipboard-list',
+          avatar: 'plate.svg',
           routeName: 'AdminPlate'
         },
         {
           title: this.$tc('dealer', 2),
-          icon: 'fad fa-biking-mountain',
+          avatar: 'dealer.svg',
           routeName: 'Admin',
           routeModule: 'dealer'
         },
         {
           title: this.$tc('employee', 2),
-          icon: 'fad fa-users',
+          avatar: 'employees.svg',
           routeName: 'Admin',
           routeModule: 'employee'
         },
         {
           title: this.$tc('client', 2),
-          icon: 'fad fa-user-friends',
+          avatar: 'clients.svg',
           routeName: 'Admin',
           routeModule: 'client'
         },
         {
           title: this.$tc('vehicle', 2),
-          icon: 'fad fa-motorcycle',
+          avatar: 'vehicle-moto.svg',
           routeName: 'Admin',
           routeModule: 'vehicle'
         },
         {
           title: this.$tc('report', 2),
-          icon: 'fad fa-file-chart-line',
+          avatar: 'report.svg',
           routeName: 'Admin',
           routeModule: 'report'
         }
@@ -248,19 +246,19 @@ export default defineComponent({
       clientOptions: [
         {
           title: this.$tc('myOrder', 2),
-          icon: 'fad fa-address-book',
+          avatar: 'order.svg',
           routeName: 'User',
           routeModule: 'order'
         },
         {
           title: this.$t('menuDaily'),
-          icon: 'fad fa-hat-chef',
+          avatar: 'daily-menu.svg',
           routeName: 'User',
           routeModule: 'menu'
         },
         {
           title: 'Platillos',
-          icon: 'fad fa-burger-soda',
+          avatar: 'user-plate.svg',
           routeName: 'UserPlates'
         }
 
@@ -285,3 +283,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+.q-drawer.q-dark {
+  background-color: #2d2d2d;
+}
+</style>

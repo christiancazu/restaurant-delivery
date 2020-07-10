@@ -36,6 +36,10 @@ export default class CategoriesSeeder implements Seeder {
         {
           name: CATEGORIES.PESCADOS,
           description: 'pescados...'
+        },
+        {
+          name: CATEGORIES.PASTAS,
+          description: 'pastas...'
         }
       ])
       .execute();

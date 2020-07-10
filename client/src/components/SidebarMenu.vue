@@ -1,15 +1,16 @@
 <template>
 <q-item
   v-ripple clickable exact
+  exact-active-class="text-warning"
   :to="{name: routeName, params: { module: routeModule } }"
 >
   <q-item-section
-    v-if="icon"
+    v-if="avatar"
     avatar
   >
-    <q-icon
-      :name="icon"
-    />
+    <q-avatar>
+      <img :src="`avatars/${avatar}`">
+    </q-avatar>
   </q-item-section>
 
   <q-item-section>
@@ -42,10 +43,18 @@ export default {
       type: String,
       default: ''
     },
-    icon: {
+    avatar: {
       type: String,
       default: ''
     }
   }
 };
 </script>
+
+<style>
+svg {
+  border:10px solid yellow;
+  stroke-width: 4;
+  fill: yellow;
+}
+</style>

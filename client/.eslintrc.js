@@ -91,6 +91,7 @@ module.exports = {
     semi: ['error', 'always'],
     'linebreak-style': 0,
     'no-trailing-spaces': 'error',
+
     // vue
     'vue/singleline-html-element-content-newline': 'off',
     'vue/multiline-html-element-content-newline': 'off',
@@ -134,6 +135,7 @@ module.exports = {
     // '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     // allow debugger during development only
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
 };

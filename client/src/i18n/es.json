@@ -7,6 +7,11 @@
   },
   "address": "Dirección",
   "admin": "Administrador",
+  "avatar": {
+    "errors": {
+      "required": "El Avatar es requerido"
+    }
+  },
   "auth": {
     "errors": {
       "credentials": "El usuario o la contraseña no son válidos",
@@ -21,6 +26,7 @@
   "client": "cliente | clientes",
   "confirmPassword": "Confirmar contraseña",
   "dealer": "repartidor | repartidores",
+  "description": "Descripción",
   "document": "Documento",
   "email": "Correo Electrónico",
   "field": {
@@ -61,7 +67,9 @@
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "signUp": "Registrarse",
+  "types": "Tipos",
   "Unauthorized": "La sesión no es válida",
   "user": "Usuario",
-  "vehicle": "vehiculo | vehiculos"
+  "variedades": "Variedades",
+  "vehicle": "vehículo | vehículos"
 }

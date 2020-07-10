@@ -1,8 +1,13 @@
-
 import { SESSION_QUERY } from './session.query';
 import { ME_QUERY } from './me.query';
+import { CATEGORIES_QUERY } from './categories.query';
+import { TYPES_QUERY } from './types.query';
+import { PLATES_QUERY } from './plates.query';
 
 export {
   SESSION_QUERY,
-  ME_QUERY
+  ME_QUERY,
+  CATEGORIES_QUERY,
+  TYPES_QUERY,
+  PLATES_QUERY
 };
