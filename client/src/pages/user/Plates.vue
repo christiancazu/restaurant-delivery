@@ -104,7 +104,7 @@
               </div>
               <div class="text-h6">{{ type.name }}</div>
               <q-img
-                src="types/all-types.jpg"
+                :src="`${PATH_MEDIA}/types/all-types.jpg`"
                 :ratio="16/9"
                 spinner-color="primary"
               />
@@ -137,7 +137,7 @@ const PATH_MEDIA = process.env.URL_MEDIA.replace(/"/g, '');
 const fallbackTypes = [{
   id: 0,
   name: 'TODOS',
-  avatar: 'types/all-types.jpg',
+  avatar: 'all-types.jpg',
   description: 'Ofrecemos Una gran variedad de platillos para su deleite'
 }];
 

@@ -9,7 +9,7 @@
     style="width: 780px"
   >
     <q-img
-      :src="`${PATH_MEDIA}/${plate.avatar}`"
+      :src="`${PATH_MEDIA}/plates/${plate.avatar}`"
     />
 
     <q-card-section>
