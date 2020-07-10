@@ -9,7 +9,7 @@ import { GqlAuthGuard } from '../auth/guards/gql.guard';
 import { RolesGuard } from '../roles/guards/roles.guard';
 import { Plate } from './plate.entity';
 import { ROLES } from 'src/modules/roles/enums/roles.enum';
-import { PlateCreateInputDto } from 'src/modules/plates/dto/plate-create.input.dto';
+import { CreatePlateInputDto } from 'src/modules/plates/dto/create-plate.input.dto';
 import { CurrentUser } from '../users/decorators/current-user.decorator';
 
 @Resolver('Plates')
@@ -27,10 +27,10 @@ export class PlatesResolver {
   @Mutation()
   @RolesRequired(ROLES.SUPER_ADMIN, ROLES.ADMIN)
   @UseGuards(GqlAuthGuard, RolesGuard)
-  plateCreate(
+  createPlate(
     @CurrentUser('id') creatorUserId: number,
-    @Args('plateCreateInput') plateCreateInput: PlateCreateInputDto
+    @Args('createPlateInput') createPlateInput: CreatePlateInputDto
   ): Promise<Plate> {
-    return this._platesService.create(plateCreateInput, creatorUserId);
+    return this._platesService.create(createPlateInput, creatorUserId);
   }
 }

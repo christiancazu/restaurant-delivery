@@ -1,29 +1,29 @@
 input CreateCardInput {
   stock: Int!
   price: Float!
-  updated_by_id: User!
-  plate: Plate!
-  created_at: Date!
-  updated_at: Date!
+  # updated_by_id: User!
+  # plate: Plate!
+  # created_at: Date!
+  # updated_at: Date!
 }
 
 input UpdateCardInput {
   stock: Int
   price: Float
-  updated_by_id: User
-  plate: Plate
-  created_at: Date
-  updated_at: Date
+  # updated_by_id: User
+  # plate: Plate
+  # created_at: Date
+  # updated_at: Date
 }
 
 type Card {
   id: Int!
   stock: Int!
   price: Float!
-  updated_by_id: User!
+  # updated_by_id: User!
   plate: Plate!
-  created_at: Date!
-  updated_at: Date!
+  # created_at: Date!
+  # updated_at: Date!
 }
 
 type Query {

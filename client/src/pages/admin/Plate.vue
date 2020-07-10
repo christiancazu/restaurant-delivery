@@ -10,7 +10,7 @@
     <q-card-section>
       <q-form
         class="q-gutter-y-md"
-        @submit="onSubmitPlateCreate"
+        @submit="onSubmitCreatePlate"
       >
         <div class="text-h6 text-center q-py-none">
           <q-icon name="fad fa-utensils-alt" /> Registrar Platillo
@@ -32,7 +32,7 @@
 
           <div class="col-12 col-md-6">
             <q-input
-              v-model="plateCreateInput.name"
+              v-model="createPlateInput.name"
               class="bg-white q-mb-md"
               :rules="[
                 val => !!val || $t('field.errors.required', { field: $t('name') }),
@@ -60,7 +60,7 @@
             </q-input>
 
             <q-select
-              v-model="plateCreateInput.typeId"
+              v-model="createPlateInput.typeId"
               outlined
               :options="types"
               :rules="[
@@ -76,7 +76,7 @@
             </q-select>
 
             <q-select
-              v-model="plateCreateInput.categoryId"
+              v-model="createPlateInput.categoryId"
               outlined
               :options="categories"
               class="q-mb-md"
@@ -92,7 +92,7 @@
         <section class="row q-my-sm q-col-gutter-md">
           <div class="col-12">
             <q-editor
-              v-model="plateCreateInput.description"
+              v-model="createPlateInput.description"
               :dense="$q.screen.lt.md"
               :toolbar="[
                 [
@@ -206,7 +206,7 @@ import { PLATE_CREATE_MUTATION } from '@core/graphql/mutations';
 
 import axios from 'axios';
 import { useMutation } from '@vue/apollo-composable';
-import { PlateCreateInput } from '@common/gql/graphql.schema.generated';
+import { CreatePlateInput } from '@common/gql/graphql.schema.generated';
 
 import { ASSERTS } from '@common/config/asserts.config';
 import { notifyUtil } from '../../../core/utils';
@@ -277,7 +277,7 @@ export default defineComponent({
       }
     ];
 
-    const plateCreateInput = reactive<PlateCreateInput>({
+    const createPlateInput = reactive<CreatePlateInput>({
       name: '',
       description: '',
       avatar: '',
@@ -303,20 +303,20 @@ export default defineComponent({
             }
           );
 
-        plateCreateInput.avatar = data.avatar;
+        createPlateInput.avatar = data.avatar;
       } catch (e) {}
     }
 
-    async function onSubmitPlateCreate () {
+    async function onSubmitCreatePlate () {
       try {
-        if (plateCreateInput.categoryId) {
-          plateCreateInput.categoryId = plateCreateInput.categoryId.value;
+        if (createPlateInput.categoryId) {
+          createPlateInput.categoryId = createPlateInput.categoryId.value;
         }
-        if (plateCreateInput.typeId) {
-          plateCreateInput.typeId = plateCreateInput.typeId.value;
+        if (createPlateInput.typeId) {
+          createPlateInput.typeId = createPlateInput.typeId.value;
         }
 
-        await createPlateMutation(plateCreateInput);
+        await createPlateMutation(createPlateInput);
 
         notifyUtil.success('plateRegister');
 
@@ -329,9 +329,9 @@ export default defineComponent({
       types,
       categories,
       added,
-      plateCreateInput,
+      createPlateInput,
       loading,
-      onSubmitPlateCreate,
+      onSubmitCreatePlate,
       /* const */
       ASSERTS
     };

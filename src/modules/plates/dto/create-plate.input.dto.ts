@@ -5,10 +5,10 @@ import {
   IsOptional,
   IsNumber
 } from 'class-validator';
-import { PlateCreateInput } from '@common/gql/graphql.schema.generated';
+import { CreatePlateInput } from '@common/gql/graphql.schema.generated';
 import { ASSERTS } from '@common/config/asserts.config';
 
-export class PlateCreateInputDto implements PlateCreateInput {
+export class CreatePlateInputDto implements CreatePlateInput {
   @IsNotEmpty()
   @MinLength(ASSERTS.PLATE.NAME_MIN_LENGTH)
   @MaxLength(ASSERTS.PLATE.NAME_MAX_LENGTH)

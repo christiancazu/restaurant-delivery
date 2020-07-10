@@ -1,21 +1,21 @@
 input CreateCardOrderInput {
-  order: Order!
-  card: Card!
+  # order: Order!
+  # card: Card!
   amount: Int!
   subtotal: Float!
 }
 
 input UpdateCardOrderInput {
-  order: Order
-  card: Card
+  # order: Order
+  # card: Card
   amount: Int
   subtotal: Float
 }
 
 type CardOrder {
   id: Int!
-  order: Order!
-  card: Card!
+  # order: Order!
+  # card: Card!
   amount: Int!
   subtotal: Float!
 }

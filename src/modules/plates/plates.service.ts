@@ -2,7 +2,7 @@ import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Plate } from './plate.entity';
 import { Repository } from 'typeorm';
-import { PlateCreateInputDto } from './dto/plate-create.input.dto';
+import { CreatePlateInputDto } from './dto/create-plate.input.dto';
 import { User } from 'src/modules/users/user.entity';
 import { Type } from '../types/type.entity';
 import { Category } from '../categories/category.entity';
@@ -18,7 +18,7 @@ export class PlatesService {
     return await this._plateRepository.find({ relations: ['updater', 'category', 'type'] });
   }
 
-  async create(dto: PlateCreateInputDto, creatorUserId: number): Promise<Plate> {
+  async create(dto: CreatePlateInputDto, creatorUserId: number): Promise<Plate> {
     let plate = await this._plateRepository.findOne({ where: { name: dto.name } });
 
     if (plate) {

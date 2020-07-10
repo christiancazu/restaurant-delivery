@@ -19,5 +19,5 @@ type Category {
 
 type Query {
   category: Category!
-  categorys: [Category!]
+  categories: [Category!]
 }

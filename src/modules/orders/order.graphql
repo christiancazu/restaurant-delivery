@@ -1,49 +1,49 @@
 input CreateOrderInput {
   destineLatLng: Int!
-  payment: Payment!
-  status: Status!
-  rating: Rating!
+  # payment: Payment!
+  # status: Status!
+  # rating: Rating!
   rating_description: String!
-  request_user: User!
-  delivered_user: User!
-  delivered_vehicle: Vehicle!
-  payment_card: String
+  # request_user: User!
+  # delivered_user: User!
+  # delivered_vehicle: Vehicle!
+  # payment_card: String
   total: Float!
-  created: Date!
-  updated: Date!
+  # created: Date!
+  # updated: Date!
   payed: Boolean!
 }
 
 input UpdateOrderInput {
   destineLatLng: Int
-  payment: Payment
-  status: Status
-  rating: Rating
+  # payment: Payment
+  # status: Status
+  # rating: Rating
   rating_description: String
-  request_user: User
-  delivered_user: User
-  delivered_vehicle: Vehicle
+  # request_user: User
+  # delivered_user: User
+  # delivered_vehicle: Vehicle
   payment_card: String
   total: Float
-  created: Date
-  updated: Date
+  # created: Date
+  # updated: Date
   payed: Boolean
 }
 
 type Order {
   id: Int!
   destineLatLng: Int!
-  payment: Payment!
-  status: Status!
-  rating: Rating!
+  # payment: Payment!
+  # status: Status!
+  # rating: Rating!
   rating_description: String!
-  request_user: User!
-  delivered_user: User!
-  delivered_vehicle: Vehicle!
+  # request_user: User!
+  # delivered_user: User!
+  # delivered_vehicle: Vehicle!
   payment_card: String
   total: Float!
-  created: Date!
-  updated: Date!
+  # created: Date!
+  # updated: Date!
   payed: Boolean!
 }
 
