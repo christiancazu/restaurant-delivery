@@ -8,6 +8,7 @@
   "address": "Dirección",
   "admin": "Administrador",
   "avatar": {
+    "name": "Imagen",
     "errors": {
       "required": "El Avatar es requerido"
     }
@@ -39,7 +40,14 @@
       "required": "El campo {field} es requerido"
     }
   },
+  "file": {
+    "errors": {
+      "invalidFormat": "El archivo no es de un formato válido",
+      "maxFileSize": "El archivo no debe ser mayor a {amount} Mb"
+    }
+  },
   "firstname": "Nombres",
+  "formats": "formatos",
   "employee": "empleado | empleados",
   "error": "Ha ocurrido un error",
   "join": "Ingresar",

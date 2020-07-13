@@ -7,8 +7,8 @@ export default {
     this.send('positive', message);
   },
 
-  error (message: any) {
-    this.send('negative', message);
+  error (message: any, payload = null) {
+    this.send('negative', message, payload);
   },
 
   info (message: any) {
@@ -26,22 +26,26 @@ export default {
    * @param type type of toast
    * @param message string|object
    */
-  send (type: string, message: any) {
+  send (type: string, message: any, payload) {
     let asserts = null;
     let messageText = '';
+    if (!payload) {
+      if (typeof message === 'object') {
+        try {
+          const { message: objMessage, asserts: objAsserts } = JSON.parse(message[0]);
 
-    if (typeof message === 'object') {
-      try {
-        const { message: objMessage, asserts: objAsserts } = JSON.parse(message[0]);
-
-        objAsserts.field = i18n.t(objAsserts.field);
-        asserts = objAsserts;
-        messageText = objMessage;
-      } catch (error) {
-        messageText = 'error';
+          objAsserts.field = i18n.t(objAsserts.field);
+          asserts = objAsserts;
+          messageText = objMessage;
+        } catch (error) {
+          messageText = 'error';
+        }
+      } else {
+        messageText = message;
       }
     } else {
       messageText = message;
+      asserts = payload;
     }
 
     Notify.create({

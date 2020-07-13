@@ -24,20 +24,18 @@ input CreatePlateInput {
   typeId: Int
 }
 
-# input UpdatePlateInput {
-#   name: String
-#   description: String
-#   category: Category
-#   type: Type
-#   created: Date
-#   updated: Date
-#   updater: User
-#   avatar: String
-#   enabled: Boolean
-# }
+input UpdatePlateInput {
+  id: Int!
+  name: String
+  description: String
+  avatar: String
+  categoryId: Int
+  typeId: Int
+  enabled: Boolean
+}
 
 type Mutation {
-  createPlate(createPlateInput: CreatePlateInput!): Plate
-  # updatePlate(plate: UpdatePlateInput!): Plate!
+  createPlate(createPlateInput: CreatePlateInput!): Plate!
+  updatePlate(updatePlateInput: UpdatePlateInput!): Plate!
   # deletePlate(id: Int!): Plate!
 }

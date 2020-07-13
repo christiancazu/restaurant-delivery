@@ -6,6 +6,7 @@ import { CreatePlateInputDto } from './dto/create-plate.input.dto';
 import { User } from 'src/modules/users/user.entity';
 import { Type } from '../types/type.entity';
 import { Category } from '../categories/category.entity';
+import { UpdatePlateInputDto } from './dto/update-plate.input.dto';
 
 @Injectable()
 export class PlatesService {
@@ -33,5 +34,20 @@ export class PlatesService {
     });
 
     return await plate.save();
+  }
+
+  async update(dto: UpdatePlateInputDto, updaterUserId: number): Promise<Plate> {
+    const plate = await this._plateRepository.findOne({ where: { name: dto.name } });
+
+    if (plate && plate.id !== dto.id) {
+      throw new UnprocessableEntityException('plate.errors.exists');
+    }
+
+    return this._plateRepository.save({
+      ...dto,
+      type: new Type(dto.typeId),
+      category: new Category(dto.categoryId),
+      updater: new User(updaterUserId)
+    });
   }
 }

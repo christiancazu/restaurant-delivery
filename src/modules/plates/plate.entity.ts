@@ -12,6 +12,7 @@ import {
 import { Category } from '../categories/category.entity';
 import { Type } from '../types/type.entity';
 import { User } from '../users/user.entity';
+import { ASSERTS } from '@common/config/asserts.config';
 
 @Entity('plates')
 export class Plate extends BaseEntity {
@@ -20,7 +21,7 @@ export class Plate extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 64,
+      length: ASSERTS.PLATE.NAME_MAX_LENGTH,
       unique: true
     })
     name: string;
@@ -51,7 +52,7 @@ export class Plate extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 32,
+      length: ASSERTS.PLATE.AVATAR_MAX_LENGTH,
       nullable: true
     })
     avatar: string;

@@ -11,6 +11,7 @@ import { Plate } from './plate.entity';
 import { ROLES } from 'src/modules/roles/enums/roles.enum';
 import { CreatePlateInputDto } from 'src/modules/plates/dto/create-plate.input.dto';
 import { CurrentUser } from '../users/decorators/current-user.decorator';
+import { UpdatePlateInputDto } from './dto/update-plate.input.dto';
 
 @Resolver('Plates')
 export class PlatesResolver {
@@ -32,5 +33,15 @@ export class PlatesResolver {
     @Args('createPlateInput') createPlateInput: CreatePlateInputDto
   ): Promise<Plate> {
     return this._platesService.create(createPlateInput, creatorUserId);
+  }
+
+  @Mutation()
+  @RolesRequired(ROLES.SUPER_ADMIN, ROLES.ADMIN)
+  @UseGuards(GqlAuthGuard, RolesGuard)
+  updatePlate(
+    @CurrentUser('id') updaterUserId: number,
+    @Args('updatePlateInput') updatePlateInput: UpdatePlateInputDto
+  ): Promise<Plate> {
+    return this._platesService.update(updatePlateInput, updaterUserId);
   }
 }

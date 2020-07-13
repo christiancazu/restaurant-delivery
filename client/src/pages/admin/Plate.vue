@@ -26,11 +26,13 @@
             <q-uploader
               ref="refUploader"
               class="full-width"
-              label="Imagen del platillo"
-              accept=".jpg, image/*"
+              :label="`${$t('avatar.name')} (${$t('formats')}: jpg, jpeg, png, bmp)`"
+              accept=".jpg, .jpeg, .png, .bmp"
               hide-upload-btn
+              max-file-size="5000000"
               @added="avatarFile = $event[0]"
               @removed="avatarFile = null"
+              @rejected="rejectedFile"
             />
           </div>
 
@@ -295,6 +297,13 @@ export default defineComponent({
         loadingCreatePlate.value = false;
       }
     }
+    function rejectedFile (e) {
+      if (e[0].failedPropValidation === 'max-file-size') {
+        notifyUtil.error('file.errors.maxFileSize', { amount: 5 });
+      } else {
+        notifyUtil.error('file.errors.invalidFormat');
+      }
+    }
 
     function resetForm () {
       createPlateInput.name = '';
@@ -316,6 +325,7 @@ export default defineComponent({
       types,
       loadingTypes,
       /** local */
+      rejectedFile,
       avatarFile,
       createPlateInput,
       loadingCreatePlate,

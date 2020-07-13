@@ -25,7 +25,7 @@ export const ASSERTS = {
 
     LOCATION_LAT_LNG_MAX_LENGTH: 128,
 
-    AVATAR_MAX_LENGTH: 32
+    AVATAR_MAX_LENGTH: 64
   },
 
   PLATE: {
@@ -34,6 +34,6 @@ export const ASSERTS = {
 
     DESCRIPTION_MAX_LENGTH: 1000,
 
-    AVATAR_MAX_LENGTH: 32
+    AVATAR_MAX_LENGTH: 64
   }
 };

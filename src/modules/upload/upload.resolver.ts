@@ -10,9 +10,15 @@ import { RolesRequired } from '../roles/decorators/roles.decorators';
 import { ROLES } from '../roles/enums/roles.enum';
 
 import { createWriteStream, promises } from 'fs';
-import { v4 as uuidv4 } from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 
-// TODO: mymetype validations, avatarType validations
+const availableExtensions = [
+  'jpg',
+  'jpeg',
+  'png',
+  'bmp'
+];
+
 @Resolver('Upload')
 export class UploadResolver {
   constructor() {}
@@ -28,19 +34,29 @@ export class UploadResolver {
     })
       {
         createReadStream,
-        mimetype
+        mimetype,
+        filename
       }: FileUpload): Promise<string> {
-    const uuid = uuidv4();
+    console.warn(createReadStream().readableLength);
+    // console.warn(createReadStream().bytesRead);
+    // console.warn(createWriteStream().writableLength);
+    // console.warn(createWriteStream().bytesWritten);
 
-    const mimetypeExt = mimetype.split('/')[1]; // image/png
-
+    console.warn('encoding', filename);
     const dirname = './media/' + avatarType;
 
     await promises.mkdir(dirname, { recursive: true });
 
+    const mimetypeExt = mimetype.split('/')[1];
+
+    if (!availableExtensions.includes(mimetypeExt)) {
+      throw new UnprocessableEntityException('file.errors.invalidFormat');
+    }
+
+    const imgFullname = uuidv1() + '.' + mimetypeExt; // image/png
     const result = await new Promise(async (resolve, reject) =>
       createReadStream()
-        .pipe(createWriteStream(`${dirname}/${uuid}.${mimetypeExt}`))
+        .pipe(createWriteStream(`${dirname}/${imgFullname}`))
         .on('finish', () => resolve(true))
         .on('error', () => reject(false))
     );
@@ -49,6 +65,6 @@ export class UploadResolver {
       throw new UnprocessableEntityException('upload.failed');
     }
 
-    return uuid;
+    return imgFullname;
   }
 }
