@@ -14,6 +14,7 @@ import { User } from '../users/user.entity';
 import { Status } from '../status/status.entity';
 import { Rating } from '../ratings/rating.entity';
 import { Vehicle } from '../vehicles/vehicle.entity';
+import { Payment } from 'src/modules/payments/payment.entity';
 
 @Entity('orders')
 export class Order extends BaseEntity {
@@ -25,6 +26,10 @@ export class Order extends BaseEntity {
       length: 128
     })
     destineLatLng: string;
+
+    @ManyToOne(() => Payment)
+    @JoinColumn({ name: 'paymentId' })
+    payment: Payment;
 
     @ManyToOne(() => Status)
     @JoinColumn({ name: 'statusId' })

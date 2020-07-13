@@ -32,12 +32,12 @@ export class Plate extends BaseEntity {
     })
     description: string;
 
+    @ManyToOne(() => Category, { nullable: false })
     @JoinColumn({ name: 'categoryId' })
-    @ManyToOne(() => Category)
     category: Category;
 
+    @ManyToOne(() => Type, { nullable: false })
     @JoinColumn({ name: 'typeId' })
-    @ManyToOne(() => Type)
     type: Type;
 
     @CreateDateColumn({ type: 'timestamp' })

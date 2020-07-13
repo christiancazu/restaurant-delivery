@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   Column
 } from 'typeorm';
+import { ASSERTS } from '@common/config/asserts.config';
 
 @Entity('types')
 export class Type extends BaseEntity {
@@ -12,21 +13,21 @@ export class Type extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 32,
+      length: ASSERTS.TYPE.NAME_MAX_LENGTH,
       unique: true
     })
     name: string;
 
     @Column({
       type: 'varchar',
-      length: 128,
+      length: ASSERTS.TYPE.DESCRIPTION_MAX_LENGTH,
       nullable: true
     })
     description: string;
 
     @Column({
       type: 'varchar',
-      length: 32,
+      length: ASSERTS.TYPE.AVATAR_MAX_LENGTH,
       nullable: true
     })
     avatar: string;

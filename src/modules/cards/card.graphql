@@ -1,6 +1,7 @@
 input CreateCardInput {
-  stock: Int!
+  createdStock: Int!
   price: Float!
+  plateId: Int!
   # updated_by_id: User!
   # plate: Plate!
   # created_at: Date!
@@ -18,12 +19,13 @@ input UpdateCardInput {
 
 type Card {
   id: Int!
-  stock: Int!
-  price: Float!
-  # updated_by_id: User!
-  plate: Plate!
-  # created_at: Date!
-  # updated_at: Date!
+  stock: Int
+  createdStock: Int
+  price: Float
+  updater: User
+  plate: Plate
+  createdAt: String
+  updatedAt: String
 }
 
 type Query {
@@ -32,7 +34,7 @@ type Query {
 }
 
 type Mutation {
-  createCard(card: CreateCardInput!): Card!
-  updateCard(card: UpdateCardInput!): Card!
-  deleteCard(id: Int!): Card!
+  createCard(createCardInput: CreateCardInput!): Card!
+  # updateCard(card: UpdateCardInput!): Card!
+  # deleteCard(id: Int!): Card!
 }

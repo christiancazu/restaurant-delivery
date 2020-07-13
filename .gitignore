@@ -41,5 +41,8 @@ package-lock.json
 /common/gql/graphql.schema.generated.ts
 yarn.lock
 
-/media/*
+/media/plates/*
+/media/types/*
 !/media/.gitkeep
+!/media/plates/.gitkeep
+!/media/types/.gitkeep

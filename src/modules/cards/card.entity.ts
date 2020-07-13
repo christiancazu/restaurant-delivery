@@ -6,7 +6,8 @@ import {
   JoinColumn,
   ManyToOne,
   CreateDateColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  BeforeInsert
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Plate } from '../plates/plate.entity';
@@ -19,14 +20,21 @@ export class Card extends BaseEntity {
     @Column({ type: 'int' })
     stock: number;
 
-    @Column({ type: 'decimal' })
+    @Column({ type: 'int' })
+    createdStock: number;
+
+    @Column({
+      type: 'decimal',
+      precision: 5,
+      scale: 2
+    })
     price: number;
 
-    @ManyToOne(() => User, { nullable: true })
+    @ManyToOne(() => User, { nullable: false })
     @JoinColumn({ name: 'updatedByUserId' })
-    user: User;
+    updater: User;
 
-    @ManyToOne(() => Plate, { nullable: true })
+    @ManyToOne(() => Plate, { nullable: false })
     @JoinColumn({ name: 'plateId' })
     plate: Plate;
 
@@ -35,4 +43,9 @@ export class Card extends BaseEntity {
 
     @UpdateDateColumn({ type: 'timestamp' })
     updatedAt: Date;
+
+    @BeforeInsert()
+    createdStockEqualsToStock() {
+      this.stock = this.createdStock;
+    }
 }
