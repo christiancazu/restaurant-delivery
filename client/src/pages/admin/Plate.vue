@@ -53,7 +53,7 @@
                   })
               ]"
               :label="$t('name')"
-              :disable="loadingPlate"
+              :disable="loadingCreatePlate"
               outlined lazy-rules
               autocomplete="off"
               bg-color="white"
@@ -198,7 +198,7 @@
 
         <section class="flex justify-center q-my-lg">
           <q-btn
-            :loading="loadingPlate"
+            :loading="loadingCreatePlate"
             style="width: 200px"
             color="primary"
             icon="fad fa-save"
@@ -215,7 +215,10 @@
 </template>
 
 <script lang="ts">
-import { PLATE_CREATE_MUTATION } from '@core/graphql/mutations';
+import {
+  PLATE_CREATE_MUTATION,
+  UPLOAD_MUTATION
+} from '@core/graphql/mutations';
 import { notifyUtil } from '@core/utils';
 import {
   CATEGORIES_QUERY,
@@ -227,7 +230,6 @@ import { ASSERTS } from '@common/config/asserts.config';
 
 import { defineComponent, reactive, ref } from '@vue/composition-api';
 import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
-import axios from 'axios';
 import { QUploader, QForm } from 'quasar';
 
 export default defineComponent({
@@ -242,8 +244,12 @@ export default defineComponent({
 
     const {
       mutate: createPlateMutation,
-      loading: loadingPlate
+      loading: loadingCreatePlate
     } = useMutation(PLATE_CREATE_MUTATION);
+
+    const {
+      mutate: uploadFileMutation
+    } = useMutation(UPLOAD_MUTATION);
 
     const {
       result: resultCategories,
@@ -263,34 +269,21 @@ export default defineComponent({
       refUploader = ref<InstanceType<typeof QUploader>>(null),
       refForm = ref<InstanceType<typeof QForm>>(null);
 
-    async function uploadFile () {
-      const fd = new FormData();
-      fd.append('image', avatarFile.value);
-
-      const { data } = await axios
-        .post(
-          `${process.env.API_MEDIA_URL.replace(/"/g, '')}`,
-          fd,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-        );
-
-      return data.avatar;
-    }
-
     async function onSubmitCreatePlate () {
       try {
+        loadingCreatePlate.value = true;
+
         if (!avatarFile.value) {
           notifyUtil.warn('avatar.errors.required');
           return;
         }
 
-        const avatarFileName = await uploadFile();
+        const { data: { uploadAvatar } } = await uploadFileMutation({
+          file: avatarFile.value,
+          avatarType: 'plates'
+        });
 
-        createPlateInput.avatar = avatarFileName;
+        createPlateInput.avatar = uploadAvatar;
 
         await createPlateMutation(createPlateInput);
 
@@ -298,6 +291,8 @@ export default defineComponent({
 
         notifyUtil.success('plateRegister');
       } catch (e) {
+      } finally {
+        loadingCreatePlate.value = false;
       }
     }
 
@@ -314,18 +309,19 @@ export default defineComponent({
     }
 
     return {
-      avatarFile,
-      createPlateInput,
-      loadingPlate,
-      onSubmitCreatePlate,
-      refUploader,
-      refForm,
       /* categories */
       categories,
       loadingCategories,
-      /* categories */
+      /* types */
       types,
       loadingTypes,
+      /** local */
+      avatarFile,
+      createPlateInput,
+      loadingCreatePlate,
+      onSubmitCreatePlate,
+      refUploader,
+      refForm,
       /* const */
       ASSERTS
     };

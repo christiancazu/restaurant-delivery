@@ -176,7 +176,7 @@
   <q-page-container class="bg-grey-11">
     <transition
       appear
-      enter-active-class="animated slideInUp"
+      enter-active-class="animated fadeInUp"
     >
       <router-view />
     </transition>

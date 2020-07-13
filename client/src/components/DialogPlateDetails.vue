@@ -70,7 +70,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 
-const PATH_MEDIA = process.env.URL_MEDIA.replace(/"/g, '');
+const PATH_MEDIA = process.env.URL_MEDIA;
 
 export default defineComponent({
   props: {

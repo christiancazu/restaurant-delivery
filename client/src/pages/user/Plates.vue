@@ -49,7 +49,7 @@
             <q-carousel-slide
               v-for="plate in filteredPlates" :key="plate.id"
               :name="plate.id"
-              :img-src="`${PATH_MEDIA}/${plate.avatar}`"
+              :img-src="`${PATH_MEDIA}/plates/${plate.avatar}`"
               style="cursor: move"
               @click="openDialogPlateDetails(plate)"
             >
@@ -127,12 +127,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@vue/composition-api';
-import { useQuery, useResult } from '@vue/apollo-composable';
 import { PLATES_QUERY, TYPES_QUERY } from '@core/graphql/querys';
+import { Plate } from '@common/gql/graphql.schema.generated';
+
 import DialogPlateDetails from 'src/components/DialogPlateDetails.vue';
 
-const PATH_MEDIA = process.env.URL_MEDIA.replace(/"/g, '');
+import { defineComponent, ref, computed } from '@vue/composition-api';
+import { useQuery, useResult } from '@vue/apollo-composable';
+
+const PATH_MEDIA = process.env.URL_MEDIA;
 
 const fallbackTypes = [{
   id: 0,
@@ -162,12 +165,12 @@ export default defineComponent({
     const plates = useResult(resultPlates, []);
     const types = useResult(resultTypes);
 
-    const selectedPlate = ref(null);
-
-    const panel = ref<string>('TODOS');
-    const fullscreen = ref<boolean>(false);
-    const slide = ref<number|null>(1);
-    const visibleDialog = ref<boolean>(false);
+    const
+      selectedPlate = ref<Plate|null>(null),
+      panel = ref<string>('TODOS'),
+      fullscreen = ref<boolean>(false),
+      slide = ref<number|null>(1),
+      visibleDialog = ref<boolean>(false);
 
     const filteredPlates = computed(() => {
       if (panel.value === 'TODOS') {
@@ -191,28 +194,25 @@ export default defineComponent({
     }
 
     return {
-      fullscreen,
-      slide,
-      //
+      /** plates */
       plates,
       loadingPlates,
-      /** types tabs */
-      panel,
+      selectedPlate,
+      filteredPlates,
       /** types */
       types,
       loadingTypes,
       fallbackTypes,
-      /** consts */
-      PATH_MEDIA,
-      // plates
-      filteredPlates,
-      //
+      /** local */
+      panel,
+      fullscreen,
+      slide,
       visibleDialog,
       openDialogPlateDetails,
-      selectedPlate
+      /** const */
+      PATH_MEDIA
     };
   }
-
 });
 </script>
 

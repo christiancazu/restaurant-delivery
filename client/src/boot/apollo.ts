@@ -2,11 +2,11 @@ import { boot } from 'quasar/wrappers';
 
 import { ApolloClient } from 'apollo-client';
 import { from } from 'apollo-link';
-import { createHttpLink } from 'apollo-link-http';
+// import { createHttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 import { onError } from 'apollo-link-error';
-
+import { createUploadLink } from 'apollo-upload-client';
 import { provide } from '@vue/composition-api';
 import { DefaultApolloClient } from '@vue/apollo-composable';
 
@@ -47,8 +47,14 @@ const errorLink = onError(({ response }) => {
   } catch (error) { }
 });
 
-const httpLink = createHttpLink({
-  uri: process.env.API_GRAPHQL_URL.replace(/"/g, '')
+// Apollo Client can only have 1 “terminating” Apollo Link that sends the GraphQL requests;
+// const httpLink = createHttpLink({
+//   uri: process.env.API_GRAPHQL_URL
+// });
+
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+const uploadClientLink = createUploadLink({
+  uri: process.env.API_GRAPHQL_URL
 });
 
 const cache = new InMemoryCache({
@@ -57,7 +63,7 @@ const cache = new InMemoryCache({
 
 export const apolloClient = new ApolloClient({
   link: from([
-    authLink, errorLink, httpLink
+    errorLink, authLink, uploadClientLink /* httpLink */
   ]),
   cache,
   resolvers,
