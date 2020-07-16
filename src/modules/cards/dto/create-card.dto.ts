@@ -1,14 +1,20 @@
 import {
   IsNumber,
   IsInt,
-  IsPositive
+  IsPositive,
+  IsOptional
 } from 'class-validator';
 import { CreateCardInput } from '@common/gql/graphql.schema.generated';
 
 export class CreateCardInputDto implements CreateCardInput {
   @IsInt()
   @IsPositive()
-  readonly createdStock: number;
+  readonly initialStock: number;
+
+  @IsOptional()
+  @IsInt()
+  @IsPositive()
+  readonly stock: number;
 
   @IsNumber({ maxDecimalPlaces: 2 })
   @IsPositive()

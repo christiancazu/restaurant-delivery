@@ -21,7 +21,7 @@ export class Card extends BaseEntity {
     stock: number;
 
     @Column({ type: 'int' })
-    createdStock: number;
+    initialStock: number;
 
     @Column({
       type: 'decimal',
@@ -45,7 +45,13 @@ export class Card extends BaseEntity {
     updatedAt: Date;
 
     @BeforeInsert()
-    createdStockEqualsToStock() {
-      this.stock = this.createdStock;
+    initialStockEqualsToStock() {
+      if (!this.stock)
+        this.stock = this.initialStock;
+    }
+
+    constructor(id: number = null) {
+      super();
+      this.id = id;
     }
 }

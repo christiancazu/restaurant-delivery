@@ -1,0 +1,4 @@
+type DateAt {
+  createdAt: GraphQLISODateTime
+  updatedAt: GraphQLISODateTime
+}

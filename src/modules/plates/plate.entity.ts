@@ -64,4 +64,9 @@ export class Plate extends BaseEntity {
     beforeInsertActions() {
       this.enabled = true;
     }
+
+    constructor(id: number) {
+      super();
+      this.id = id;
+    }
 }

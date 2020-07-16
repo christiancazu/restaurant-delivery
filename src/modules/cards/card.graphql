@@ -1,11 +1,8 @@
 input CreateCardInput {
-  createdStock: Int!
+  initialStock: Int!
+  stock: Int
   price: Float!
   plateId: Int!
-  # updated_by_id: User!
-  # plate: Plate!
-  # created_at: Date!
-  # updated_at: Date!
 }
 
 input UpdateCardInput {
@@ -20,21 +17,21 @@ input UpdateCardInput {
 type Card {
   id: Int!
   stock: Int
-  createdStock: Int
+  initialStock: Int
   price: Float
   updater: User
   plate: Plate
-  createdAt: String
-  updatedAt: String
+  createdAt: GraphQLISODateTime
+  updatedAt: GraphQLISODateTime
 }
 
 type Query {
   card: Card!
-  cards: [Card!]
+  inCurrentDayCards: [Card!]
 }
 
 type Mutation {
-  createCard(createCardInput: CreateCardInput!): Card!
+  createCards(createCardsInput: [CreateCardInput]): Boolean
   # updateCard(card: UpdateCardInput!): Card!
   # deleteCard(id: Int!): Card!
 }

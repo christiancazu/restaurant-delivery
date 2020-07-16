@@ -1,4 +1,4 @@
-import { Injectable, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from './card.entity';
 import { Repository, MoreThan } from 'typeorm';
@@ -6,6 +6,7 @@ import { CreateCardInputDto } from './dto/create-card.dto';
 import { Plate } from '../plates/plate.entity';
 import { PlatesService } from 'src/modules/plates/plates.service';
 import { User } from 'src/modules/users/user.entity';
+import { DateTime } from 'luxon';
 
 @Injectable()
 export class CardsService {
@@ -15,47 +16,51 @@ export class CardsService {
     private readonly _platesService: PlatesService
   ) {}
 
-  async findAll(): Promise<Card[]> {
-    const todayISOString = new Date().toISOString().split('T')[0];
-
-    console.warn('todayISOString', todayISOString);
-
+  async findAllinQueryDate(queryDate: Date): Promise<Card[]> {
+    // TODO: define queryDate input
     return await this._cardsRepository.find({
-      where: { createdAt: MoreThan(todayISOString) },
+      where: { /* createdAt: MoreThan() */ },
       relations: ['plate', 'updater']
     });
   }
 
   async findAllInCurrentDay(): Promise<Card[]> {
-    const todayISOString = new Date().toISOString().split('T')[0];
-
-    console.warn('todayISOString', todayISOString);
+    const todayLocalTimeISOString = DateTime.local().toISODate();
 
     return await this._cardsRepository.find({
-      where: { createdAt: MoreThan(todayISOString) },
+      where: { createdAt: MoreThan(todayLocalTimeISOString) },
       relations: ['plate', 'updater']
     });
   }
 
-  async create(dto: CreateCardInputDto, creatorUserId: number): Promise<Card> {
+  async createOrUpdate(dtoCards: CreateCardInputDto[], creatorUserId: number): Promise<boolean> {
     const inCurrentDayCards = await this.findAllInCurrentDay();
 
-    const cardCreatedToday = inCurrentDayCards.find(o => o.plate.id === dto.plateId);
+    const updatedsCards: Card[] = [];
 
-    if (cardCreatedToday) {
-      throw new UnprocessableEntityException('cards.errors.exists');
-      // cardCreated = await this._cardsRepository.save({
-      //   id: existsCard.id,
-      //   ...dto,
-      //   updater: new User(creatorUserId),
-      //   stock: dto.createdStock
-      // });
-    }
-    const card = this._cardsRepository.create({
-      ...dto,
-      updater: new User(creatorUserId)
+    dtoCards.forEach(dtoCard => {
+      const indexExistsInCurrentDayCards = inCurrentDayCards.findIndex(c => c.plate.id === dtoCard.plateId);
+
+      if (indexExistsInCurrentDayCards !== -1) {
+        const updatedCard = inCurrentDayCards[indexExistsInCurrentDayCards];
+        updatedCard.initialStock = dtoCard.initialStock;
+        updatedCard.stock = dtoCard.stock;
+        updatedCard.price = dtoCard.price;
+
+        updatedsCards.push(updatedCard);
+      } else {
+        const newCard = new Card();
+        newCard.initialStock = dtoCard.initialStock,
+        newCard.price = dtoCard.price,
+        newCard.plate = new Plate(dtoCard.plateId),
+        newCard.updater = new User(creatorUserId);
+
+        updatedsCards.push(newCard);
+      }
     });
 
-    return await card.save();
+    updatedsCards.forEach(async updatedCard => await this._cardsRepository.save(updatedCard));
+
+    return true;
   }
 }

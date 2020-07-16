@@ -1,3 +1,5 @@
+scalar GraphQLISODateTime
+
 type Plate {
   id: Int!
   name: String
@@ -7,8 +9,8 @@ type Plate {
   type: Type
   enabled: Boolean
   updater: User
-  createdAt: String
-  updatedAt: String
+  createdAt: GraphQLISODateTime
+  updatedAt: GraphQLISODateTime
 }
 
 type Query {

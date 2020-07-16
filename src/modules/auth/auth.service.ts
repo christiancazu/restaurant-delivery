@@ -27,10 +27,10 @@ export class AuthService {
 
   private signJWTPayload(user: Partial<User>): string {
     const userJWTPayload = {
-      ...user,
-      roles: user.roles.map(r => r.name)
+      id: user.id,
+      email: user.email,
+      roles: user.roles.map(role => role.name)
     };
-
 
     return sign(
       userJWTPayload,

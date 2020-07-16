@@ -23,6 +23,7 @@ import { join } from 'path';
 import { UploadModule } from './modules/upload/upload.module';
 // import { MulterModule } from '@nestjs/platform-express';
 // import { AppController } from './app.controller';
+import { SharedModule } from './modules/shared/shared.module';
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -60,7 +61,8 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
     CardsModule,
     OrdersModule,
     OrderCardsModule,
-    UploadModule
+    UploadModule,
+    SharedModule
   ],
   providers: [
     {
