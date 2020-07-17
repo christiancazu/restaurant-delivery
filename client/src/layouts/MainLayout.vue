@@ -150,7 +150,7 @@
     <q-list v-if="session.isLogged">
 
       <!-- ADMIN PANEL -->
-      <template v-if="session.user.roles.find(role => role.name === 'ADMIN')">
+      <template v-if="session.user.roles.find(role => ['SUPER_ADMIN', 'ADMIN'].includes(role.name))">
         <q-item-label header>
           {{ $t('admin' ) }}
         </q-item-label>
@@ -189,12 +189,14 @@ import { Session } from '@common/gql/graphql.schema.generated';
 
 import { sessionService } from '@core/services';
 import { notifyUtil } from '@core/utils';
+import { SESSION_QUERY } from '@core/graphql/querys';
 
 import { defineComponent } from '@vue/composition-api';
 import { useQuery, useResult } from '@vue/apollo-composable';
-import { SESSION_QUERY } from '@core/graphql/querys';
 
 import SidebarMenu from 'src/components/SidebarMenu.vue';
+
+import { i18n } from 'src/boot/i18n';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -208,60 +210,63 @@ export default defineComponent({
       leftDrawerOpen: false,
       adminOptions: [
         {
-          title: this.$tc('plate', 1),
+          title: i18n.tc('plate', 1),
           avatar: 'plate.svg',
-          routeName: 'AdminPlate'
+          routeName: 'AdminPlatesCreate'
         },
         {
-          title: this.$tc('dealer', 2),
-          avatar: 'dealer.svg',
-          routeName: 'Admin',
-          routeModule: 'dealer'
-        },
-        {
-          title: this.$tc('employee', 2),
-          avatar: 'employees.svg',
-          routeName: 'Admin',
-          routeModule: 'employee'
-        },
-        {
-          title: this.$tc('client', 2),
-          avatar: 'clients.svg',
-          routeName: 'Admin',
-          routeModule: 'client'
-        },
-        {
-          title: this.$tc('vehicle', 2),
-          avatar: 'vehicle-moto.svg',
-          routeName: 'Admin',
-          routeModule: 'vehicle'
-        },
-        {
-          title: this.$tc('report', 2),
-          avatar: 'report.svg',
-          routeName: 'Admin',
-          routeModule: 'report'
+          title: i18n.t('card.daily'),
+          avatar: 'card-register.svg',
+          routeName: 'AdminCardsDaily'
         }
+        // {
+        //   title: i18n.tc('dealer', 2),
+        //   avatar: 'dealer.svg',
+        //   routeName: 'Admin',
+        //   routeModule: 'dealer'
+        // },
+        // {
+        //   title: i18n.tc('employee', 2),
+        //   avatar: 'employees.svg',
+        //   routeName: 'Admin',
+        //   routeModule: 'employee'
+        // },
+        // {
+        //   title: i18n.tc('client', 2),
+        //   avatar: 'clients.svg',
+        //   routeName: 'Admin',
+        //   routeModule: 'client'
+        // },
+        // {
+        //   title: i18n.tc('vehicle', 2),
+        //   avatar: 'vehicle-moto.svg',
+        //   routeName: 'Admin',
+        //   routeModule: 'vehicle'
+        // },
+        // {
+        //   title: i18n.tc('report', 2),
+        //   avatar: 'report.svg',
+        //   routeName: 'Admin',
+        //   routeModule: 'report'
+        // }
       ],
       clientOptions: [
+        // {
+        //   title: i18n.tc('myOrder', 2),
+        //   avatar: 'order.svg',
+        //   routeName: 'User',
+        //   routeModule: 'order'
+        // },
         {
-          title: this.$tc('myOrder', 2),
-          avatar: 'order.svg',
-          routeName: 'User',
-          routeModule: 'order'
-        },
-        {
-          title: this.$t('menuDaily'),
-          avatar: 'daily-menu.svg',
-          routeName: 'User',
-          routeModule: 'menu'
-        },
-        {
-          title: 'Platillos',
-          avatar: 'user-plate.svg',
-          routeName: 'UserPlates'
+          title: i18n.t('card.default'),
+          avatar: 'daily-card.svg',
+          routeName: 'Cards'
         }
-
+        // {
+        //   title: 'Platillos',
+        //   avatar: 'user-plate.svg',
+        //   routeName: 'UserPlates'
+        // }
       ]
     };
   },

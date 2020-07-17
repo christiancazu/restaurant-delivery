@@ -22,12 +22,17 @@
           style="padding-top: 8px"
         >
 
-          <div class="col-12 col-md-6">
+          <div
+            :class="[
+              { 'q-mb-lg': $q.screen.lt.md },
+              'col-12 col-md-6'
+            ]"
+          >
             <q-uploader
               ref="refUploader"
               class="full-width"
-              :label="`${$t('avatar.name')} (${$t('formats')}: jpg, jpeg, png, bmp)`"
-              accept=".jpg, .jpeg, .png, .bmp"
+              :label="`${$t('avatar.name')} (${$t('formats')}: jpg, jpeg, png, bmp, webp)`"
+              accept=".jpg, .jpeg, .png, .bmp, .webp"
               hide-upload-btn
               max-file-size="5000000"
               @added="avatarFile = $event[0]"
@@ -56,7 +61,7 @@
               ]"
               :label="$t('name')"
               :disable="loadingCreatePlate"
-              outlined lazy-rules
+              outlined lazy-rules dense
               autocomplete="off"
               bg-color="white"
               class="q-mb-sm"
@@ -74,7 +79,7 @@
               ]"
               option-label="name"
               option-value="id"
-              outlined emit-value map-options
+              outlined emit-value map-options dense
               label="Tipo de plato"
               class="q-mb-sm"
               bg-color="white"
@@ -91,7 +96,7 @@
               :loading="loadingCategories"
               option-label="name"
               option-value="id"
-              outlined emit-value map-options
+              outlined emit-value map-options dense
               label="Categoría"
               class="q-mb-xs"
               bg-color="white"

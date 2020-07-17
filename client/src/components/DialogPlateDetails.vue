@@ -1,11 +1,11 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
 <q-dialog
-  :value="visibleDialog"
-  @hide="$emit('update:visibleDialog', false)"
+  :value="visible"
+  @hide="$emit('update:visible', false)"
 >
   <q-card
-    v-if="visibleDialog"
+    v-if="visible"
     style="width: 780px"
   >
     <q-img
@@ -73,8 +73,10 @@ import { defineComponent } from '@vue/composition-api';
 const PATH_MEDIA = process.env.URL_MEDIA;
 
 export default defineComponent({
+  name: 'DialogPlateDetails',
+
   props: {
-    visibleDialog: {
+    visible: {
       type: Boolean
     },
     plate: {

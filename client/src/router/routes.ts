@@ -1,24 +1,25 @@
 import { RouteConfig } from 'vue-router';
 
-import home from './home';
-import admin from './admin';
-import user from './user';
-import signin from './signin';
+import adminRoutes from './admin';
+import clientRoutes from './client';
 
 const routes: RouteConfig[] = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      ...home,
-      ...admin,
-      ...user
+      adminRoutes,
+      clientRoutes
     ],
     meta: {
       requiresAuth: true
     }
   },
-  ...signin
+  {
+    path: '/signin',
+    name: 'SignIn',
+    component: () => import('layouts/SignInLayout.vue')
+  }
 ];
 
 // Always leave this as last one

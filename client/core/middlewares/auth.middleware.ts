@@ -8,7 +8,6 @@ import {
 export default async (to: Route, from: Route, next: NavigationGuardNext<Vue>): Promise<any> => {
   if (to.matched.some((record: RouteRecord) => record.meta.requiresAuth)) {
     const { session: { isLogged } } = sessionService.get();
-
     if (isLogged) {
       next();
     } else {

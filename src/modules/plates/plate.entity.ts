@@ -32,7 +32,7 @@ export class Plate extends BaseEntity {
     })
     description: string;
 
-    @ManyToOne(() => Category, { nullable: false })
+    @ManyToOne(() => Category, { nullable: true })
     @JoinColumn({ name: 'categoryId' })
     category: Category;
 

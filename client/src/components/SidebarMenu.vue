@@ -2,7 +2,7 @@
 <q-item
   v-ripple clickable exact
   exact-active-class="text-warning"
-  :to="{name: routeName, params: { module: routeModule } }"
+  :to="{name: routeName }"
 >
   <q-item-section
     v-if="avatar"
@@ -38,10 +38,6 @@ export default {
     routeName: {
       type: String,
       default: '#'
-    },
-    routeModule: {
-      type: String,
-      default: ''
     },
     avatar: {
       type: String,

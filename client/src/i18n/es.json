@@ -24,8 +24,13 @@
     }
   },
   "cancel": "Cancelar",
+  "card": {
+    "default": "Carta",
+    "daily": "Carta del día"
+  },
   "client": "cliente | clientes",
   "confirmPassword": "Confirmar contraseña",
+  "dailyCards": "Carta del día",
   "dealer": "repartidor | repartidores",
   "description": "Descripción",
   "document": "Documento",
