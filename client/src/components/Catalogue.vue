@@ -29,7 +29,7 @@
           :ofiltered-platesset="[18, 18]"
         >
           <q-btn
-            icon="fad fa-cart-plus"
+            :icon="btnAddIcon"
             color="white"
             text-color="primary"
             push round
@@ -40,7 +40,7 @@
             "
           />
           <q-btn
-            :icon="carousel.fullScreen ? 'fullscreen_exit' : 'fullscreen'"
+            :icon="carousel.fullScreen ? 'fad fa-compress' : 'fad fa-expand'"
             color="white"
             text-color="primary"
             push round
@@ -125,6 +125,13 @@ const fallbackTypes: Plate[] = [{
 export default defineComponent({
   name: 'Catalogue',
 
+  props: {
+    btnAddIcon: {
+      type: String,
+      default: 'fad fa-plus'
+    }
+  },
+
   components: {
     DialogPlateDetails
   },
@@ -201,3 +208,9 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+.slider-caption {
+  background-color: rgba(0, 0, 0, .3);
+}
+</style>

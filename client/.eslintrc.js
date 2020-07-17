@@ -35,7 +35,7 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#usage
     // ESLint typescript rules
     'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended',
     // consider disabling this class of rules if linting takes too long
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
 
@@ -47,7 +47,9 @@ module.exports = {
     // 'plugin:vue/recommended' // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
     'standard',
-    '@vue/typescript/recommended'
+    '@vue/typescript/recommended',
+
+    'plugin:json/recommended'
   ],
 
   plugins: [
@@ -56,7 +58,8 @@ module.exports = {
 
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
-    'vue'
+    'vue',
+    'json'
   ],
 
   globals: {
@@ -124,6 +127,8 @@ module.exports = {
         baseIndent: 0
       }
     ],
+    // json
+    'json/*': ['error', 'allowComments'],
     // TypeScript
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-var-requires': 'off',

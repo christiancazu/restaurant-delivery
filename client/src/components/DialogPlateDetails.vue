@@ -55,14 +55,14 @@
 
     <q-separator />
 
-    <q-card-actions align="right">
+    <!-- <q-card-actions align="right">
       <q-btn
         label="Agregar a mi Orden"
         icon="fad fa-cart-plus"
         color="primary"
         push glossy
       />
-    </q-card-actions>
+    </q-card-actions> -->
   </q-card>
 </q-dialog>
 </template>

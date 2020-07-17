@@ -1,5 +1,4 @@
 import { RouteConfig } from 'vue-router';
-
 import adminRoutes from './admin';
 import clientRoutes from './client';
 
@@ -19,6 +18,9 @@ const routes: RouteConfig[] = [
     path: '/signin',
     name: 'SignIn',
     component: () => import('layouts/SignInLayout.vue')
+  },
+  {
+    path: '/api'
   }
 ];
 

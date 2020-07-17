@@ -26,9 +26,13 @@
   "cancel": "Cancelar",
   "card": {
     "default": "Carta",
-    "daily": "Carta del día"
+    "daily": "Carta del día",
+    "warnings": {
+      "exists": "El Plato ya ha sido añadido a la carta"
+    }
   },
   "client": "cliente | clientes",
+  "confirm": "Confirmar",
   "confirmPassword": "Confirmar contraseña",
   "dailyCards": "Carta del día",
   "dealer": "repartidor | repartidores",
@@ -41,6 +45,7 @@
       "email": "El Correo Electrónico no es válido",
       "minLength": "El campo {field} debe contener almenos {amount} caracteres",
       "maxLength": "El campo {field} no debe contener más de {amount} caracteres",
+      "minValue": "El campo {field} no puede ser menor a {amount}",
       "notValid": "El campo {field} no es válido",
       "required": "El campo {field} es requerido"
     }
@@ -64,8 +69,12 @@
   "name": "nombre",
   "password": "Contraseña",
   "plate": "plato | platos | platos extras",
-  "plateRegister": "El Platillo ha sido registrado",
+  "plateRegister": "Registrar platillo",
+  "plateRegistered": "El Platillo ha sido registrado",
   "phone": "Nº Celular",
+  "register": "Registrar",
+  "registerHere": "Registrar aquí",
+  "report": "Reporte | Reportes",
   "session": {
     "errors": {
       "notValid": "La sesión no es válida"
@@ -74,12 +83,14 @@
       "close": "La sesión ha finalizado"
     }
   },
-  "register": "Registrar",
-  "registerHere": "Registrar aquí",
-  "report": "Reporte | Reportes",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "signUp": "Registrarse",
+  "stock": {
+    "default": "Stock",
+    "initial": "Stock inicial",
+    "set": "Establezca el stock"
+  },
   "types": "Tipos",
   "Unauthorized": "La sesión no es válida",
   "user": "Usuario",
