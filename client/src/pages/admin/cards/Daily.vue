@@ -8,7 +8,7 @@
 
     <q-separator class="q-my-md" />
 
-    <div class="q-field__label q-pb-sm">{{ $tc('plate', 1) }}</div>
+    <div class="q-field__label q-pb-sm">{{ $tc('plate.plurals', 1) }}</div>
     <section class="row q-col-gutter-md">
       <article
         v-for="dailyCard in dailyCards"
@@ -22,17 +22,13 @@
           >
             <q-chip
               color="red"
-              text-color="white"
-              class="shadow-10"
+              text-color="white" class="shadow-10"
             >
               <q-avatar
                 class="text-bold"
                 style="background-color: #e0e0e0"
                 text-color="black"
-              >
-                {{ dailyCard.initialStock }}
-              </q-avatar>
-              stock
+              >{{ dailyCard.initialStock }}</q-avatar>stock
             </q-chip>
           </q-card-section>
 
@@ -41,8 +37,7 @@
             <q-chip>
               <q-avatar
                 color="red"
-                text-color="white"
-                icon="fad fa-utensils-alt"
+                text-color="white" icon="fad fa-utensils-alt"
               />
               {{ dailyCard.plate.type.name }}
             </q-chip>
@@ -70,7 +65,7 @@ import { AppPage } from 'src/wrappers';
 import { Catalogue, DialogStock } from 'src/components';
 
 interface DialogStockProps {
-  visible: boolean
+  visible: boolean;
 }
 
 const PATH_MEDIA = process.env.URL_MEDIA;
@@ -97,7 +92,9 @@ export default defineComponent({
     }
 
     function onSelectPlate (_selectedPlate: Plate) {
-      const hasInDailyCards = dailyCards.value.find(dailyCard => dailyCard.plate.id === _selectedPlate.id);
+      const hasInDailyCards = dailyCards.value.find(
+        (dailyCard) => dailyCard.plate.id === _selectedPlate.id
+      );
 
       if (hasInDailyCards) {
         notifyUtil.warn('card.warnings.exists');

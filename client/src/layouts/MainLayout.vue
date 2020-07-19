@@ -210,7 +210,7 @@ export default defineComponent({
       leftDrawerOpen: false,
       adminOptions: [
         {
-          title: i18n.tc('plate', 1),
+          title: i18n.tc('plate.plurals', 1),
           avatar: 'plate.svg',
           routeName: 'AdminPlatesCreate'
         },

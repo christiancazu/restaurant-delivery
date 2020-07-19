@@ -1,29 +1,29 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { GraphQLModule } from '@nestjs/graphql';
 import { APP_PIPE } from '@nestjs/core';
-
-import { UsersModule } from './modules/users/users.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { RolesModule } from './modules/roles/roles.module';
-import { TypesModule } from './modules/types/types.module';
-import { CategoriesModule } from './modules/categories/categories.module';
-import { StatusModule } from './modules/status/status.module';
-import { PaymentsModule } from './modules/payments/payments.module';
-import { RatingsModule } from './modules/ratings/ratings.module';
-import { VehiclesModule } from './modules/vehicles/vehicles.module';
-import { PlatesModule } from './modules/plates/plates.module';
-import { CardsModule } from './modules/cards/cards.module';
-import { OrdersModule } from './modules/orders/orders.module';
-import { OrderCardsModule } from './modules/order-cards/order-cards.module';
-
+import { GraphQLModule } from '@nestjs/graphql';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
-import { UploadModule } from './modules/upload/upload.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { CardsModule } from './modules/cards/cards.module';
+import { CategoriesModule } from './modules/categories/categories.module';
+import { OrderCardsModule } from './modules/order-cards/order-cards.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { PaymentsModule } from './modules/payments/payments.module';
+import { PlatesModule } from './modules/plates/plates.module';
+import { RatingsModule } from './modules/ratings/ratings.module';
+import { RolesModule } from './modules/roles/roles.module';
 // import { MulterModule } from '@nestjs/platform-express';
 // import { AppController } from './app.controller';
 import { SharedModule } from './modules/shared/shared.module';
+import { StatusModule } from './modules/status/status.module';
+import { TypesModule } from './modules/types/types.module';
+import { UploadModule } from './modules/upload/upload.module';
+import { UsersModule } from './modules/users/users.module';
+import { VehiclesModule } from './modules/vehicles/vehicles.module';
+
+
 
 const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
 
@@ -38,6 +38,7 @@ const IS_PRODUCTION_ENV: boolean = process.env.NODE_ENV === 'production';
       debug: !IS_PRODUCTION_ENV,
       playground: !IS_PRODUCTION_ENV,
       context: ({ req }) => ({ req }),
+      installSubscriptionHandlers: true,
       typePaths: ['./**/*.graphql'],
       definitions: {
         path: join(process.cwd(), 'common/gql/graphql.schema.generated.ts')

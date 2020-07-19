@@ -41,7 +41,7 @@
         outlined lazy-rules dense
         type="number"
         min="1"
-
+        max="99"
         autocomplete="off"
         class="q-mb-sm"
       >
@@ -100,8 +100,15 @@ export default defineComponent({
       current: 1
     });
 
+    function onKeyDown (e) {
+      if (e.keyCode === 69) {
+        stock.initial = parseInt(stock.initial.toString().replace('e', ''));
+      }
+    }
+
     return {
       stock,
+      onKeyDown,
       //
       PATH_MEDIA
     };

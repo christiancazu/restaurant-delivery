@@ -1,6 +1,4 @@
-import {
-  Resolver, Args, Mutation
-} from '@nestjs/graphql';
+import { Resolver, Args, Mutation } from '@nestjs/graphql';
 import { GraphQLUpload, FileUpload } from 'graphql-upload';
 
 import { UseGuards, UnprocessableEntityException } from '@nestjs/common';
@@ -11,38 +9,41 @@ import { ROLES } from '../roles/enums/roles.enum';
 
 import { createWriteStream, promises } from 'fs';
 import { v1 as uuidv1 } from 'uuid';
+import { PlatesService } from 'src/modules/plates/plates.service';
 
 const availableExtensions = [
   'jpg',
   'jpeg',
   'png',
-  'bmp'
+  'bmp',
+  'webp'
 ];
 
 @Resolver('Upload')
 export class UploadResolver {
-  constructor() {}
+  constructor(private readonly _platesService: PlatesService) {}
 
   @RolesRequired(ROLES.SUPER_ADMIN, ROLES.ADMIN)
   @UseGuards(GqlAuthGuard, RolesGuard)
   @Mutation(() => String)
   async uploadAvatar(
     @Args('avatarType') avatarType: string,
+    @Args('plateName') plateName: string,
     @Args({
       name: 'file',
       type: () => GraphQLUpload
     })
       {
         createReadStream,
-        mimetype,
-        filename
+        mimetype
       }: FileUpload): Promise<string> {
-    console.warn(createReadStream().readableLength);
-    // console.warn(createReadStream().bytesRead);
-    // console.warn(createWriteStream().writableLength);
-    // console.warn(createWriteStream().bytesWritten);
 
-    console.warn('encoding', filename);
+    const plateNameExists = await this._platesService.findByName(plateName);
+
+    if (plateNameExists) {
+      throw new UnprocessableEntityException('plate.errors.exists');
+    }
+
     const dirname = './media/' + avatarType;
 
     await promises.mkdir(dirname, { recursive: true });

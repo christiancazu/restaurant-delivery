@@ -34,7 +34,7 @@ module.exports = {
     'object-curly-newline': [
       'error', {
         'multiline': true,
-        'minProperties': 3
+        'minProperties': 4
       }
     ],
     'key-spacing': ['error', { 'afterColon': true }],

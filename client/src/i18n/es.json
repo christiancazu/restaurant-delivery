@@ -68,7 +68,12 @@
   "menuDaily": "Menú del día",
   "name": "nombre",
   "password": "Contraseña",
-  "plate": "plato | platos | platos extras",
+  "plate": {
+    "plurals": "plato | platos | platos extras",
+    "errors": {
+      "exists": "El nombre del Platillo ya existe"
+    }
+  },  
   "plateRegister": "Registrar platillo",
   "plateRegistered": "El Platillo ha sido registrado",
   "phone": "Nº Celular",

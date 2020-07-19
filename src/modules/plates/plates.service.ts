@@ -19,11 +19,16 @@ export class PlatesService {
     return await this._plateRepository.find({ relations: ['updater', 'category', 'type'] });
   }
 
+  async findByName(plateName: string): Promise<Plate> {
+    console.warn('search', plateName);
+    return await this._plateRepository.findOne({ where: { name: plateName } });
+  }
+
   async create(dto: CreatePlateInputDto, creatorUserId: number): Promise<Plate> {
     let plate = await this._plateRepository.findOne({ where: { name: dto.name } });
 
     if (plate) {
-      throw new UnprocessableEntityException('plate.errors.exists.name');
+      throw new UnprocessableEntityException('plate.errors.exists');
     }
 
     plate = this._plateRepository.create({

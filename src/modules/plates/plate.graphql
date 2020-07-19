@@ -41,3 +41,7 @@ type Mutation {
   updatePlate(updatePlateInput: UpdatePlateInput!): Plate!
   # deletePlate(id: Int!): Plate!
 }
+
+type Subscription {
+  plateCreated: Plate
+}

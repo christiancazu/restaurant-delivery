@@ -33,7 +33,7 @@ export class CardsService {
     });
   }
 
-  async createOrUpdate(dtoCards: CreateCardInputDto[], creatorUserId: number): Promise<boolean> {
+  async createOrUpdate(dtoCards: CreateCardInputDto[], creatorUserId: number): Promise<Card[]> {
     const inCurrentDayCards = await this.findAllInCurrentDay();
 
     const updatedsCards: Card[] = [];
@@ -61,6 +61,6 @@ export class CardsService {
 
     updatedsCards.forEach(async updatedCard => await this._cardsRepository.save(updatedCard));
 
-    return true;
+    return updatedsCards;
   }
 }

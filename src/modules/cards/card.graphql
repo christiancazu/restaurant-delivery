@@ -35,3 +35,7 @@ type Mutation {
   # updateCard(card: UpdateCardInput!): Card!
   # deleteCard(id: Int!): Card!
 }
+
+type Subscription {
+  cardsUpdated: [Card]
+}

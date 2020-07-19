@@ -1,5 +1,5 @@
 import {
-  Resolver, Query, Mutation, Args
+  Resolver, Query, Mutation, Args, Subscription
 } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guards/gql.guard';
@@ -10,12 +10,17 @@ import { ROLES } from '@common/config/roles.config';
 import { RolesGuard } from 'src/modules/roles/guards/roles.guard';
 import { CurrentUser } from '../users/decorators/current-user.decorator';
 import { CreateCardInputDto } from './dto/create-card.dto';
+import { PubSub } from 'graphql-subscriptions';
 
 @Resolver('Cards')
 export class CardsResolver {
+  private _pubSub: PubSub
+
   constructor(
     private readonly _cardsService: CardsService
-  ) {}
+  ) {
+    this._pubSub = new PubSub();
+  }
 
   // @UseGuards(GqlAuthGuard)
   @Query(() => [Card])
@@ -23,13 +28,20 @@ export class CardsResolver {
     return this._cardsService.findAllInCurrentDay();
   }
 
-  @Mutation()
+  @Mutation(() => [Card])
   @RolesRequired(ROLES.SUPER_ADMIN, ROLES.ADMIN)
   @UseGuards(GqlAuthGuard, RolesGuard)
-  createCards(
+  async createCards(
     @CurrentUser('id') creatorUserId: number,
     @Args('createCardsInput') createCardsInput: CreateCardInputDto[]
   ) {
-    return this._cardsService.createOrUpdate(createCardsInput, creatorUserId);
+    const createdCards = await this._cardsService.createOrUpdate(createCardsInput, creatorUserId);
+    this._pubSub.publish('cardsUpdated', { cardsUpdated: createdCards });
+    return createdCards;
+  }
+
+  @Subscription('cardsUpdated')
+  cardsUpdated() {
+    return  this._pubSub.asyncIterator('cardsUpdated');
   }
 }

@@ -281,8 +281,9 @@ export default defineComponent({
         }
 
         const { data: { uploadAvatar } } = await uploadFileMutation({
-          file: avatarFile.value,
-          avatarType: 'plates'
+          avatarType: 'plates',
+          plateName: createPlateInput.name,
+          file: avatarFile.value
         });
 
         createPlateInput.avatar = uploadAvatar;
