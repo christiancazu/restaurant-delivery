@@ -4,7 +4,7 @@
   icon="fad fa-utensils-alt"
 >
   <template #pageContent>
-    <catalogue
+    <catalogue-subscription
       btn-add-icon="fad fa-cart-plus"
       @on-select-plate="onSelectPlate"
     />
@@ -14,14 +14,14 @@
 
 <script lang="ts">
 import { AppPage } from 'src/wrappers';
-import { Catalogue } from 'src/components';
+import { CatalogueSubscription } from 'src/components';
 
 import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
   components: {
     AppPage,
-    Catalogue
+    CatalogueSubscription
   },
 
   setup () {

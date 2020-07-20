@@ -62,7 +62,7 @@ const uploadClientLink = createUploadLink({
 });
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:3333/graphql',
+  uri: process.env.WS_GRAPHQL_URL,
   options: {
     reconnect: true
   }
@@ -97,8 +97,5 @@ cache.writeData({
 });
 
 export default boot(({ app }) => {
-  app.setup = () => {
-    provide(DefaultApolloClient, apolloClient);
-    return {};
-  };
+  app.setup = () => provide(DefaultApolloClient, apolloClient);
 });

@@ -1,6 +1,6 @@
 {
   "vetur.validation.template": false,
-  
+
   "eslint.validate": ["javascript", "typescript", "vue", "json"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vetur.experimental.templateInterpolationService": true

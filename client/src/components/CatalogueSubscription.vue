@@ -93,12 +93,13 @@
 
 <script lang="ts">
 import { Plate } from '@common/gql/graphql.schema.generated';
-import { PLATES_QUERY, TYPES_QUERY } from '@core/graphql/querys';
+import { TYPES_QUERY, IN_CURRENT_DAY_CARDS_QUERY } from '@core/graphql/querys';
 
 import { defineComponent, reactive, computed, ref } from '@vue/composition-api';
 import { useQuery, useResult, useSubscription } from '@vue/apollo-composable';
 
 import { DialogPlateDetails } from 'src/components';
+import { CARDS_UPDATED_SUBSCRIPTION } from '@core/graphql/subscriptions';
 
 const PATH_MEDIA = process.env.URL_MEDIA;
 
@@ -123,7 +124,7 @@ const fallbackTypes: Plate[] = [{
 }];
 
 export default defineComponent({
-  name: 'Catalogue',
+  name: 'CatalogueSubscription',
 
   props: {
     btnAddIcon: {
@@ -151,9 +152,9 @@ export default defineComponent({
     });
 
     const {
-      result: resultPlates,
-      loading: loadingPlates
-    } = useQuery(PLATES_QUERY, {}, {
+      loading: loadingPlates,
+      onResult: onResultPlates
+    } = useQuery(IN_CURRENT_DAY_CARDS_QUERY, {}, {
       fetchPolicy: 'network-only'
     });
 
@@ -162,7 +163,22 @@ export default defineComponent({
       loading: loadingTypes
     } = useQuery(TYPES_QUERY);
 
-    const plates = useResult(resultPlates);
+    const {
+      onResult: onResultCardsUpdated
+    } = useSubscription(CARDS_UPDATED_SUBSCRIPTION);
+
+    onResultCardsUpdated(({ data: { cardsUpdated } }) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      plates.value = [...cardsUpdated.map(o => o.plate)];
+    });
+
+    const plates = ref([]);
+
+    onResultPlates(({ data: { inCurrentDayCards } }) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      plates.value = [...inCurrentDayCards.map(o => o.plate)];
+    });
+
     const types = useResult(resultTypes);
 
     const selectedPlate = ref<Plate>(null);

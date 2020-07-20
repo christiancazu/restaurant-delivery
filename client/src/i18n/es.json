@@ -27,6 +27,9 @@
   "card": {
     "default": "Carta",
     "daily": "Carta del día",
+    "success": {
+      "set": "La carta del día ha sido establecida con éxito"
+    },
     "warnings": {
       "exists": "El Plato ya ha sido añadido a la carta"
     }
@@ -77,8 +80,13 @@
   "plateRegister": "Registrar platillo",
   "plateRegistered": "El Platillo ha sido registrado",
   "phone": "Nº Celular",
+  "price": {
+    "default": "Precio",
+    "set": "Establezca el precio"
+  },
   "register": "Registrar",
   "registerHere": "Registrar aquí",
+  "remove": "Remover",
   "report": "Reporte | Reportes",
   "session": {
     "errors": {
@@ -88,6 +96,7 @@
       "close": "La sesión ha finalizado"
     }
   },
+  "set": "Establecer",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "signUp": "Registrarse",
@@ -98,6 +107,7 @@
   },
   "types": "Tipos",
   "Unauthorized": "La sesión no es válida",
+  "update": "Actualizar",
   "user": "Usuario",
   "variedades": "Variedades",
   "vehicle": "vehículo | vehículos"

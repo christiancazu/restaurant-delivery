@@ -1,12 +1,12 @@
 import gql from 'graphql-tag';
 
-export const PLATE_CREATE_MUTATION = gql`
+export const CREATE_PLATE_MUTATION = gql`
   mutation createPlate(
-    $name: String!, 
-    $description: String!,
-    $avatar: String!,
+    $name: String! 
+    $description: String!
+    $avatar: String!
     $categoryId: Int
-    $typeId: Int,
+    $typeId: Int
     ) {
     createPlate(
       createPlateInput: {

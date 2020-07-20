@@ -20,7 +20,7 @@ export class CardsService {
     // TODO: define queryDate input
     return await this._cardsRepository.find({
       where: { /* createdAt: MoreThan() */ },
-      relations: ['plate', 'updater']
+      relations: ['plate', 'updater', 'plate.type', 'plate.category']
     });
   }
 
@@ -29,7 +29,7 @@ export class CardsService {
 
     return await this._cardsRepository.find({
       where: { createdAt: MoreThan(todayLocalTimeISOString) },
-      relations: ['plate', 'updater']
+      relations: ['plate', 'updater', 'plate.type', 'plate.category']
     });
   }
 
@@ -59,8 +59,8 @@ export class CardsService {
       }
     });
 
-    updatedsCards.forEach(async updatedCard => await this._cardsRepository.save(updatedCard));
+    await Promise.all(updatedsCards.map(updatedCard => this._cardsRepository.save(updatedCard)));
 
-    return updatedsCards;
+    return await this.findAllInCurrentDay();
   }
 }

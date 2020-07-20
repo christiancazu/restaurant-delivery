@@ -212,7 +212,7 @@
 
 <script lang="ts">
 import {
-  PLATE_CREATE_MUTATION,
+  CREATE_PLATE_MUTATION,
   UPLOAD_MUTATION
 } from '@core/graphql/mutations';
 import {
@@ -247,7 +247,7 @@ export default defineComponent({
     const {
       mutate: createPlateMutation,
       loading: loadingCreatePlate
-    } = useMutation(PLATE_CREATE_MUTATION);
+    } = useMutation(CREATE_PLATE_MUTATION);
 
     const {
       mutate: uploadFileMutation

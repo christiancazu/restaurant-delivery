@@ -37,7 +37,7 @@ export class CardsResolver {
   ) {
     const createdCards = await this._cardsService.createOrUpdate(createCardsInput, creatorUserId);
     this._pubSub.publish('cardsUpdated', { cardsUpdated: createdCards });
-    return createdCards;
+    return true;
   }
 
   @Subscription('cardsUpdated')
