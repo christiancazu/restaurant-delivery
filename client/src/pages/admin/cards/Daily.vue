@@ -108,7 +108,7 @@ import { defineComponent, ref, reactive } from '@vue/composition-api';
 
 import { AppPage } from 'src/wrappers';
 import { Catalogue, DialogStock } from 'src/components';
-import { useMutation, useQuery, useResult } from '@vue/apollo-composable';
+import { useMutation, useQuery } from '@vue/apollo-composable';
 import { CREATE_CARDS_MUTATION } from '@core/graphql/mutations';
 import { IN_CURRENT_DAY_CARDS_QUERY } from '../../../../core/graphql/querys';
 
@@ -145,8 +145,8 @@ export default defineComponent({
     } = useQuery(IN_CURRENT_DAY_CARDS_QUERY);
 
     onResultInCurrentDayCardsQuery(({ data: { inCurrentDayCards } }) => {
-      dailyCards.value = [...inCurrentDayCards]
-    })
+      dailyCards.value = [...inCurrentDayCards];
+    });
 
     async function createDailyCards () {
       loadingCreateCard.value = true;

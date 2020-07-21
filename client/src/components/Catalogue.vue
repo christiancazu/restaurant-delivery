@@ -96,7 +96,7 @@ import { Plate } from '@common/gql/graphql.schema.generated';
 import { PLATES_QUERY, TYPES_QUERY } from '@core/graphql/querys';
 
 import { defineComponent, reactive, computed, ref } from '@vue/composition-api';
-import { useQuery, useResult, useSubscription } from '@vue/apollo-composable';
+import { useQuery, useResult } from '@vue/apollo-composable';
 
 import { DialogPlateDetails } from 'src/components';
 

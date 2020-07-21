@@ -28,7 +28,7 @@
           position="bottom-right"
           :ofiltered-platesset="[18, 18]"
         >
-          <q-btn
+          <!-- <q-btn
             :icon="btnAddIcon"
             color="white"
             text-color="primary"
@@ -38,14 +38,50 @@
               /** emits the current plate on carousel v-model */
               $emit('on-select-plate', plates.find(plate => plate.id === carousel.id))
             "
-          />
-          <q-btn
-            :icon="carousel.fullScreen ? 'fad fa-compress' : 'fad fa-expand'"
-            color="white"
-            text-color="primary"
-            push round
-            @click="carousel.fullScreen = !carousel.fullScreen"
-          />
+          /> -->
+          <section style="transform: translate(20%, -20%)">
+            <div>
+              <q-chip
+                color="red"
+                text-color="white"
+                class="shadow-10"
+              >
+                <q-avatar
+                  class="text-bold"
+                  text-color="black"
+                  style="background-color: #e0e0e0;"
+                >
+                  S/.
+                </q-avatar>
+                {{ cardsCtx.find(cCtx => cCtx.plate.id === plates.find(plate => plate.id === carousel.id).id).price }}
+              </q-chip>
+            </div>
+            <div>
+              <q-chip
+                color="red"
+                text-color="white"
+                class="shadow-10"
+              >
+                <q-avatar
+                  class="text-bold"
+                  style="background-color: #e0e0e0"
+                  text-color="black"
+                >
+                  {{ cardsCtx.find(cCtx => cCtx.plate.id === plates.find(plate => plate.id === carousel.id).id).stock }}
+                </q-avatar>
+                stock
+              </q-chip>
+            </div>
+          </section>
+          <section style="transform: translateX(50%)">
+            <q-btn
+              :icon="carousel.fullScreen ? 'fad fa-compress' : 'fad fa-expand'"
+              color="white"
+              text-color="primary"
+              push round
+              @click="carousel.fullScreen = !carousel.fullScreen"
+            />
+          </section>
         </q-carousel-control>
       </template>
     </q-carousel>
@@ -167,14 +203,17 @@ export default defineComponent({
       onResult: onResultCardsUpdated
     } = useSubscription(CARDS_UPDATED_SUBSCRIPTION);
 
+    const plates = ref([]);
+    const cardsCtx = ref([]);
+
     onResultCardsUpdated(({ data: { cardsUpdated } }) => {
+      cardsCtx.value = [...cardsUpdated];
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       plates.value = [...cardsUpdated.map(o => o.plate)];
     });
 
-    const plates = ref([]);
-
     onResultPlates(({ data: { inCurrentDayCards } }) => {
+      cardsCtx.value = [...inCurrentDayCards];
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       plates.value = [...inCurrentDayCards.map(o => o.plate)];
     });
@@ -219,7 +258,9 @@ export default defineComponent({
       types,
       loadingTypes,
       /** const */
-      PATH_MEDIA
+      PATH_MEDIA,
+      //
+      cardsCtx
     };
   }
 });
