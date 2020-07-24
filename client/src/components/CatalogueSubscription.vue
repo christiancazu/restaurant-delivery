@@ -28,17 +28,6 @@
           position="bottom-right"
           :ofiltered-platesset="[18, 18]"
         >
-          <!-- <q-btn
-            :icon="btnAddIcon"
-            color="white"
-            text-color="primary"
-            push round
-            class="q-mx-md"
-            @click="
-              /** emits the current plate on carousel v-model */
-              $emit('on-select-plate', plates.find(plate => plate.id === carousel.id))
-            "
-          /> -->
           <section style="transform: translate(20%, -20%)">
             <div>
               <q-chip
@@ -73,7 +62,18 @@
               </q-chip>
             </div>
           </section>
-          <section style="transform: translateX(50%)">
+          <section class="flex">
+            <q-btn
+              :icon="btnAddIcon"
+              color="white"
+              text-color="primary"
+              push round
+              class="q-mx-md"
+              @click="
+                /** emits the current plate on carousel v-model */
+                $emit('on-select-plate', plates.find(plate => plate.id === carousel.id))
+              "
+            />
             <q-btn
               :icon="carousel.fullScreen ? 'fad fa-compress' : 'fad fa-expand'"
               color="white"

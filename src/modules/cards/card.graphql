@@ -21,6 +21,7 @@ type Card {
   price: Float
   updater: User
   plate: Plate
+  enabled: Boolean
   createdAt: GraphQLISODateTime
   updatedAt: GraphQLISODateTime
 }
@@ -32,6 +33,7 @@ type Query {
 
 type Mutation {
   createCards(createCardsInput: [CreateCardInput]): Boolean
+  updateCard(createCardsInput: CreateCardInput!): Card
   # updateCard(card: UpdateCardInput!): Card!
   # deleteCard(id: Int!): Card!
 }

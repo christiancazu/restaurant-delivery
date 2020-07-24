@@ -44,10 +44,21 @@ export class Card extends BaseEntity {
     @UpdateDateColumn({ type: 'timestamp' })
     updatedAt: Date;
 
+    @Column({
+      type: 'boolean',
+      default: true
+    })
+    enabled: boolean;
+
     @BeforeInsert()
     initialStockEqualsToStock() {
       if (!this.stock)
         this.stock = this.initialStock;
+    }
+
+    @BeforeInsert()
+    cardEnabled() {
+      this.enabled = true;
     }
 
     constructor(id: number = null) {

@@ -35,8 +35,20 @@ export class CardsResolver {
     @CurrentUser('id') creatorUserId: number,
     @Args('createCardsInput') createCardsInput: CreateCardInputDto[]
   ) {
-    const createdCards = await this._cardsService.createOrUpdate(createCardsInput, creatorUserId);
+    const createdCards = await this._cardsService.createOrUpdateCards(createCardsInput, creatorUserId);
     this._pubSub.publish('cardsUpdated', { cardsUpdated: createdCards });
+    return true;
+  }
+
+  @Mutation(() => [Card])
+  @RolesRequired(ROLES.SUPER_ADMIN, ROLES.ADMIN)
+  @UseGuards(GqlAuthGuard, RolesGuard)
+  async updateCard(
+    @CurrentUser('id') creatorUserId: number,
+    @Args('updateCardInput') updateCardInput: CreateCardInputDto
+  ) {
+    const cardsUpdated = await this._cardsService.updateCard(updateCardInput, creatorUserId);
+    this._pubSub.publish('cardsUpdated', { cardsUpdated });
     return true;
   }
 

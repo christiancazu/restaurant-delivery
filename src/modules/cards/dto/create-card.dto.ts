@@ -2,7 +2,8 @@ import {
   IsNumber,
   IsInt,
   IsPositive,
-  IsOptional
+  IsOptional,
+  IsBoolean
 } from 'class-validator';
 import { CreateCardInput } from '@common/gql/graphql.schema.generated';
 
@@ -23,4 +24,8 @@ export class CreateCardInputDto implements CreateCardInput {
   @IsInt()
   @IsPositive()
   readonly plateId: number;
+
+  @IsOptional()
+  @IsBoolean()
+  readonly enabled: boolean;
 }
