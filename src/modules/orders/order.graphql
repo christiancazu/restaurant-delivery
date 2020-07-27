@@ -1,17 +1,7 @@
 input CreateOrderInput {
-  destineLatLng: Int!
-  # payment: Payment!
-  # status: Status!
-  # rating: Rating!
-  rating_description: String!
-  # request_user: User!
-  # delivered_user: User!
-  # delivered_vehicle: Vehicle!
-  # payment_card: String
-  total: Float!
-  # created: Date!
-  # updated: Date!
-  payed: Boolean!
+  destineLatLng: Int
+  paymentId: Int
+  paymentCode: String
 }
 
 input UpdateOrderInput {
@@ -32,19 +22,19 @@ input UpdateOrderInput {
 
 type Order {
   id: Int!
-  destineLatLng: Int!
-  # payment: Payment!
-  # status: Status!
-  # rating: Rating!
-  rating_description: String!
-  # request_user: User!
-  # delivered_user: User!
-  # delivered_vehicle: Vehicle!
-  payment_card: String
-  total: Float!
-  # created: Date!
-  # updated: Date!
-  payed: Boolean!
+  destineLatLng: String
+  payment: Payment
+  status: Status
+  rating: Rating
+  ratingDescription: String
+  client: Client
+  dealer: User
+  vehicle: Vehicle
+  paymentCode: String
+  total: Float
+  # createdAt: Date;
+  # updatedAt: Date;
+  payed: Boolean
 }
 
 type Query {

@@ -31,7 +31,8 @@
       "set": "La carta del día ha sido establecida con éxito"
     },
     "warnings": {
-      "exists": "El Plato ya ha sido añadido a la carta"
+      "exists": "El Plato ya ha sido añadido a la carta",
+      "notMore": "No puede agregar más órdenes de ese plato"
     }
   },
   "client": "cliente | clientes",
@@ -70,11 +71,21 @@
   "myProfile": "Mi Perfil",
   "menuDaily": "Menú del día",
   "name": "nombre",
+  "order": {
+    "plurals": "orden | órdenes",
+    "send": "Enviar orden",
+    "success": {
+      "created": "La orden ha sido creada con éxito"
+    }
+  },
   "password": "Contraseña",
   "plate": {
     "plurals": "plato | platos | platos extras",
     "errors": {
       "exists": "El nombre del Platillo ya existe"
+    },
+    "info": {
+      "empty": "No hay platillos de este tipo para el día de hoy"
     }
   },  
   "plateRegister": "Registrar platillo",

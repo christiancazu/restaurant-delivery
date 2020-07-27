@@ -81,6 +81,7 @@
 
     <div class="flex justify-center q-my-lg">
       <q-btn
+        :loading="loadingCreateCard"
         style="width: 200px"
         color="primary"
         icon="fad fa-save"
@@ -110,7 +111,7 @@ import { AppPage } from 'src/wrappers';
 import { Catalogue, DialogStock } from 'src/components';
 import { useMutation, useQuery } from '@vue/apollo-composable';
 import { CREATE_CARDS_MUTATION } from '@core/graphql/mutations';
-import { IN_CURRENT_DAY_CARDS_QUERY } from '../../../../core/graphql/querys';
+import { IN_CURRENT_DAY_CARDS_QUERY } from '@core/graphql/querys';
 
 interface DialogStockProps {
   visible: boolean;
@@ -203,6 +204,7 @@ export default defineComponent({
       createDailyCards,
       addDailyCard,
       removeDailyCard,
+      loadingCreateCard,
       /* const */
       PATH_MEDIA
     };

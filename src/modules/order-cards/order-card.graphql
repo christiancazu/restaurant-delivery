@@ -1,32 +1,21 @@
-input CreateCardOrderInput {
-  # order: Order!
-  # card: Card!
-  amount: Int!
-  subtotal: Float!
-}
-
-input UpdateCardOrderInput {
-  # order: Order
-  # card: Card
+type OrderCard {
+  id: Int
+  order: Order
+  card: Card
   amount: Int
   subtotal: Float
 }
 
-type CardOrder {
-  id: Int!
-  # order: Order!
-  # card: Card!
-  amount: Int!
-  subtotal: Float!
+type Query {
+  cardOder: OrderCard
+  cardOrders: [OrderCard]
 }
 
-type Query {
-  cardOder: CardOrder!
-  cardOrders: [CardOrder!]
+input CreateOrderCardInput {
+  cardId: Int!
+  amount: Int!
 }
 
 type Mutation {
-  createCardOrder(card: CreateCardOrderInput!): CardOrder!
-  updateCardOrder(card: UpdateCardOrderInput!): CardOrder!
-  deleteCardOrder(id: Int!): CardOrder!
+  createOrderCards(createOrderCardsInput: [CreateOrderCardInput]!): Boolean
 }

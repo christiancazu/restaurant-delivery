@@ -89,6 +89,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'prefer-promise-reject-errors': 'off',
 
+    'no-empty': ['error', { allowEmptyCatch: true }],
     indent: ['error', 2, { SwitchCase: 1 }],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],

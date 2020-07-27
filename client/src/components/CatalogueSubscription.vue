@@ -5,10 +5,20 @@
 >
   <div class="col-9">
     <div class="q-mb-sm">{{ $t('variedades') }}</div>
+
+    <template v-if="!filteredPlates.length">
+      <q-banner
+        class="bg-info text-white"
+        rounded
+      >
+        <q-icon name="fad fa-info-circle" /> {{ $t('plate.info.empty') }}
+      </q-banner>
+    </template>
     <q-carousel
+      v-else
       v-model="carousel.id"
       :fullscreen.sync="carousel.fullScreen"
-      swipeable animated arrows infinite
+      swipeable animated infinite
     >
       <q-carousel-slide
         v-for="plate in filteredPlates" :key="plate.id"
@@ -70,8 +80,8 @@
               push round
               class="q-mx-md"
               @click="
-                /** emits the current plate on carousel v-model */
-                $emit('on-select-plate', plates.find(plate => plate.id === carousel.id))
+                /** emits the current card on carousel v-model */
+                $emit('on-select-card', cardsCtx.find(cardCtx => cardCtx.plate.id === carousel.id))
               "
             />
             <q-btn
@@ -229,10 +239,11 @@ export default defineComponent({
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         const filter = plates.value.filter(plate => plate.type.name === panel.typeName);
         setTimeout(() => {
-          if (filter[0].id) {
+          try {
             carousel.id = filter[0].id;
+          } catch (e) {
           }
-        }, 10);
+        }, 1);
 
         return filter;
       }

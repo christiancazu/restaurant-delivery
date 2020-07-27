@@ -6,29 +6,69 @@
   <template #pageContent>
     <catalogue-subscription
       btn-add-icon="fad fa-cart-plus"
-      @on-select-plate="onSelectPlate"
+      @on-select-card="onSelectCard"
     />
 
     <q-separator class="q-my-md" />
 
-    <div class="q-field__label q-pb-sm">{{ $tc('plate.plurals', 1) }}</div>
+    <div class="q-field__label q-pb-sm text-capitalize">{{ $tc('order.plurals', 2) }}</div>
     <transition-group
       name="daily-list"
       class="row q-col-gutter-md"
       tag="section"
     >
       <article
-        v-for="dailyCard in dailyCards" :key="dailyCard.id"
+        v-for="orderCard in orderCards" :key="orderCard.card.id"
         class="daily-list-item col-12 col-md-3"
       >
         <q-card>
           <img
-            :src="`${PATH_MEDIA}/plates/${dailyCard.avatar}`"
+            :src="`${PATH_MEDIA}/plates/${orderCard.card.plate.avatar}`"
             class="img-cover"
           >
+          <q-card-section
+            class="absolute"
+            style="top: -16px; right: -16px"
+          >
+            <q-btn
+              color="primary"
+              icon="fas fa-minus"
+              round dense
+              @click="decrementOrder(orderCard)"
+            />
+            <q-chip
+              color="red"
+              text-color="white"
+              class="shadow-10"
+            >
+              <q-avatar
+                class="text-bold"
+                style="background-color: #e0e0e0"
+                text-color="black"
+              >
+                {{ orderCard.amount }}
+              </q-avatar>
+              {{ $tc('order.plurals', 2) }}
+            </q-chip>
+
+            <q-btn
+              color="primary"
+              icon="fas fa-plus"
+              round dense
+              @click="incrementOrder(orderCard)"
+            />
+          </q-card-section>
           <q-card-section class="q-pa-sm">
-            <div class="text-h6">{{ dailyCard.name }}</div>
-            <div class="text-caption">{{ dailyCard.type.name }}</div>
+            <div class="text-h6">{{ orderCard.card.plate.name }}</div>
+            <div class="text-caption">{{ orderCard.card.plate.type.name }}</div>
+            <div class="text-caption">
+              precio unidad
+              <span class="text-accent">S/. {{ orderCard.card.price }}</span>
+            </div>
+            <div class="text-caption">
+              sub total
+              <span class="text-bold text-accent">S/. {{ orderCard.card.price * orderCard.amount }}</span>
+            </div>
           </q-card-section>
 
           <q-card-actions align="right">
@@ -37,12 +77,38 @@
               icon="fad fa-times-circle"
               :label="$t('remove')"
               outline
-              @click="removeDailyCard(dailyCard)"
+              @click="removeDailyCard(orderCard)"
             />
           </q-card-actions>
         </q-card>
       </article>
     </transition-group>
+
+    <q-separator
+      inset
+      class="q-my-lg"
+    />
+
+    <div
+      v-if="orderCards.length"
+      class="flex justify-center q-my-lg"
+    >
+
+      <div class="text-bold text-h5">Total: S/. {{ orderCardsTotal }} </div>
+
+      <div class="q-px-lg">
+        <q-btn
+          :loading="loadingCreateOrderCards"
+          style="width: 200px"
+          color="primary"
+          icon="fad fa-save"
+          glossy push
+          :label="$t('order.send')"
+          @click="createOrder"
+        />
+      </div>
+    </div>
+
   </template>
 </app-page>
 </template>
@@ -51,9 +117,11 @@
 import { AppPage } from 'src/wrappers';
 import { CatalogueSubscription } from 'src/components';
 
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent, ref, computed } from '@vue/composition-api';
 import { notifyUtil } from '@core/utils';
-import { Plate, Card } from '@common/gql/graphql.schema.generated';
+import { OrderCard, Card } from '@common/gql/graphql.schema.generated';
+import { useMutation } from '@vue/apollo-composable';
+import { CREATE_ORDER_CARD_MUTATION } from '@core/graphql/mutations';
 
 const PATH_MEDIA = process.env.URL_MEDIA;
 
@@ -64,30 +132,81 @@ export default defineComponent({
   },
 
   setup () {
-    const dailyCards = ref<Card[]>([]);
+    const orderCards = ref<OrderCard[]>([]);
 
-    function onSelectPlate (_selectedPlate: Plate) {
-      const hasInDailyCards = dailyCards.value.find(
-        (dailyCard) => dailyCard.id === _selectedPlate.id
+    const {
+      // mutate: createOrderCardsMutation,
+      loading: loadingCreateOrderCards
+    } = useMutation(CREATE_ORDER_CARD_MUTATION);
+
+    const orderCardsTotal = computed(() => orderCards.value.reduce((acc, item) => {
+      acc += item.amount * item.card.price;
+      return acc;
+    }, 0));
+
+    function onSelectCard (selectedCard: Card) {
+      const hasInDailyCards = orderCards.value.find(
+        (orderCard) => orderCard.card.id === selectedCard.id
       );
 
       if (hasInDailyCards) {
         notifyUtil.warn('card.warnings.exists');
       } else {
-        dailyCards.value.push(_selectedPlate);
+        orderCards.value.push({ card: selectedCard, amount: 1 });
       }
     }
 
-    function removeDailyCard (dailyPlateToRemove: Plate) {
-      dailyCards.value = dailyCards.value.filter(
-        dailyCard => dailyCard.id !== dailyPlateToRemove.id
+    function removeDailyCard (orderCardToRemove: OrderCard) {
+      orderCards.value = orderCards.value.filter(
+        orderCard => orderCard.card.id !== orderCardToRemove.card.id
       );
     }
 
+    function decrementOrder (orderCard: OrderCard) {
+      if (orderCard.amount > 1) {
+        orderCard.amount--;
+      }
+    }
+
+    function incrementOrder (orderCard: OrderCard) {
+      if (orderCard.amount === orderCard.card.stock) {
+        notifyUtil.warn('card.warnings.notMore');
+      } else {
+        orderCard.amount++;
+      }
+    }
+
+    function createOrder () {
+      loadingCreateOrderCards.value = true;
+      try {
+        // const createCardsInput = orderCards.value
+        //   .map(orderCard => ({
+        //     cardId: orderCard.card.id,
+        //     amount: orderCard.amount
+        //   })
+        //   );
+
+        // await createOrderCardsMutation({ createCardsInput });
+        // console.warn(createCardsInput)
+
+        notifyUtil.success('order.success.created');
+      } catch (e) {
+      } finally {
+        loadingCreateOrderCards.value = false;
+
+        orderCards.value = [];
+      }
+    }
+
     return {
-      onSelectPlate,
+      onSelectCard,
       removeDailyCard,
-      dailyCards,
+      orderCards,
+      decrementOrder,
+      incrementOrder,
+      createOrder,
+      loadingCreateOrderCards,
+      orderCardsTotal,
       PATH_MEDIA
     };
   }
