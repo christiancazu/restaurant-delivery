@@ -53,5 +53,21 @@ export const ASSERTS = {
     DESCRIPTION_MAX_LENGTH: 128,
 
     AVATAR_MAX_LENGTH: 64
+  },
+
+  ORDER: {
+    DESTINE_LAT_LNG: 128,
+    RATING_DESCRIPTION: 128,
+    PAYMENT_CODE: 32
+  },
+
+  PAYMENT: {
+    NAME: 32,
+    DESCRIPTION: 128
+  },
+
+  STATUS: {
+    NAME: 32,
+    DESCRIPTION: 128
   }
 };

@@ -51,6 +51,7 @@ export class CardsService {
     return await this.findAllInCurrentDay();
   }
 
+  /** DEFINITELY THIS LOGIC SHOULD BE IMPROVED */
   async createOrUpdateCards(dtoCards: CreateCardInputDto[], creatorUserId: number): Promise<Card[]> {
     const inCurrentDayCards = await this.findAllInCurrentDay();
 

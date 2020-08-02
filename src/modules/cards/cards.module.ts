@@ -7,10 +7,7 @@ import { PlateRepository } from 'src/modules/plates/plate.repository';
 import { PlatesService } from 'src/modules/plates/plates.service';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([CardRepository]),
-    TypeOrmModule.forFeature([PlateRepository])
-  ],
+  imports: [TypeOrmModule.forFeature([CardRepository, PlateRepository])],
   providers: [CardsResolver, CardsService, PlatesService],
   exports: [CardsModule]
 

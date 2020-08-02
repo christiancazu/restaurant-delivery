@@ -20,7 +20,6 @@ export class PlatesService {
   }
 
   async findByName(plateName: string): Promise<Plate> {
-    console.warn('search', plateName);
     return await this._plateRepository.findOne({ where: { name: plateName } });
   }
 

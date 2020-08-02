@@ -1,6 +1,6 @@
 input CreateOrderInput {
-  destineLatLng: Int
-  paymentId: Int
+  destineLatLng: String!
+  paymentId: Int!
   paymentCode: String
 }
 
@@ -27,9 +27,9 @@ type Order {
   status: Status
   rating: Rating
   ratingDescription: String
-  client: Client
-  dealer: User
-  vehicle: Vehicle
+  # client: Client
+  # dealer: User
+  # vehicle: Vehicle
   paymentCode: String
   total: Float
   # createdAt: Date;
@@ -43,7 +43,6 @@ type Query {
 }
 
 type Mutation {
-  createOrder(order: CreateOrderInput!): Order!
+  createOrder(createOrderInput: CreateOrderInput!, createOrderCardsInput: [CreateOrderCardInput!]!): Boolean
   updateOrder(order: UpdateOrderInput!): Order!
-  deleteOrder(id: Int!): Order!
 }

@@ -8,13 +8,15 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
-  BeforeInsert
+  BeforeInsert,
+  ManyToMany
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Status } from '../status/status.entity';
 import { Rating } from '../ratings/rating.entity';
 import { Vehicle } from '../vehicles/vehicle.entity';
 import { Payment } from 'src/modules/payments/payment.entity';
+import { ASSERTS } from '@common/config/asserts.config';
 
 @Entity('orders')
 export class Order extends BaseEntity {
@@ -23,7 +25,7 @@ export class Order extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 128
+      length: ASSERTS.ORDER.DESTINE_LAT_LNG
     })
     destineLatLng: string;
 
@@ -41,31 +43,36 @@ export class Order extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 128,
+      length: ASSERTS.ORDER.RATING_DESCRIPTION,
       nullable: true
     })
     ratingDescription: string
 
-    @OneToOne(() => User)
+    @ManyToMany(() => User)
     @JoinColumn({ name: 'requestedByUserId' })
     client: User;
 
-    @OneToOne(() => User)
+    @ManyToMany(() => User)
     @JoinColumn({ name: 'deliveredByUserId' })
     dealer: User;
 
-    @OneToOne(() => Vehicle)
+    @ManyToMany(() => Vehicle)
     @JoinColumn({ name: 'deliveredByVehicleId' })
     vehicle: Vehicle;
 
     @Column({
       type: 'varchar',
-      length: 32,
+      length: ASSERTS.ORDER.PAYMENT_CODE,
       nullable: true
     })
     paymentCode: string
 
-    @Column({ type: 'decimal' })
+    @Column({
+      type: 'decimal',
+      precision: 5,
+      scale: 2,
+      nullable: true
+    })
     total: number
 
     @CreateDateColumn({ type: 'timestamp' })
@@ -80,5 +87,11 @@ export class Order extends BaseEntity {
     @BeforeInsert()
     beforeInsertActions() {
       this.payed = false;
+      this.status = new Status(1); // 1 = RECEIVED STATUS ID
+    }
+
+    constructor(id: number) {
+      super();
+      this.id = id;
     }
 }

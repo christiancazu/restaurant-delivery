@@ -25,7 +25,11 @@ export class OrderCards extends BaseEntity {
   @Column({ type: 'int' })
   amount: number
 
-  @Column({ type: 'decimal' })
+  @Column({
+    type: 'decimal',
+    precision: 5,
+    scale: 2
+  })
   subtotal: number
 }
 
