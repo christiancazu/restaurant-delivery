@@ -1,4 +1,4 @@
-import { Injectable, HttpException, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In, MoreThan } from 'typeorm';
 import { CreateOrderInputDto } from './dto/create-order.input.dto';
@@ -9,6 +9,7 @@ import { Order } from 'src/modules/orders/order.entity';
 import { Card } from 'src/modules/cards/card.entity';
 import { OrderCards } from 'src/modules/order-cards/order-cards.entity';
 import { DateTime } from 'luxon';
+import { OrderDetails } from './interfaces/order-details.interface';
 
 @Injectable()
 export class OrdersService {
@@ -24,6 +25,34 @@ export class OrdersService {
     private readonly _cardRepository: Repository<Card>
   ) {}
 
+  async findAllByClient(clientId: number): Promise<OrderDetails[]> {
+    const orders = await this._orderRepository
+      .find({
+        where: { client: { id: clientId } },
+        relations: ['client', 'dealer', 'vehicle', 'payment', 'status', 'rating']
+      });
+
+    if (!orders.length) {
+      return [];
+    }
+
+    const orderCards = await Promise.all(
+      orders.map(order => this._orderCardsRepository
+        .find({ where: { order: { id: order.id } } })
+      )
+    );
+
+    const ordersDetails: OrderDetails[] =
+      orders.map((order, i) => ({
+        order,
+        orderCards: orderCards[i]
+      })
+      );
+
+    return ordersDetails;
+  }
+
+  /** TODO: there should validate available cards stocks before to discount */
   async create(
     orderDto: CreateOrderInputDto,
     orderCardsDto: CreateOrderCardInputDto[],

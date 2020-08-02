@@ -6,6 +6,8 @@ import {
   BeforeInsert
 } from 'typeorm';
 
+import { ASSERTS } from '@common/config/asserts.config';
+
 @Entity('vehicles')
 export class Vehicle extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
@@ -13,21 +15,25 @@ export class Vehicle extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 8,
+      length: ASSERTS.VEHICLES.LICENSE_PLATE,
       unique: true
     })
     licencePlate: string;
 
     @Column({
       type: 'varchar',
-      length: 16
+      length: ASSERTS.VEHICLES.TYPE,
+      default: 'MOTO'
     })
     type: string;
 
     @Column({ type: 'int' })
-    capability: boolean;
+    capability: number;
 
-    @Column({ type: 'boolean' })
+    @Column({
+      type: 'boolean',
+      default: true
+    })
     available: boolean;
 
     @BeforeInsert()

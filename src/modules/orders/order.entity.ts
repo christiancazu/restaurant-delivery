@@ -9,7 +9,8 @@ import {
   UpdateDateColumn,
   OneToOne,
   BeforeInsert,
-  ManyToMany
+  ManyToMany,
+  OneToMany
 } from 'typeorm';
 import { User } from '../users/user.entity';
 import { Status } from '../status/status.entity';
@@ -48,15 +49,15 @@ export class Order extends BaseEntity {
     })
     ratingDescription: string
 
-    @ManyToMany(() => User)
+    @ManyToOne(() => User)
     @JoinColumn({ name: 'requestedByUserId' })
     client: User;
 
-    @ManyToMany(() => User)
+    @ManyToOne(() => User)
     @JoinColumn({ name: 'deliveredByUserId' })
     dealer: User;
 
-    @ManyToMany(() => Vehicle)
+    @ManyToOne(() => Vehicle)
     @JoinColumn({ name: 'deliveredByVehicleId' })
     vehicle: Vehicle;
 

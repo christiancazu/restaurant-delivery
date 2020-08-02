@@ -27,19 +27,25 @@ type Order {
   status: Status
   rating: Rating
   ratingDescription: String
-  # client: Client
-  # dealer: User
-  # vehicle: Vehicle
+  client: User
+  dealer: User
+  vehicle: Vehicle
   paymentCode: String
   total: Float
-  # createdAt: Date;
-  # updatedAt: Date;
+  createdAt: GraphQLISODateTime
+  updatedAt: GraphQLISODateTime
   payed: Boolean
+}
+
+type OrderDetails {
+  order: Order
+  orderCards: [OrderCard] 
 }
 
 type Query {
   order: Order!
   orders: [Order!]
+  orderDetailsByClient: [OrderDetails]
 }
 
 type Mutation {

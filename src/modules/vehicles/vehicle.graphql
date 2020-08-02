@@ -1,35 +1,12 @@
-input CreateVehicleInput {
-  license_plate: String!
-  description: String
-  type: String!
-  enabled: Boolean!
-  capability: Int!
-}
-
-input UpdateVehicleInput {
-  license_plate: String
-  description: String
-  type: String
-  enabled: Boolean
-  capability: Int
-}
-
 type Vehicle {
   id: Int!
-  license_plate: String!
-  description: String
-  type: String!
-  enabled: Boolean!
-  capability: Int!
+  licensePlate: String
+  type: String
+  capability: Int
+  available: Boolean
 }
 
 type Query {
   vehicle: Vehicle!
   vehicles: [Vehicle!]
-}
-
-type Mutation {
-  createVehicle(vehicle: CreateVehicleInput!): Vehicle!
-  updateVehicle(vehicle: UpdateVehicleInput!): Vehicle!
-  deleteVehicle(id: Int!): Vehicle!
 }

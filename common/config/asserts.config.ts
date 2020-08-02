@@ -69,5 +69,10 @@ export const ASSERTS = {
   STATUS: {
     NAME: 32,
     DESCRIPTION: 128
+  },
+
+  VEHICLES: {
+    LICENSE_PLATE: 8,
+    TYPE: 16
   }
 };
