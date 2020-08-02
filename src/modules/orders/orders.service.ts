@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In, MoreThan } from 'typeorm';
 import { CreateOrderInputDto } from './dto/create-order.input.dto';
@@ -10,6 +10,12 @@ import { Card } from 'src/modules/cards/card.entity';
 import { OrderCards } from 'src/modules/order-cards/order-cards.entity';
 import { DateTime } from 'luxon';
 import { OrderDetails } from './interfaces/order-details.interface';
+import { UpdateOrderByAdminInputDto } from 'src/modules/orders/dto/update-order-by-admin.input.dto';
+import { UpdateOrderByClientInputDto } from 'src/modules/orders/dto/update-order-by-client.input.dto';
+import { Rating } from 'src/modules/ratings/rating.entity';
+import { UpdateOrderDeliveryInputDto } from 'src/modules/orders/dto/update-order-delivery.input.dto';
+import { Vehicle } from 'src/modules/vehicles/vehicle.entity';
+import { UpdateOrderPayedInputDto } from 'src/modules/orders/dto/update-order-payed.input.dto';
 
 @Injectable()
 export class OrdersService {
@@ -105,5 +111,55 @@ export class OrdersService {
     } catch (error) {
       throw new BadRequestException('order.errors.fail');
     }
+  }
+
+  async updateByAdmin(dto: UpdateOrderByAdminInputDto): Promise<Order> {
+    const orderToUpdate: Order = await this._orderRepository
+      .findOne(dto.orderId, { relations: ['status'] });
+
+    orderToUpdate.status.id = dto.statusId;
+
+    return await this._orderRepository.save(orderToUpdate);
+  }
+
+  async updateByClient(dto: UpdateOrderByClientInputDto, clientId: number): Promise<Order> {
+    const orderToUpdate: Order = await this._orderRepository
+      .findOne({
+        where: {
+          id: dto.orderId,
+          client: { id: clientId }
+        },
+        relations: ['rating']
+      });
+
+    if (!orderToUpdate) {
+      throw new UnauthorizedException('auth.errors.clientOrder');
+    }
+
+    orderToUpdate.rating = new Rating(dto.ratingId);
+    orderToUpdate.ratingDescription = dto.ratingDescription;
+
+    await this._orderRepository.save(orderToUpdate);
+
+    return await this._orderRepository.findOne(dto.orderId, { relations: ['rating'] });
+  }
+
+  async updateDelivery(dto: UpdateOrderDeliveryInputDto): Promise<Order> {
+    const orderToUpdate: Order = await this._orderRepository
+      .findOne(dto.orderId, { relations: ['dealer', 'vehicle'] });
+
+    orderToUpdate.dealer = new User(dto.dealerId);
+    orderToUpdate.vehicle = new Vehicle(dto.vehicleId);
+
+    return await this._orderRepository.save(orderToUpdate);
+  }
+
+  async updatePayed(dto: UpdateOrderPayedInputDto): Promise <Order> {
+    const orderToUpdate: Order = await this._orderRepository
+      .findOne(dto.orderId);
+
+    orderToUpdate.payed = dto.payed;
+
+    return await this._orderRepository.save(orderToUpdate);
   }
 }

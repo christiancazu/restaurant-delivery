@@ -15,14 +15,14 @@ export class Vehicle extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: ASSERTS.VEHICLES.LICENSE_PLATE,
+      length: ASSERTS.VEHICLE.LICENSE_PLATE,
       unique: true
     })
     licencePlate: string;
 
     @Column({
       type: 'varchar',
-      length: ASSERTS.VEHICLES.TYPE,
+      length: ASSERTS.VEHICLE.TYPE,
       default: 'MOTO'
     })
     type: string;
@@ -39,6 +39,11 @@ export class Vehicle extends BaseEntity {
     @BeforeInsert()
     beforeInsertActions() {
       this.available = true;
+    }
+
+    constructor(id: number) {
+      super();
+      this.id = id;
     }
 }
 

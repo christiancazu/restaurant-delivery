@@ -1,25 +1,3 @@
-input CreateOrderInput {
-  destineLatLng: String!
-  paymentId: Int!
-  paymentCode: String
-}
-
-input UpdateOrderInput {
-  destineLatLng: Int
-  # payment: Payment
-  # status: Status
-  # rating: Rating
-  rating_description: String
-  # request_user: User
-  # delivered_user: User
-  # delivered_vehicle: Vehicle
-  payment_card: String
-  total: Float
-  # created: Date
-  # updated: Date
-  payed: Boolean
-}
-
 type Order {
   id: Int!
   destineLatLng: String
@@ -48,7 +26,37 @@ type Query {
   orderDetailsByClient: [OrderDetails]
 }
 
+input CreateOrderInput {
+  destineLatLng: String!
+  paymentId: Int!
+  paymentCode: String
+}
+
+input UpdateOrderByAdminInput {
+  orderId: Int!
+  statusId: Int!
+}
+
+input UpdateOrderByClientInput {
+  orderId: Int!
+  ratingId: Int!
+  ratingDescription: String
+}
+
+input UpdateOrderDeliveryInput {
+  orderId: Int!
+  dealerId: Int!
+  vehicleId: Int!
+}
+
+input UpdateOrderPayedInput {
+  orderId: Int!
+  payed: Boolean!
+}
 type Mutation {
   createOrder(createOrderInput: CreateOrderInput!, createOrderCardsInput: [CreateOrderCardInput!]!): Boolean
-  updateOrder(order: UpdateOrderInput!): Order!
+  updateOrderByAdmin(updateOrderByAdminInput: UpdateOrderByAdminInput!): Order
+  updateOrderByClient(updateOrderByClientInput: UpdateOrderByClientInput!): Order
+  updateOrderDelivery(updateOrderDeliveryInput: UpdateOrderDeliveryInput!): Order
+  updateOrderPayed(updateOrderPayedInput: UpdateOrderPayedInput!): Order
 }

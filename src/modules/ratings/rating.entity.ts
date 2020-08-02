@@ -5,6 +5,8 @@ import {
   Column
 } from 'typeorm';
 
+import { ASSERTS } from '@common/config/asserts.config';
+
 @Entity('ratings')
 export class Rating extends BaseEntity {
     @PrimaryGeneratedColumn('increment')
@@ -12,15 +14,20 @@ export class Rating extends BaseEntity {
 
     @Column({
       type: 'varchar',
-      length: 32,
+      length: ASSERTS.RATING.NAME,
       unique: true
     })
     name: string;
 
     @Column({
       type: 'varchar',
-      length: 128,
+      length: ASSERTS.RATING.DESCRIPTION,
       nullable: true
     })
     description: string;
+
+    constructor(id: number) {
+      super();
+      this.id = id;
+    }
 }
