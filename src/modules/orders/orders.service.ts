@@ -44,7 +44,10 @@ export class OrdersService {
 
     const orderCards = await Promise.all(
       orders.map(order => this._orderCardsRepository
-        .find({ where: { order: { id: order.id } } })
+        .find({
+          where: { order: { id: order.id } },
+          relations: ['card', 'card.plate']
+        })
       )
     );
 
@@ -98,7 +101,12 @@ export class OrdersService {
         wantedCard.stock -= newOrderCard.amount;
 
         newOrderCards.push(newOrderCard);
+
+        // acc order total
+        orderCreated.total += newOrderCard.subtotal;
       });
+
+      await this._orderRepository.save(orderCreated);
 
       // saving order cards
       await Promise.all(newOrderCards.map(newOrderCard => this._orderCardsRepository.save(newOrderCard)));

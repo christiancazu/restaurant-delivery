@@ -74,7 +74,7 @@
           :options="{
             title: $t('destine.place'),
           }"
-          draggable
+          :draggable="marker.draggable"
           @update:lat-lng="onUpdateMarker"
         >
           <l-popup :content="$t('destine.place')" />
@@ -105,7 +105,8 @@ export default defineComponent({
       type: Object,
       default: () => ({
         latLng: [],
-        visible: false
+        visible: false,
+        draggable: true
       })
     },
     tileLayer: {
@@ -119,19 +120,13 @@ export default defineComponent({
     }
   },
 
-  data () {
-    return {
-      markerL: {}
-    };
-  },
-
   methods: {
     setMarkerInvisible () {
       this.marker.visible = false;
     },
 
     onUpdateMarker ({ lat, lng }) {
-      this.$emit('update:marker', { latLng: [lat, lng], visible: true });
+      this.$emit('update:marker', { latLng: [lat, lng], visible: true, draggable: true });
     },
 
     onClickBtnMarker () {

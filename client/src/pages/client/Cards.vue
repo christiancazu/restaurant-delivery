@@ -203,7 +203,8 @@ export default defineComponent({
 
     const marker = ref({
       latLng: [],
-      visible: false
+      visible: false,
+      draggable: true
     });
 
     const {

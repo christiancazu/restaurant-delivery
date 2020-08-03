@@ -38,6 +38,7 @@
   "client": "cliente | clientes",
   "confirm": "Confirmar",
   "confirmPassword": "Confirmar contraseña",
+  "createdAt": "Creado en",
   "dailyCards": "Carta del día",
   "dealer": "repartidor | repartidores",
   "description": "Descripción",
@@ -45,6 +46,7 @@
     "place": "Lugar de entrega",
     "set": "Establecer destino" 
   },
+  "details": "Detalles",
   "document": "Documento",
   "email": "Correo Electrónico",
   "field": {
@@ -75,7 +77,10 @@
   "myProfile": "Mi Perfil",
   "menuDaily": "Menú del día",
   "name": "nombre",
+  "no": "No",
+  "noResults": "No hay resultados",
   "order": {
+    "my": "Mis órdenes",
     "plurals": "orden | órdenes",
     "send": "Enviar orden",
     "success": {
@@ -93,6 +98,7 @@
     "creditCard": "Tarjeta de crédito",
     "yape": "Yape"
   },
+  "payed": "Pagado",
   "plate": {
     "plurals": "plato | platos | platos extras",
     "errors": {
@@ -127,6 +133,14 @@
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "signUp": "Registrarse",
+  "status": {
+    "default": "Estado",
+    "received": "Recibido",
+    "preparing": "En preparación",
+    "dispatched": "Despachado",
+    "delivered": "Entregado",
+    "canceled": "Cancelado"
+  },
   "stock": {
     "default": "Stock",
     "initial": "Stock inicial",
@@ -137,5 +151,6 @@
   "update": "Actualizar",
   "user": "Usuario",
   "variedades": "Variedades",
-  "vehicle": "vehículo | vehículos"
+  "vehicle": "vehículo | vehículos",
+  "yes": "Si"
 }
