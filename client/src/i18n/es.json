@@ -41,6 +41,10 @@
   "dailyCards": "Carta del día",
   "dealer": "repartidor | repartidores",
   "description": "Descripción",
+  "destine": {
+    "place": "Lugar de entrega",
+    "set": "Establecer destino" 
+  },
   "document": "Documento",
   "email": "Correo Electrónico",
   "field": {
@@ -76,9 +80,19 @@
     "send": "Enviar orden",
     "success": {
       "created": "La orden ha sido creada con éxito"
+    },
+    "info": {
+      "choosePayment": "Elija un tipo de pago",
+      "chooseDestine": "Elija una ubicación de destino"
     }
   },
   "password": "Contraseña",
+  "payment": {
+    "type": "Tipo de pago",
+    "cash": "Efectivo",
+    "creditCard": "Tarjeta de crédito",
+    "yape": "Yape"
+  },
   "plate": {
     "plurals": "plato | platos | platos extras",
     "errors": {
@@ -108,6 +122,8 @@
     }
   },
   "set": "Establecer",
+  "setDeliveryLocation": "Lugar de entrega",
+  "setMark": "Establezca una marca como lugar de entrega",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "signUp": "Registrarse",

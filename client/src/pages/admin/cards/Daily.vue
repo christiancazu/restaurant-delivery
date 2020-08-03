@@ -56,7 +56,7 @@
                 >
                   S/.
                 </q-avatar>
-                {{ dailyCard.price }}
+                {{ dailyCard.price.toFixed(2) }}
               </q-chip>
             </div>
           </q-card-section>

@@ -52,7 +52,7 @@
                 >
                   S/.
                 </q-avatar>
-                {{ cardsCtx.find(cCtx => cCtx.plate.id === plates.find(plate => plate.id === carousel.id).id).price }}
+                {{ cardsCtx.find(cCtx => cCtx.plate.id === plates.find(plate => plate.id === carousel.id).id).price.toFixed(2) }}
               </q-chip>
             </div>
             <div>

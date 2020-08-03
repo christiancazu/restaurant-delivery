@@ -17,5 +17,5 @@ input CreateOrderCardInput {
 }
 
 type Mutation {
-  createOrderCards(createOrderCardsInput: [CreateOrderCardInput]!): Boolean
+  createOrderCards(createOrderCardsInput: [CreateOrderCardInput]): Boolean
 }

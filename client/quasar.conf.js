@@ -31,7 +31,8 @@ module.exports = configure(function (ctx) {
       /* 'axios', */
       'composition-api',
       'apollo',
-      'i18n'
+      'i18n',
+      'leaflet'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -58,7 +59,12 @@ module.exports = configure(function (ctx) {
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'es', // Quasar language pack
-      config: {},
+      config: {
+        // loading: {
+        //   spinner: 'QSpinnerIos',
+        //   spinnerColor: 'red'
+        // }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - Auto-import needed Quasar components & directives
@@ -137,7 +143,7 @@ module.exports = configure(function (ctx) {
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
-      pwa: false
+      pwa: true
     },
 
     // https://quasar.dev/quasar-cli/developing-pwa/configuring-pwa
@@ -151,7 +157,7 @@ module.exports = configure(function (ctx) {
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#027be3',
+        theme_color: '#ff0000',
         icons: [
           {
             src: 'icons/icon-128x128.png',

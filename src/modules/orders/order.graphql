@@ -54,7 +54,7 @@ input UpdateOrderPayedInput {
   payed: Boolean!
 }
 type Mutation {
-  createOrder(createOrderInput: CreateOrderInput!, createOrderCardsInput: [CreateOrderCardInput!]!): Boolean
+  createOrder(createOrderInput: CreateOrderInput, createOrderCardsInput: [CreateOrderCardInput]): Boolean
   updateOrderByAdmin(updateOrderByAdminInput: UpdateOrderByAdminInput!): Order
   updateOrderByClient(updateOrderByClientInput: UpdateOrderByClientInput!): Order
   updateOrderDelivery(updateOrderDeliveryInput: UpdateOrderDeliveryInput!): Order
