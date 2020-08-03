@@ -36,12 +36,12 @@
               size="2em"
               icon="fad fa-bell fa-swap-opacity"
             >
-              <q-badge
+              <!-- <q-badge
                 color="warning"
                 label="2"
                 floating
                 style="transform: translate(16px, -4px)"
-              />
+              /> -->
             </q-avatar>
           </template>
 
@@ -70,12 +70,12 @@
               size="2em"
               icon="fad fa-shopping-cart"
             >
-              <q-badge
+              <!-- <q-badge
                 color="warning"
                 label="2"
                 floating
                 style="transform: translate(16px, -4px)"
-              />
+              /> -->
             </q-avatar>
           </template>
 

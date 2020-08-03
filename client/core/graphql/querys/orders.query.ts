@@ -33,3 +33,37 @@ export const ORDER_DETAILS_BY_CLIENT_QUERY = gql`
 
   }
 }`;
+
+export const ORDER_DETAILS_QUERY = gql`
+{
+  orderDetails {
+    order {
+      id
+      destineLatLng
+      payment {
+        name
+      }
+      status {
+        name
+      }
+      total
+      createdAt
+      payed
+    }
+    orderCards {
+      id
+      amount
+      subtotal
+      card {
+        id
+        price
+        plate {
+          id
+          name
+          avatar
+        }
+      }
+    }
+
+  }
+}`;

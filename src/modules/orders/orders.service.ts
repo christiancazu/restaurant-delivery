@@ -31,11 +31,42 @@ export class OrdersService {
     private readonly _cardRepository: Repository<Card>
   ) {}
 
+  async findAll(): Promise<OrderDetails[]> {
+    const orders = await this._orderRepository
+      .find({
+        relations: ['client', 'dealer', 'vehicle', 'payment', 'status', 'rating'],
+        order: { id: 'DESC' }
+      });
+
+    if (!orders.length) {
+      return [];
+    }
+
+    const orderCards = await Promise.all(
+      orders.map(order => this._orderCardsRepository
+        .find({
+          where: { order: { id: order.id } },
+          relations: ['card', 'card.plate']
+        })
+      )
+    );
+
+    const ordersDetails: OrderDetails[] =
+      orders.map((order, i) => ({
+        order,
+        orderCards: orderCards[i]
+      })
+      );
+
+    return ordersDetails;
+  }
+
   async findAllByClient(clientId: number): Promise<OrderDetails[]> {
     const orders = await this._orderRepository
       .find({
         where: { client: { id: clientId } },
-        relations: ['client', 'dealer', 'vehicle', 'payment', 'status', 'rating']
+        relations: ['client', 'dealer', 'vehicle', 'payment', 'status', 'rating'],
+        order: { id: 'DESC' }
       });
 
     if (!orders.length) {

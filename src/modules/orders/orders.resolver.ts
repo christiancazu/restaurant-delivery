@@ -32,6 +32,13 @@ export class OrdersResolver {
     return this._ordersService.findAllByClient(clientId);
   }
 
+  @Query()
+  @RolesRequired(ROLES.ADMIN, ROLES.SUPER_ADMIN)
+  @UseGuards(GqlAuthGuard, RolesGuard)
+  async orderDetails() {
+    return this._ordersService.findAll();
+  }
+
   @Mutation()
   @RolesRequired(ROLES.CLIENT)
   @UseGuards(GqlAuthGuard, RolesGuard)

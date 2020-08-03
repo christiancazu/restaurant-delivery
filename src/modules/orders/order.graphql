@@ -23,6 +23,7 @@ type OrderDetails {
 type Query {
   order: Order!
   orders: [Order!]
+  orderDetails: [OrderDetails]
   orderDetailsByClient: [OrderDetails]
 }
 
